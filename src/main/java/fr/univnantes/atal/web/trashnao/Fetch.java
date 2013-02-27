@@ -37,7 +37,7 @@ public class Fetch extends HttpServlet {
         URL url = new URL("http://data.nantes.fr/api/publication/"
                 + "JOURS_COLLECTE_DECHETS_VDN/JOURS_COLLECTE_DECHETS_VDN_STBL/"
                 + "content/?format=csv");
-        CSVReader reader = new CSVReader(new InputStreamReader(url.openStream()));
+        CSVReader reader = new CSVReader(new InputStreamReader(url.openStream(), "UTF-8"));
         String[] nextLine;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();

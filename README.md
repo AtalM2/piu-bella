@@ -1,24 +1,24 @@
-App Engine Java Guestbook
-Copyright (C) 2010-2012 Google Inc.
+Più Bella
+=========
 
-## Sample guestbook for use with App Engine Java.
+M1 Webdev project to use Nantes Open Data on trash disposal.
+Goal is to have a running app by 04/12/2013.
 
-Requires [Apache Maven](http://maven.apache.org) 3.0 or greater, and JDK 6+ in order to run.
+App is live at https://trashnao.appspot.com/
 
-To build, run
+The address may change later on.
 
-    mvn package
+Maven 3 is required and should be usable directly:
 
-Building will run the tests, but to explicitly run tests you can use the test target
-
-    mvn test
-
-To start the app, use the [App Engine Maven Plugin](http://code.google.com/p/appengine-maven-plugin/) that is already included in this demo.  Just run the command.
+    mvn verify
+to check that everything is fine after a `git clone` or `git pull`.
 
     mvn appengine:devserver
+to make the app accessible on `http://localhost:8080/`
 
-For further information, consult the [Java App Engine](https://developers.google.com/appengine/docs/java/overview) documentation.
+    mvn appengine:update
+to upload the app to https://trashnao.appspot/com/
 
-To see all the available goals for the App Engine plugin, run
+Atm, Java 6 is used because the 1.7.5 maven plugin doesn't seem quite ready yet to handle Java 7. Maybe we'll upgrade before the end of the project.
 
-    mvn help:describe -Dplugin=appengine
+Any IDE should be fine to open this project and contribute: Netbeans, Eclipse and IntelliJ all have maven support at this point.

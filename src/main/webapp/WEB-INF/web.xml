@@ -6,11 +6,11 @@
     </servlet>
     <servlet>
         <servlet-name>Controller</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.trashnao.Controller</servlet-class>
+        <servlet-class>fr.univnantes.atal.web.trashnao.servlets.Controller</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Fetch</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.trashnao.Fetch</servlet-class>
+        <servlet-class>fr.univnantes.atal.web.trashnao.servlets.Fetch</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>

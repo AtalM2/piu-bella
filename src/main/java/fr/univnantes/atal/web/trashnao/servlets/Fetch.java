@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.univnantes.atal.web.trashnao;
+package fr.univnantes.atal.web.trashnao.servlets;
 
 import au.com.bytecode.opencsv.CSVReader;
 import java.io.IOException;

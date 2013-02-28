@@ -2,9 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.univnantes.atal.web.trashnao;
+package fr.univnantes.atal.web.trashnao.servlets;
 
+import fr.univnantes.atal.web.trashnao.model.User;
+import fr.univnantes.atal.web.trashnao.persistence.PMF;
 import java.io.IOException;
+import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +37,19 @@ public class Controller extends HttpServlet {
         RequestDispatcher rd;
         if (path.equals("/Fetch")) {
             rd = getServletContext().getNamedDispatcher("Fetch");
+        } else if (path.equals("/Access")) {
+            rd = getServletContext().getNamedDispatcher("Access");
+        } else if (path.equals("/User")) {
+            User user = new User();
+            user.setGoogleId("abc");
+            user.setRefreshToken("abcd");
+            PersistenceManager pm = PMF.get().getPersistenceManager();
+            try {
+                pm.makePersistent(user);
+            } finally {
+                pm.close();
+            }
+            rd = getServletContext().getNamedDispatcher("Index");
         } else {
             rd = getServletContext().getNamedDispatcher("Index");
         }

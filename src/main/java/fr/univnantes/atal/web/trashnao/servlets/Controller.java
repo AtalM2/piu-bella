@@ -21,25 +21,27 @@ import javax.servlet.http.HttpServletResponse;
 public class Controller extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
+     * Handles the HTTP
+     * <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doGet(
+            HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getPathInfo();
         System.out.println(path);
         RequestDispatcher rd;
-        if (path.equals("/Fetch")) {
+        if (path.equals("/fetch")) {
             rd = getServletContext().getNamedDispatcher("Fetch");
-        } else if (path.equals("/Access")) {
-            rd = getServletContext().getNamedDispatcher("Access");
-        } else if (path.equals("/User")) {
+        } else if (path.equals("/login")) {
+            rd = getServletContext().getNamedDispatcher("Login");
+        } else if (path.equals("/user")) {
             User user = new User();
             user.setGoogleId("abc");
             user.setRefreshToken("abcd");
@@ -56,22 +58,6 @@ public class Controller extends HttpServlet {
         rd.forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP
-     * <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
     /**
      * Handles the HTTP
      * <code>POST</code> method.
@@ -82,9 +68,48 @@ public class Controller extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(
+            HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        RequestDispatcher rd = getServletContext().getNamedDispatcher("Index");
+        rd.forward(request, response);
+    }
+
+    /**
+     * Handles the HTTP
+     * <code>PUT</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPut(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher rd = getServletContext().getNamedDispatcher("Index");
+        rd.forward(request, response);
+    }
+
+    /**
+     * Handles the HTTP
+     * <code>DELETE</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doDelete(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher rd = getServletContext().getNamedDispatcher("Index");
+        rd.forward(request, response);
     }
 
     /**
@@ -94,6 +119,6 @@ public class Controller extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        return "Controller servlet. Dispatches requests.";
+    }
 }

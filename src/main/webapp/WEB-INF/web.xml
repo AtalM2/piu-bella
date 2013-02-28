@@ -12,6 +12,10 @@
         <servlet-name>Fetch</servlet-name>
         <servlet-class>fr.univnantes.atal.web.trashnao.servlets.Fetch</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>fr.univnantes.atal.web.trashnao.servlets.Login</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/*</url-pattern>

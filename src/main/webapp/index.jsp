@@ -12,7 +12,7 @@
         sb.append("https://accounts.google.com/o/oauth2/auth?")
             .append("response_type=token&")
             .append("client_id=311668897898.apps.googleusercontent.com&")
-            .append("redirect_uri=https://trashnao.appspot.com/oauth2callback&")
+            .append("redirect_uri=https://trashnao.appspot.com/login&")
             .append("scope=https://www.googleapis.com/auth/userinfo.profile+")
             .append("https://www.googleapis.com/auth/userinfo.email");
         %>

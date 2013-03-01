@@ -5,6 +5,10 @@
         <jsp-file>/index.jsp</jsp-file>
     </servlet>
     <servlet>
+        <servlet-name>App</servlet-name>
+        <jsp-file>/app.jsp</jsp-file>
+    </servlet>
+    <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>fr.univnantes.atal.web.trashnao.servlets.Controller</servlet-class>
     </servlet>
@@ -12,12 +16,16 @@
         <servlet-name>Fetch</servlet-name>
         <servlet-class>fr.univnantes.atal.web.trashnao.servlets.Fetch</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>Login</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.trashnao.servlets.Login</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
+    <security-constraint>
+        <web-resource-collection>
+            <url-pattern>/app/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
+        </auth-constraint>
+    </security-constraint>
 </web-app>

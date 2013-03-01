@@ -4,15 +4,19 @@
  */
 package fr.univnantes.atal.web.trashnao.servlets;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import fr.univnantes.atal.web.trashnao.model.User;
 import fr.univnantes.atal.web.trashnao.persistence.PMF;
 import java.io.IOException;
 import javax.jdo.PersistenceManager;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,13 +39,18 @@ public class Controller extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getPathInfo();
-        System.out.println(path);
         RequestDispatcher rd;
-        if (path.equals("/fetch")) {
-            rd = getServletContext().getNamedDispatcher("Fetch");
-        } else if (path.equals("/login")) {
-            rd = getServletContext().getNamedDispatcher("Login");
-        } else if (path.equals("/user")) {
+        ServletContext sc = getServletContext();
+        HttpSession session = request.getSession(false);
+
+        if (path.startsWith("/app")) {
+            rd = sc.getNamedDispatcher("App");
+        } else if (path.equals("/fetch")) {
+            // to remove when the cron is ready, Fetch should not be publicly
+            // accessible
+            rd = sc.getNamedDispatcher("Fetch");
+        } else if (path.equals(
+                "/user")) {
             User user = new User();
             user.setGoogleId("abc");
             user.setRefreshToken("abcd");
@@ -51,10 +60,11 @@ public class Controller extends HttpServlet {
             } finally {
                 pm.close();
             }
-            rd = getServletContext().getNamedDispatcher("Index");
+            rd = sc.getNamedDispatcher(session == null ? "Index" : "App");
         } else {
-            rd = getServletContext().getNamedDispatcher("Index");
+            rd = sc.getNamedDispatcher(session == null ? "Index" : "App");
         }
+
         rd.forward(request, response);
     }
 

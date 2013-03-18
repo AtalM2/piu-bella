@@ -9,16 +9,28 @@
         <jsp-file>/app.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>Controller</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.trashnao.servlets.Controller</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Fetch</servlet-name>
         <servlet-class>fr.univnantes.atal.web.trashnao.servlets.Fetch</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OAuth</servlet-name>
+        <servlet-class>fr.univnantes.atal.web.trashnao.servlets.OAuth</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>Controller</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>App</servlet-name>
+        <url-pattern>/app/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Fetch</servlet-name>
+        <url-pattern>/fetch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OAuth</servlet-name>
+        <url-pattern>/OAuth</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <web-resource-collection>

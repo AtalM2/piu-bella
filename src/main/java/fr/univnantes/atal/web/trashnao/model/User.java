@@ -10,24 +10,13 @@ public class User {
     
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    private String googleId;
+    private String email;
     
-    @Persistent
-    private String refreshToken;
-
-    public String getGoogleId() {
-        return googleId;
+    public String getEmail() {
+        return email;
     }
 
-    public void setGoogleId(String googleId) {
-        this.googleId = googleId;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

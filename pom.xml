@@ -84,6 +84,12 @@
             <version>${appengine.target.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-lgpl</artifactId>
+            <version>1.9.12</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>

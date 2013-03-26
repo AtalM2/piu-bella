@@ -1,5 +1,9 @@
 package fr.univnantes.atal.web.trashnao.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -12,11 +16,14 @@ public class Notification {
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Address address;
     @Persistent
-    private NotificationTransport transport;
+    private List<NotificationTransport> onYellowDay;
     @Persistent
-    private boolean notifyOnYellowDay;
-    @Persistent
-    private boolean notifyOnBlueDayblue;
+    private List<NotificationTransport> onBlueDay;
+
+    public Notification() {
+        onBlueDay = new ArrayList<>();
+        onYellowDay = new ArrayList<>();
+    }
 
     public Address getAddress() {
         return address;
@@ -26,27 +33,31 @@ public class Notification {
         this.address = address;
     }
 
-    public NotificationTransport getTransport() {
-        return transport;
+    public void addNotificationOnBlueDay(NotificationTransport transport) {
+        if (!onBlueDay.contains(transport)) {
+            onBlueDay.add(transport);
+        }
     }
 
-    public void setTransport(NotificationTransport transport) {
-        this.transport = transport;
+    public void addNotificationOnYellowDay(NotificationTransport transport) {
+        if (!onYellowDay.contains(transport)) {
+            onYellowDay.add(transport);
+        }
+    }
+    
+    public void removeNotificationOnBlueDay(NotificationTransport transport) {
+        onBlueDay.remove(transport);
     }
 
-    public boolean isNotifyOnYellowDay() {
-        return notifyOnYellowDay;
+    public void removeNotificationOnYellowDay(NotificationTransport transport) {
+        onYellowDay.remove(transport);
     }
-
-    public void setNotifyOnYellowDay(boolean notifyOnYellowDay) {
-        this.notifyOnYellowDay = notifyOnYellowDay;
+    
+    public Collection<NotificationTransport> getNotificationsOnBlueDay() {
+        return Collections.unmodifiableCollection(onBlueDay);
     }
-
-    public boolean isNotifyOnBlueDayblue() {
-        return notifyOnBlueDayblue;
-    }
-
-    public void setNotifyOnBlueDayblue(boolean notifyOnBlueDayblue) {
-        this.notifyOnBlueDayblue = notifyOnBlueDayblue;
+    
+    public Collection<NotificationTransport> getNotificationsOnYellowDay() {
+        return Collections.unmodifiableCollection(onYellowDay);
     }
 }

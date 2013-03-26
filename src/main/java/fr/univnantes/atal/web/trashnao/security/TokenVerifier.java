@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.Map;
 import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
+import javax.servlet.http.HttpServletRequest;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
@@ -16,7 +17,8 @@ public class TokenVerifier {
     static private ObjectMapper mapper = new ObjectMapper();
     static private PersistenceManager pm = PMF.get().getPersistenceManager();
 
-    static public User getUser(String accessToken) {
+    static public User getUser(HttpServletRequest request) {
+        String accessToken = request.getParameter("access_token");
         if (accessToken == null) {
             return null;
         } else {
@@ -34,13 +36,13 @@ public class TokenVerifier {
                         .equals(Constants.clientId)) {
                     return null;
                 } else {
-                    String email = userData.get("email");
+                    String email = userData.get("email"),
+                            userId = userData.get("user_id");
                     User user;
                     try {
                         user = pm.getObjectById(User.class, email);
                     } catch (JDOObjectNotFoundException ex) {
-                        user = new User();
-                        user.setEmail(email);
+                        user = new User(email, userId);
                         pm.makePersistent(user);
                     }
                     return user;

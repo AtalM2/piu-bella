@@ -16,6 +16,10 @@
         <servlet-name>OAuth</servlet-name>
         <servlet-class>fr.univnantes.atal.web.trashnao.servlets.OAuth</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>User</servlet-name>
+        <servlet-class>fr.univnantes.atal.web.trashnao.webservices.UserService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>OAuth</servlet-name>
         <url-pattern>/OAuth</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>User</servlet-name>
+        <url-pattern>/user</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <web-resource-collection>

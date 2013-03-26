@@ -24,21 +24,14 @@ public class OAuth extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         final String accessToken = request.getParameter("access_token");
-        User user = TokenVerifier.getUser(accessToken);
-        if (user != null) {
-            try {
+        User user = TokenVerifier.getUser(request);
+        try (PrintWriter out = response.getWriter()) {
+            if (user != null) {
                 out.println("Logged in with email: " + user.getEmail());
-            } finally {
-                out.close();
-            }
 
-        } else {
-            try {
+            } else {
                 out.println("Authentication failed, invalid token");
-            } finally {
-                out.close();
             }
         }
     }

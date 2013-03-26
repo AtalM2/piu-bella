@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class UserService extends WebService {
-    
+
     PersistenceManager pm = PMF.get().getPersistenceManager();
-    
+
     @Override
     protected void get(
             HttpServletRequest request,
@@ -22,8 +22,14 @@ public class UserService extends WebService {
             throws ServletException, IOException {
         User user = TokenVerifier.getUser(request);
         Map<String, String> data = new HashMap<>();
-        data.put("id", user.getGoogleId());
-        data.put("email", user.getEmail());
+        if (user != null) {
+            data.put("id", user.getGoogleId());
+            data.put("email", user.getEmail());
+        } else {
+            error(request,
+                    response,
+                    "Couldn't identify the user thanks to the access_token.");
+        }
     }
 
     @Override
@@ -48,6 +54,12 @@ public class UserService extends WebService {
             HttpServletResponse response)
             throws ServletException, IOException {
         User user = TokenVerifier.getUser(request);
-        pm.deletePersistent(user);
+        if (user != null) {
+            pm.deletePersistent(user);
+        } else {
+            error(request,
+                    response,
+                    "Couldn't identify the user thanks to the access_token.");
+        }
     }
 }

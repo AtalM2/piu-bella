@@ -13,6 +13,10 @@
         <servlet-class>fr.univnantes.atal.web.trashnao.servlets.Fetch</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>FetchJson</servlet-name>
+        <servlet-class>fr.univnantes.atal.web.trashnao.servlets.FetchJson</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>OAuth</servlet-name>
         <servlet-class>fr.univnantes.atal.web.trashnao.servlets.OAuth</servlet-class>
     </servlet>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>Fetch</servlet-name>
         <url-pattern>/fetch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FetchJson</servlet-name>
+        <url-pattern>/fetchjson</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OAuth</servlet-name>

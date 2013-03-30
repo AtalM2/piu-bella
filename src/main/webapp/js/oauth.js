@@ -2,7 +2,7 @@ function load() {
     console.log('Google API loading...');
     /* gapi.client.setApiKey('311668897898.apps.googleusercontent.com');*/
     gapi.client.load('oauth2', 'v2', authorize);
-    $('authorize').click(authorize);
+    $('#authorize').click(authorize);
     console.log('hey2');
 }
     
@@ -25,7 +25,12 @@ function handle_token(auth_result) {
         gapi.auth.setToken(auth_result);
         var request = gapi.client.oauth2.userinfo.get();
         request.execute(handle_email);
+        //
+        $('.piubella-notconnected').hide();
+        $('.piubella-connected').show();
     } else {
+        $('.piubella-notconnected').show();
+        $('.piubella-connected').hide();
     }
 }
 

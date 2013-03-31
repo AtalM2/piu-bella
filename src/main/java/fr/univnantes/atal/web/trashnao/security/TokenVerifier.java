@@ -31,9 +31,10 @@ public class TokenVerifier {
                         new InputStreamReader(url.openStream(), "UTF-8"),
                         new TypeReference<Map<String, String>>() {
                         });
-                if (userData.containsKey("error")
+                if (userData.get("audience") == null
+                        || userData.containsKey("error")
                         || !userData.get("audience")
-                        .equals(Constants.clientId)) {
+                        .equals(Constants.CLIENT_ID)) {
                     return null;
                 } else {
                     String email = userData.get("email"),

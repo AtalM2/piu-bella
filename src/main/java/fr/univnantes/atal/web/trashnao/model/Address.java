@@ -14,10 +14,10 @@ public class Address {
     private Boolean singleCollect;
     
     @Persistent
-    private Collection<Day> blueDays;
+    private Collection<CollectDay> blueDays;
     
     @Persistent
-    private Collection<Day> yellowDays;
+    private Collection<CollectDay> yellowDays;
     
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
@@ -31,19 +31,19 @@ public class Address {
         this.singleCollect = singleCollect;
     }
 
-    public Collection<Day> getBlueDays() {
+    public Collection<CollectDay> getBlueDays() {
         return Collections.unmodifiableCollection(blueDays);
     }
 
-    public void setBlueDays(Collection<Day> blueDays) {
+    public void setBlueDays(Collection<CollectDay> blueDays) {
         this.blueDays = blueDays;
     }
 
-    public Collection<Day> getYellowDays() {
+    public Collection<CollectDay> getYellowDays() {
         return Collections.unmodifiableCollection(yellowDays);
     }
 
-    public void setYellowDays(Collection<Day> yellowDays) {
+    public void setYellowDays(Collection<CollectDay> yellowDays) {
         this.yellowDays = yellowDays;
     }
 

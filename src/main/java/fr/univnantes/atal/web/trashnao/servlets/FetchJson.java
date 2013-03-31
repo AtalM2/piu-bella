@@ -2,7 +2,7 @@ package fr.univnantes.atal.web.trashnao.servlets;
 
 import au.com.bytecode.opencsv.CSVReader;
 import fr.univnantes.atal.web.trashnao.model.Address;
-import fr.univnantes.atal.web.trashnao.model.Day;
+import fr.univnantes.atal.web.trashnao.model.CollectDay;
 import fr.univnantes.atal.web.trashnao.persistence.PMF;
 import java.io.IOException;
 import java.io.InputStreamReader;

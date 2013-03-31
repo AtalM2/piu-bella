@@ -13,14 +13,6 @@
     <appengine.target.version>1.7.6</appengine.target.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  
-  <pluginRepositories>
-    <pluginRepository>
-      <id>google-releases</id>
-      <url>https://oss.sonatype.org/content/repositories/google-releases</url>
-      <name>Google Releases</name>
-    </pluginRepository>
-  </pluginRepositories>
 
   <dependencies>
     <!-- Compile/runtime dependencies -->

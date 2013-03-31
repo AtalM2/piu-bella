@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+    <cron>
+        <url>/cron/update-checker</url>
+        <description>Checks if an update of our dataset is available on NOD.</description>
+        <schedule>every day 04:00</schedule>
+        <timezone>Europe/Paris</timezone>
+    </cron>
+</cronentries>

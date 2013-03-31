@@ -54,11 +54,19 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateChecker</servlet-name>
-        <url-pattern>/UpdateChecker</url-pattern>
+        <url-pattern>/cron/update-checker</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <web-resource-collection>
             <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <url-pattern>/cron/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>admin</role-name>

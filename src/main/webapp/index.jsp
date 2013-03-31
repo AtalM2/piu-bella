@@ -38,6 +38,7 @@
         <ul class="nav nav-pills pull-right">
           <li class="active"><a href="/">Accueil</a></li>
           <li><a href="#">À propos</a></li>
+          <span id="email">email</span>
         </ul>
         <h3 class="muted">Projet Più Bella</h3>
       </div>
@@ -50,13 +51,12 @@
         <a class="btn btn-large btn-success piubella-notconnected" id="authorize" href="#">Je m'inscris!</a>
       </div>
 
+      
       <div class="row-fluid marketing piubella-connected">
+        
         <div class="span6">
-            <section id="logged_in">
-                Vous êtes connecté avec l'adresse <span id="email">email</span>.
-            </section>
-            
-            <!-- <section>
+            <!--
+            <section>
                 <a href="https://trashnao.appspot.com/app/">Go to the app</a>
                 <br/>
                 <a href="https://trashnao.appspot.com/fetch">Run the dataset update</a>
@@ -65,43 +65,66 @@
 
 
       <div class="row-fluid marketing piubella-connected">
-        <div class="span6">
+        <div class="span6" id="address-query-wrapper">
             <!-- <h1>Memberz app</h1>
             <a href="https://trashnao.appspot.com/">Welcome</a>
             <br/>
             <a href="https://trashnao.appspot.com/fetch">Fetch</a>
             <br /> -->
-            <input placeholder="Votre rue ou quartier..." type="text" data-provide="typeahead" id="addressquery">
+            <div class="address-query-container">
+                <input placeholder="Votre rue ou quartier..." type="text" data-provide="typeahead" id="addressquery">
+                <img src="/images/ajax-loader.gif" id="loading-indicator" style="display:none" />
+            </div>
         </div>
       </div>
 
 
       <hr>
 
-      <div class="row-fluid marketing">
-        <div class="span6">
-          <h4>Subheading</h4>
-          <p>Peut etre mettre les adresses sauvées ou les options ici.</p>
+        <h2>Mes Alertes</h2>
 
-          <h4>Subheading</h4>
-          <p>Peut etre mettre les adresses sauvées ou les options ici.</p>
-
-          <h4>Subheading</h4>
-          <p>Peut etre mettre les adresses sauvées ou les options ici.</p>
-        </div>
-
-        <div class="span6">
-          <h4>Subheading</h4>
-          <p>Peut etre mettre les adresses sauvées ou les options ici.</p>
-
-          <h4>Subheading</h4>
-          <p>Peut etre mettre les adresses sauvées ou les options ici.</p>
-
-          <h4>Subheading</h4>
-          <p>Peut etre mettre les adresses sauvées ou les options ici.</p>
-        </div>
-      </div>
-
+            <div class="span12 alert">
+                <div class="span8">
+                    <h4>Quartier du chat perdu</h4>
+                    <p>La rue Bien-Paumé</p>
+                </div>
+                <div class="span4 alert-icons">
+                    <button type="button" class="btn" data-toggle="button">
+                        <img src="/images/gmail-icon.png"></img>
+                    </button>
+                    <button type="button" class="btn" data-toggle="button">
+                        <img src="/images/twitter-icon.png"></img>
+                    </button>
+                </div>
+            </div>
+            <div class="span12 alert">
+                <div class="span8">
+                    <h4>Un autre quartier</h4>
+                    <p>une autre rue</p>
+                </div>
+                <div class="span4 alert-icons">
+                    <button type="button" class="btn" data-toggle="button">
+                        <img src="/images/gmail-icon.png"></img>
+                    </button>
+                    <button type="button" class="btn" data-toggle="button">
+                        <img src="/images/twitter-icon.png"></img>
+                    </button>
+                </div>
+            </div>
+            <div class="span12 alert">
+                <div class="span8">
+                    <h4>Encore un autre</h4>
+                    <p>encore une autre</p>
+                </div>
+                <div class="span4 alert-icons">
+                    <button type="button" class="btn" data-toggle="button">
+                        <img src="/images/gmail-icon.png"></img>
+                    </button>
+                    <button type="button" class="btn" data-toggle="button">
+                        <img src="/images/twitter-icon.png"></img>
+                    </button>
+                </div>
+            </div>
       <hr>
 
       <div class="footer">

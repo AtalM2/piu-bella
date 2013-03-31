@@ -1,6 +1,7 @@
 $(function addquery(){
 var url = "/fetchjson";
-var dict = {};
+var dict = null;
+var addressList = [];
 $('#addressquery').typeahead({
 	source: function(query, process){
 		//console.log(query,process);
@@ -8,24 +9,24 @@ $('#addressquery').typeahead({
 	},
 
 	updater:function (item) {
+		$('#address-query-wrapper').popover('destroy');
 
-		console.log(dict[item]);
         var yellow = dict[item].JAUNE_JOUR_COLLECTE;
         var blue = dict[item].BLEU_JOUR_COLLECTE;
 
         var popoverContent = '<div class="yellow">Sacs jaunes : '+ yellow + '</div>'
         + '<div class="blue">Sacs bleus : '+ blue + '</div>'
-        + '<div> Mon super bouton de sauvegarde </div>';
+        + '<div align=right><button type="button" class="btn btn-primary" data-loading-text="Création...">Créer une alerte</button>';
 
-        $('#addressquery').popover({
-        	title: "Ramassage des poubelles "+item,
+        $('#address-query-wrapper').popover({
+        	title: "Jours de collecte",
         	content: popoverContent,
         	placement: 'right',
         	html: true,
         	trigger: 'manual'
         });
 
-        $('#addressquery').popover('show');
+        $('#address-query-wrapper').popover('show');
         //do your stuff.
 
         //dont forget to return the item to reflect them into input
@@ -34,13 +35,19 @@ $('#addressquery').typeahead({
 });
 
 var adressjson = function(myAdress, callback){
+	$('#loading-indicator').show();
 	$.ajax(url,{
+		complete: function(noarg){
+			$('#loading-indicator').hide();
+		},
 		success: function(data){
-			console.log(data);
-			var addressList = $.map(data.data,function(item){
-				dict[item.LIBELLE]=item;
-				return item.LIBELLE;//+ '<span>' + item.QUARTIER + '</span>';
-			});
+			if(!dict){
+				dict = {};
+				addressList = $.map(data.data,function(item){
+					dict[item.LIBELLE]=item;
+					return item.LIBELLE;//+ '<span>' + item.QUARTIER + '</span>';
+				});
+			}
 			callback(addressList);
 		},
 		dataType: "json",

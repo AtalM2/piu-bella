@@ -5,7 +5,6 @@ import fr.univnantes.atal.web.trashnao.model.DatasetInfo;
 import fr.univnantes.atal.web.trashnao.persistence.PMF;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.List;
@@ -74,32 +73,25 @@ public class UpdateChecker extends HttpServlet {
 
             }
         }
-        try (PrintWriter out = response.getWriter()) {
-            if (updated != null) {
-                DatasetInfo datasetInfo;
-                Query q = pm.newQuery(DatasetInfo.class);
-                try {
-                    List<DatasetInfo> results =
-                            (List<DatasetInfo>) q.execute();
-                    if (!results.isEmpty()) {
-                        datasetInfo = results.get(0);
-                    } else {
-                        datasetInfo = new DatasetInfo();
-                        pm.makePersistent(datasetInfo);
-                    }
-                } finally {
-                    q.closeAll();
-                }
-                if (datasetInfo.getLastUpdateDate().compareTo(updated) < 0) {
-                    notifyUpdate();
-                    datasetInfo.setLastUpdateDate(updated);
-                    out.println(updated);
-                    pm.makePersistent(datasetInfo);
+        if (updated != null) {
+            DatasetInfo datasetInfo;
+            Query q = pm.newQuery(DatasetInfo.class);
+            try {
+                List<DatasetInfo> results =
+                        (List<DatasetInfo>) q.execute();
+                if (!results.isEmpty()) {
+                    datasetInfo = results.get(0);
                 } else {
-                    out.println("Pas besoin d'update");
+                    datasetInfo = new DatasetInfo();
+                    pm.makePersistent(datasetInfo);
                 }
-            } else {
-                out.println("Pas de date d'update");
+            } finally {
+                q.closeAll();
+            }
+            if (datasetInfo.getLastUpdateDate().compareTo(updated) < 0) {
+                datasetInfo.setLastUpdateDate(updated);
+                pm.makePersistent(datasetInfo);
+                notifyUpdate();
             }
         }
     }

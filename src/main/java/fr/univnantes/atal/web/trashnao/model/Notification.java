@@ -1,5 +1,7 @@
 package fr.univnantes.atal.web.trashnao.model;
 
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.datanucleus.annotations.Unowned;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -14,6 +16,9 @@ public class Notification {
 
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+    private Key key;
+    @Persistent
+    @Unowned
     private Address address;
     @Persistent
     private List<NotificationTransport> onYellowDay;

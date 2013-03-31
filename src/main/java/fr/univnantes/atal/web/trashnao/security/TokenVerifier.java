@@ -15,7 +15,6 @@ import org.codehaus.jackson.type.TypeReference;
 public class TokenVerifier {
 
     static private ObjectMapper mapper = new ObjectMapper();
-    static private PersistenceManager pm = PMF.get().getPersistenceManager();
 
     static public User getUser(HttpServletRequest request) {
         String accessToken = request.getParameter("access_token");
@@ -40,11 +39,14 @@ public class TokenVerifier {
                     String email = userData.get("email"),
                             userId = userData.get("user_id");
                     User user;
+                    PersistenceManager pm = PMF.get().getPersistenceManager();
                     try {
                         user = pm.getObjectById(User.class, email);
                     } catch (JDOObjectNotFoundException ex) {
                         user = new User(email, userId);
                         pm.makePersistent(user);
+                    } finally {
+                        pm.close();
                     }
                     return user;
                 }

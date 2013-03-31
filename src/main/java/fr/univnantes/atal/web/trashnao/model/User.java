@@ -1,5 +1,6 @@
 package fr.univnantes.atal.web.trashnao.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -21,7 +22,8 @@ public class User {
     public User(String googleId, String email) {
         this.googleId = googleId;
         this.email = email;
-    }
+        notifications = new ArrayList<>(); 
+   }
 
     public String getEmail() {
         return email;

@@ -5,20 +5,12 @@
         <jsp-file>/index.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>App</servlet-name>
-        <jsp-file>/app.jsp</jsp-file>
-    </servlet>
-    <servlet>
         <servlet-name>Fetch</servlet-name>
         <servlet-class>fr.univnantes.atal.web.trashnao.servlets.Fetch</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FetchJson</servlet-name>
         <servlet-class>fr.univnantes.atal.web.trashnao.servlets.FetchJson</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>OAuth</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.trashnao.servlets.OAuth</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>User</servlet-name>
@@ -33,20 +25,12 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>App</servlet-name>
-        <url-pattern>/app/</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Fetch</servlet-name>
         <url-pattern>/admin/fetch</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FetchJson</servlet-name>
         <url-pattern>/fetchjson</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>OAuth</servlet-name>
-        <url-pattern>/OAuth</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>User</servlet-name>

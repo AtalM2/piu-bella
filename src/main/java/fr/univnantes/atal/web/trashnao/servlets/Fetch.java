@@ -32,8 +32,6 @@ public class Fetch extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.setProperty("http.proxyHost", "cache.wifi.univ-nantes.fr");
-        System.setProperty("http.proxyPort", "3128");
         Query q = pm.newQuery(Address.class);
         q.deletePersistentAll();
         URL url = new URL("http://data.nantes.fr/api/publication/"

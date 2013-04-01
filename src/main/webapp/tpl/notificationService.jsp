@@ -5,6 +5,14 @@
 <% 
 Collection<Notification> notifications = (Collection<Notification>) request.getAttribute("mesAlertes"); 
 
+if(notifications.size() == 0) {
+%>
+	<div class="well">
+		Vous n'avez rien.
+	</div>
+<%
+}
+
 Iterator<Notification> iter = notifications.iterator();
 while( iter.hasNext() ) {
 	Notification item=iter.next();

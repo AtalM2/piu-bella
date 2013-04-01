@@ -122,3 +122,8 @@ padding: 0px;
 .alert-btn{
   margin: 20px;
 }
+
+.btn-group-vertical {
+  text-align: right;
+  margin-left: 20px;
+}

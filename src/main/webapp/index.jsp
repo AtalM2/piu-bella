@@ -49,42 +49,35 @@
                 <a class="btn btn-large btn-success piubella-notconnected" id="authorize" href="#">Je m'inscris!</a>
             </div>
 
-    <h2>Mes Alertes</h2>
-    <div class="accordion" id="accordion2">
-        
-    </div>
-
-      <hr>
+            <div class="row-fluid marketing piubella-connected">
+                <div class="span6" id="address-query-wrapper">
+                    <!-- <h1>Memberz app</h1>
+                    <a href="https://trashnao.appspot.com/">Welcome</a>
+                    <br/>
+                    <a href="https://trashnao.appspot.com/fetch">Fetch</a>
+                    <br /> -->
+                    <div class="address-query-container">
+                        <input placeholder="Votre rue ou quartier..." type="text" data-provide="typeahead" id="addressquery">
+                        <img src="/img/ajax-loader.gif" id="loading-indicator" style="display:none" />
+                    </div>
+                </div>
+                
+            </div>
+            
+            <hr>
 
             <div class="row-fluid marketing piubella-connected">
 
-                <div class="span6">
-                    <!--
-                    <section>
-                        <a href="https://trashnao.appspot.com/app/">Go to the app</a>
-                        <br/>
-                        <a href="https://trashnao.appspot.com/fetch">Run the dataset update</a>
-                    </section> -->
-                </div>
-
-
-                <div class="row-fluid marketing piubella-connected">
-                    <div class="span6" id="address-query-wrapper">
-                        <!-- <h1>Memberz app</h1>
-                        <a href="https://trashnao.appspot.com/">Welcome</a>
-                        <br/>
-                        <a href="https://trashnao.appspot.com/fetch">Fetch</a>
-                        <br /> -->
-                        <div class="address-query-container">
-                            <input placeholder="Votre rue ou quartier..." type="text" data-provide="typeahead" id="addressquery">
-                            <img src="/images/ajax-loader.gif" id="loading-indicator" style="display:none" />
-                        </div>
+                
+                    <h2>Mes Alertes</h2>
+                    <div class="accordion" id="accordion2">
+                        
                     </div>
-                </div>
-                <div class="footer">
-                    <p>© M1 ATAL 2013</p>
-                </div>
+            </div>
 
+            <hr>
+            <div class="footer">
+                    <p>© M1 ATAL 2013</p>
             </div>
         </div> <!-- /container-narrow -->
 

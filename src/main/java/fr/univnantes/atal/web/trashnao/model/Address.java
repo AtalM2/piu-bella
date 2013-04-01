@@ -23,11 +23,15 @@ public class Address {
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private String street;
 
+    public Address() {
+
+    }
+
     public Address(String street){
         this.street = street;
     }
 
-    public Address(String street, Collection<Day> blueDays, Collection<Day> yellowDays){
+    public Address(String street, Collection<CollectDay> blueDays, Collection<CollectDay> yellowDays){
         this.street = street;
         this.blueDays = blueDays;
         this.yellowDays = yellowDays;     

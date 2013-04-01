@@ -7,14 +7,18 @@
     <div id="${param.id}" class="accordion-body in collapse">
         <div class="accordion-inner">
             <div class="accordion-section-jaune span6">
-                Sacs jaunes
-                <button type="button" class="btn alert-btn" data-toggle="button">Gmail</button>
-                <button type="button" class="btn alert-btn" data-toggle="button">Xmpp</button>
+                Mardi et Vendredi
+                <div class="btn-group btn-group-vertical">
+                    <button type="button" class="btn alert-btn" data-toggle="button"><i class="icon-envelope"></i> Gmail</button>
+                    <button type="button" class="btn alert-btn" data-toggle="button"><i class="icon-envelope"></i> Xmpp</button>
+                </div>
             </div>
             <div class="accordion-section-bleu span6">
-                Sacs bleus
-                <button type="button" class="btn alert-btn" data-toggle="button">Gmail</button>
-                <button type="button" class="btn alert-btn" data-toggle="button">Xmpp</button>
+                Jeudi et Samedi
+                <div class="btn-group btn-group-vertical">
+                    <button type="button" class="btn alert-btn" data-toggle="button"><i class="icon-envelope"></i> Gmail</button>
+                    <button type="button" class="btn alert-btn" data-toggle="button"><i class="icon-envelope"></i> Xmpp</button>
+                </div>
             </div>
         </div>
     </div>

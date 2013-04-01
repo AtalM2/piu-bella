@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0066)http://twitter.github.com/bootstrap/examples/marketing-narrow.html -->
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -86,6 +85,7 @@
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="js/jsrender.js"></script>
         <script type="text/javascript" src="js/bootstrap-typeahead.js"></script>
         <script type="text/javascript" src="js/bootstrap-tooltip.js"></script>
         <script type="text/javascript" src="js/bootstrap-popover.js"></script>
@@ -111,7 +111,13 @@
                 $('.piubella-connected').hide();
                 pb = null;
             }
-        </script> 
+        </script>
+        <script type="text/x-jsrender" id="notifications-options">
+            <jsp:include page="tpl/notifications-options.jsp" flush="true">
+                <jsp:param name="alertaddr" value="{{>address.street}}" />
+                <jsp:param name="id" value="{{>keyIntRandom}}" />
+            </jsp:include>
+        </script>
 
     </body>
 </html>

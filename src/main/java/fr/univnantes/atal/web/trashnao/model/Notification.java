@@ -32,6 +32,8 @@ public class Notification {
 
     public Notification(Address address) {
         this.address = address;
+        onBlueDay = new ArrayList<>();
+        onYellowDay = new ArrayList<>();
     }
 
     public Address getAddress() {
@@ -68,5 +70,9 @@ public class Notification {
     
     public Collection<NotificationTransport> getNotificationsOnYellowDay() {
         return Collections.unmodifiableCollection(onYellowDay);
+    }
+
+    public int getKeyIntRandom() {
+        return (int)(Math.random()*10000);
     }
 }

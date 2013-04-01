@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class UserService extends WebService {
 
-    PersistenceManager pm = PMF.get().getPersistenceManager();
-
     @Override
     protected void get(
             HttpServletRequest request,
@@ -53,6 +51,7 @@ public class UserService extends WebService {
             HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
+        PersistenceManager pm = PMF.get().getPersistenceManager();
         User user = TokenVerifier.getUser(request);
         if (user != null) {
             pm.deletePersistent(user);
@@ -61,5 +60,6 @@ public class UserService extends WebService {
                     response,
                     "Couldn't identify the user thanks to the access_token.");
         }
+        pm.close();
     }
 }

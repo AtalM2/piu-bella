@@ -2,7 +2,7 @@ package fr.univnantes.atal.web.trashnao.servlets;
 
 import au.com.bytecode.opencsv.CSVReader;
 import fr.univnantes.atal.web.trashnao.model.Address;
-import fr.univnantes.atal.web.trashnao.model.Day;
+import fr.univnantes.atal.web.trashnao.model.CollectDay;
 import fr.univnantes.atal.web.trashnao.persistence.PMF;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -53,53 +53,61 @@ public class Fetch extends HttpServlet {
                     String street = nextLine[1],
                             obsStreet = nextLine[9],
                             yellow = nextLine[11];
-                    Collection<Day> blueDays = new ArrayList<>(),
+                    Collection<CollectDay> blueDays = new ArrayList<>(),
                             yellowDays = new ArrayList<>();
                     Boolean singleCollect = false;
                     if (yellow.isEmpty()) {
                         singleCollect = true;
                     }
                     if (blue.contains("lundi")) {
-                        blueDays.add(Day.MONDAY);
+                        blueDays.add(CollectDay.MONDAY);
                     }
                     if (blue.contains("mardi")) {
-                        blueDays.add(Day.TUESDAY);
+                        blueDays.add(CollectDay.TUESDAY);
                     }
                     if (blue.contains("mercredi")) {
-                        blueDays.add(Day.WEDNESDAY);
+                        blueDays.add(CollectDay.WEDNESDAY);
+                    } else if (blue.contains("merc_sem_impaires")) {
+                        blueDays.add(CollectDay.WEDNESDAY_ODD);
+                    } else if (blue.contains("merc_sem_paires")) {
+                        blueDays.add(CollectDay.WEDNESDAY_EVEN);
                     }
                     if (blue.contains("jeudi")) {
-                        blueDays.add(Day.THURSDAY);
+                        blueDays.add(CollectDay.THURSDAY);
                     }
                     if (blue.contains("vendredi")) {
-                        blueDays.add(Day.FRIDAY);
+                        blueDays.add(CollectDay.FRIDAY);
                     }
                     if (blue.contains("samedi")) {
-                        blueDays.add(Day.SATURDAY);
+                        blueDays.add(CollectDay.SATURDAY);
                     }
                     if (blue.contains("dimanche")) {
-                        blueDays.add(Day.SUNDAY);
+                        blueDays.add(CollectDay.SUNDAY);
                     }
                     if (yellow.contains("lundi")) {
-                        yellowDays.add(Day.MONDAY);
+                        yellowDays.add(CollectDay.MONDAY);
                     }
                     if (yellow.contains("mardi")) {
-                        yellowDays.add(Day.TUESDAY);
+                        yellowDays.add(CollectDay.TUESDAY);
                     }
                     if (yellow.contains("mercredi")) {
-                        yellowDays.add(Day.WEDNESDAY);
+                        yellowDays.add(CollectDay.WEDNESDAY);
+                    } else if (yellow.contains("merc_sem_impaires")) {
+                        yellowDays.add(CollectDay.WEDNESDAY_ODD);
+                    } else if (yellow.contains("merc_sem_paires")) {
+                        yellowDays.add(CollectDay.WEDNESDAY_EVEN);
                     }
                     if (yellow.contains("jeudi")) {
-                        yellowDays.add(Day.THURSDAY);
+                        yellowDays.add(CollectDay.THURSDAY);
                     }
                     if (yellow.contains("vendredi")) {
-                        yellowDays.add(Day.FRIDAY);
+                        yellowDays.add(CollectDay.FRIDAY);
                     }
                     if (yellow.contains("samedi")) {
-                        yellowDays.add(Day.SATURDAY);
+                        yellowDays.add(CollectDay.SATURDAY);
                     }
                     if (yellow.contains("dimanche")) {
-                        yellowDays.add(Day.SUNDAY);
+                        yellowDays.add(CollectDay.SUNDAY);
                     }
                     Address address = new Address();
                     address.setSingleCollect(singleCollect);

@@ -4,6 +4,7 @@ import fr.univnantes.atal.web.trashnao.model.User;
 import fr.univnantes.atal.web.trashnao.persistence.PMF;
 import fr.univnantes.atal.web.trashnao.security.TokenVerifier;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import javax.jdo.PersistenceManager;
@@ -23,6 +24,11 @@ public class UserService extends WebService {
         if (user != null) {
             data.put("id", user.getGoogleId());
             data.put("email", user.getEmail());
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                out.println(mapper.writeValueAsString(data));
+            }
         } else {
             error(request,
                     response,

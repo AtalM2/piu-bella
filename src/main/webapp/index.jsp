@@ -81,50 +81,11 @@
 
       <hr>
 
-        <h2>Mes Alertes</h2>
+    <h2>Mes Alertes</h2>
+    <div class="accordion" id="accordion2">
+        
+    </div>
 
-            <div class="span12 alert">
-                <div class="span8">
-                    <h4>Quartier du chat perdu</h4>
-                    <p>La rue Bien-Paumé</p>
-                </div>
-                <div class="span4 alert-icons">
-                    <button type="button" class="btn" data-toggle="button">
-                        <img src="/images/gmail-icon.png"></img>
-                    </button>
-                    <button type="button" class="btn" data-toggle="button">
-                        <img src="/images/twitter-icon.png"></img>
-                    </button>
-                </div>
-            </div>
-            <div class="span12 alert">
-                <div class="span8">
-                    <h4>Un autre quartier</h4>
-                    <p>une autre rue</p>
-                </div>
-                <div class="span4 alert-icons">
-                    <button type="button" class="btn" data-toggle="button">
-                        <img src="/images/gmail-icon.png"></img>
-                    </button>
-                    <button type="button" class="btn" data-toggle="button">
-                        <img src="/images/twitter-icon.png"></img>
-                    </button>
-                </div>
-            </div>
-            <div class="span12 alert">
-                <div class="span8">
-                    <h4>Encore un autre</h4>
-                    <p>encore une autre</p>
-                </div>
-                <div class="span4 alert-icons">
-                    <button type="button" class="btn" data-toggle="button">
-                        <img src="/images/gmail-icon.png"></img>
-                    </button>
-                    <button type="button" class="btn" data-toggle="button">
-                        <img src="/images/twitter-icon.png"></img>
-                    </button>
-                </div>
-            </div>
       <hr>
 
       <div class="footer">
@@ -141,9 +102,29 @@
     <script type="text/javascript" src="js/bootstrap-typeahead.js"></script>
     <script type="text/javascript" src="js/bootstrap-tooltip.js"></script>
     <script type="text/javascript" src="js/bootstrap-popover.js"></script>
+    <script type="text/javascript" src="js/bootstrap-collapse.js"></script>
     <script type="text/javascript" src="js/underscore.js"></script>
+    <script type="text/javascript" src="js/piubella.js"></script>
     <script type="text/javascript" src="js/oauth.js"></script>
     <script type="text/javascript" src="js/addressquery.js"></script>
     <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=load"></script>  
+    <script type="text/javascript">
+    var pb = null;
+
+    function onConnect() {
+        $('.piubella-notconnected').hide();
+        $('.piubella-connected').show();
+
+        pb = new PiuBella();
+        pb.loadNotifications('#accordion2');
+    }
+
+    function onDisconnect() {
+        $('.piubella-notconnected').show();
+        $('.piubella-connected').hide();
+        pb = null;
+    }
+    </script>
+
 
 </body></html>

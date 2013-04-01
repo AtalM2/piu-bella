@@ -17,6 +17,10 @@
         <servlet-class>fr.univnantes.atal.web.trashnao.webservices.UserService</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Notification</servlet-name>
+        <servlet-class>fr.univnantes.atal.web.trashnao.webservices.NotificationService</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UpdateChecker</servlet-name>
         <servlet-class>fr.univnantes.atal.web.trashnao.servlets.UpdateChecker</servlet-class>
     </servlet>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>UpdateChecker</servlet-name>
         <url-pattern>/cron/update-checker</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Notification</servlet-name>
+        <url-pattern>/notification</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <web-resource-collection>

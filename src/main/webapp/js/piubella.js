@@ -13,9 +13,13 @@ PiuBella.prototype.loadNotifications = function(selector) {
 /**
  */
 PiuBella.prototype.addNotification = function(street, yellow, blue) {
-  $.ajax('/notifications', {
-    method: 'post',
-    data: {   },
+  $.ajax('/notification', {
+    type: 'POST',
+    data: {data: JSON.stringify({
+            street: street,
+            yellow: yellow,
+            blue: blue
+        })},
     success: function() { /* notif ajoutée */ }
   });
 };

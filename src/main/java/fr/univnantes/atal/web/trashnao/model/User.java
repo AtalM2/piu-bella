@@ -1,8 +1,8 @@
 package fr.univnantes.atal.web.trashnao.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -16,13 +16,17 @@ public class User {
     private String googleId;
     @Persistent
     private String email;
-    @Persistent
-    private List<Notification> notifications;
+    @Persistent(mappedBy="user")
+    private Set<Notification> notifications;
 
+    public User() {
+        notifications = new HashSet<>();
+    }
+    
     public User(String googleId, String email) {
         this.googleId = googleId;
         this.email = email;
-        notifications = new ArrayList<>(); 
+        notifications = new HashSet<>(); 
    }
 
     public String getEmail() {
@@ -34,14 +38,25 @@ public class User {
     }
     
     public void addNotification(Notification notification) {
+        notification.setUser(this);
         notifications.add(notification);
     }
     
-    public void removeNotification(int index) {
-        notifications.remove(index);
+    public Boolean removeNotification(String key) {
+        Notification toRemove = null;
+        for (Notification notification : notifications) {
+            if (notification.getKey().equals(key)) {
+                toRemove = notification;
+            }
+        }
+        if (toRemove != null) {
+            return notifications.remove(toRemove);
+        } else {
+            return false;
+        }
     }
     
-    public List<Notification> getNotifications() {
-        return Collections.unmodifiableList(notifications);
+    public Set<Notification> getNotifications() {
+        return Collections.unmodifiableSet(notifications);
     }
 }

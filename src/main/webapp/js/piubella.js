@@ -5,7 +5,7 @@ var PiuBella = function(conf) { };
 PiuBella.prototype.loadNotifications = function(selector) {
   $.getJSON("/notification",function(data){
     $(selector).html(
-      $("#notifications-options").render(data.mesAlertes)
+      $("#notifications-options").render(data.data)
     );
   })
 };

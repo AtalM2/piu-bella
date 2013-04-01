@@ -1,11 +1,11 @@
 package fr.univnantes.atal.web.trashnao.model;
 
-import com.google.appengine.api.datastore.Key;
 import com.google.appengine.datanucleus.annotations.Unowned;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -16,24 +16,35 @@ public class Notification {
 
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    private Key key;
+    @Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+    private String key;
     @Persistent
     @Unowned
     private Address address;
     @Persistent
-    private List<NotificationTransport> onYellowDay;
+    private User user;
     @Persistent
-    private List<NotificationTransport> onBlueDay;
+    private Set<NotificationTransport> onYellowDay;
+    @Persistent
+    private Set<NotificationTransport> onBlueDay;
 
     public Notification() {
-        onBlueDay = new ArrayList<>();
-        onYellowDay = new ArrayList<>();
+        onBlueDay = new HashSet<>();
+        onYellowDay = new HashSet<>();
     }
 
     public Notification(Address address) {
         this.address = address;
-        onBlueDay = new ArrayList<>();
-        onYellowDay = new ArrayList<>();
+        onBlueDay = new HashSet<>();
+        onYellowDay = new HashSet<>();
+    }
+    
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    public User getUser() {
+        return user;
     }
 
     public Address getAddress() {
@@ -72,7 +83,7 @@ public class Notification {
         return Collections.unmodifiableCollection(onYellowDay);
     }
 
-    public int getKeyIntRandom() {
-        return (int)(Math.random()*10000);
+    public String getKey() {
+        return key;
     }
 }

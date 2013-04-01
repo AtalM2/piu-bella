@@ -22,6 +22,7 @@ public class UserService extends WebService {
         User user = TokenVerifier.getUser(request);
         Map<String, String> data = new HashMap<>();
         if (user != null) {
+            data.put("status", "success");
             data.put("id", user.getGoogleId());
             data.put("email", user.getEmail());
             response.setContentType("application/json");
@@ -32,24 +33,9 @@ public class UserService extends WebService {
         } else {
             error(request,
                     response,
-                    "Couldn't identify the user thanks to the access_token.");
+                    "Couldn't identify the user thanks to the access_token.",
+                    HttpServletResponse.SC_UNAUTHORIZED);
         }
-    }
-
-    @Override
-    protected void post(
-            HttpServletRequest request,
-            HttpServletResponse response)
-            throws ServletException, IOException {
-        error(request, response, "Unsupported method: POST");
-    }
-
-    @Override
-    protected void put(
-            HttpServletRequest request,
-            HttpServletResponse response)
-            throws ServletException, IOException {
-        error(request, response, "Unsupported method: PUT");
     }
 
     @Override
@@ -64,7 +50,8 @@ public class UserService extends WebService {
         } else {
             error(request,
                     response,
-                    "Couldn't identify the user thanks to the access_token.");
+                    "Couldn't identify the user thanks to the access_token.",
+                    HttpServletResponse.SC_UNAUTHORIZED);
         }
         pm.close();
     }

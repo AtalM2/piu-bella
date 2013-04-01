@@ -38,19 +38,20 @@ public class TokenVerifier {
                 } else {
                     String email = userData.get("email"),
                             userId = userData.get("user_id");
-                    User user;
+                    User user = null;
                     PersistenceManager pm = PMF.get().getPersistenceManager();
                     try {
-                        user = pm.getObjectById(User.class, email);
+                        user = pm.getObjectById(User.class, userId);
                     } catch (JDOObjectNotFoundException ex) {
                         user = new User(userId, email);
-                        pm.makePersistent(user);
                     } finally {
+                        pm.makePersistent(user);
                         pm.close();
                     }
                     return user;
                 }
             } catch (Exception ex) {
+                System.err.println(ex.getMessage());
                 return null;
             }
         }

@@ -63,13 +63,8 @@ public class TestNotifs extends HttpServlet {
                     notification.addNotificationOnBlueDay(NotificationTransport.XMPP);
                     notification.addNotificationOnYellowDay(NotificationTransport.EMAIL);
                     notification.setAddress(address);
-                    System.out.println(notification);
-                    if (notification == null) {
-                        
-                    } else {
-                        user.addNotification(notification);
-                        pm.makePersistent(user);
-                    }
+                    user.addNotification(notification);
+                    pm.makePersistent(user);
                     try (PrintWriter out = response.getWriter()) {
                         out.println("Email: " + user.getEmail());
                         out.println("Address: " + address.getStreet());

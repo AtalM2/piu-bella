@@ -33,7 +33,10 @@ public abstract class WebService extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        error(request, response, "Unsupported method: GET");
+        error(request,
+                response,
+                "Unsupported method: GET",
+                HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
 
     /**
@@ -67,7 +70,10 @@ public abstract class WebService extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        error(request, response, "Unsupported method: POST");
+        error(request,
+                response,
+                "Unsupported method: POST",
+                HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
 
     /**
@@ -89,7 +95,10 @@ public abstract class WebService extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        error(request, response, "Unsupported method: PUT");
+        error(request,
+                response,
+                "Unsupported method: PUT",
+                HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
 
     /**
@@ -111,16 +120,22 @@ public abstract class WebService extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        error(request, response, "Unsupported method: DELETE");
+        error(request,
+                response,
+                "Unsupported method: DELETE",
+                HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
     
     protected void error(
             HttpServletRequest request,
             HttpServletResponse response,
-            String error)
+            String error,
+            int status)
             throws ServletException, IOException {
         Map<String, String> data = new HashMap<>();
+        data.put("status", "error");
         data.put("error", error);
+        response.setStatus(status);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {

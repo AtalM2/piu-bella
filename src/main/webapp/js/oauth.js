@@ -5,7 +5,7 @@ function load() {
     $('#authorize').click(authorize);
     console.log('hey2');
 }
-    
+
 function authorize(event) {
     // Step 3: get authorization to use private data
     gapi.auth.authorize({
@@ -26,11 +26,9 @@ function handle_token(auth_result) {
         var request = gapi.client.oauth2.userinfo.get();
         request.execute(handle_email);
         //
-        $('.piubella-notconnected').hide();
-        $('.piubella-connected').show();
+        onConnect();
     } else {
-        $('.piubella-notconnected').show();
-        $('.piubella-connected').hide();
+        onDisconnect();
     }
 }
 

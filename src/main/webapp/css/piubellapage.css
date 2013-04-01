@@ -105,3 +105,25 @@ padding: 0px;
   margin-right: 5px;
   margin-left: 5px;
 }
+
+.accordion-section-bleu{
+  background-color: #B3B9FF;
+}
+
+.accordion-section-jaune{
+  background-color: #FFFF71;
+}
+
+.accordion-inner{
+  padding: 0px;
+  text-align: center;
+}
+
+.alert-btn{
+  margin: 20px;
+}
+
+.btn-group-vertical {
+  text-align: right;
+  margin-left: 20px;
+}

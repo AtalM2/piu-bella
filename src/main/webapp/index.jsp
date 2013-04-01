@@ -49,100 +49,68 @@
                 <a class="btn btn-large btn-success piubella-notconnected" id="authorize" href="#">Je m'inscris!</a>
             </div>
 
+            <div class="row-fluid marketing piubella-connected">
+                <div class="span6" id="address-query-wrapper">
+                    <!-- <h1>Memberz app</h1>
+                    <a href="https://trashnao.appspot.com/">Welcome</a>
+                    <br/>
+                    <a href="https://trashnao.appspot.com/fetch">Fetch</a>
+                    <br /> -->
+                    <div class="address-query-container">
+                        <input placeholder="Votre rue ou quartier..." type="text" data-provide="typeahead" id="addressquery">
+                        <img src="/img/ajax-loader.gif" id="loading-indicator" style="display:none" />
+                    </div>
+                </div>
+                
+            </div>
+            
+            <hr>
 
             <div class="row-fluid marketing piubella-connected">
 
-                <div class="span6">
-                    <!--
-                    <section>
-                        <a href="https://trashnao.appspot.com/app/">Go to the app</a>
-                        <br/>
-                        <a href="https://trashnao.appspot.com/fetch">Run the dataset update</a>
-                    </section> -->
-                </div>
-
-
-                <div class="row-fluid marketing piubella-connected">
-                    <div class="span6" id="address-query-wrapper">
-                        <!-- <h1>Memberz app</h1>
-                        <a href="https://trashnao.appspot.com/">Welcome</a>
-                        <br/>
-                        <a href="https://trashnao.appspot.com/fetch">Fetch</a>
-                        <br /> -->
-                        <div class="address-query-container">
-                            <input placeholder="Votre rue ou quartier..." type="text" data-provide="typeahead" id="addressquery">
-                            <img src="/images/ajax-loader.gif" id="loading-indicator" style="display:none" />
-                        </div>
+                
+                    <h2>Mes Alertes</h2>
+                    <div class="accordion" id="accordion2">
+                        
                     </div>
-                </div>
+            </div>
 
-
-                <hr>
-
-                <h2>Mes Alertes</h2>
-
-                <div class="span12 alert">
-                    <div class="span8">
-                        <h4>Quartier du chat perdu</h4>
-                        <p>La rue Bien-Paumé</p>
-                    </div>
-                    <div class="span4 alert-icons">
-                        <button type="button" class="btn" data-toggle="button">
-                            <img src="/images/gmail-icon.png">
-                        </button>
-                        <button type="button" class="btn" data-toggle="button">
-                            <img src="/images/twitter-icon.png">
-                        </button>
-                    </div>
-                </div>
-                <div class="span12 alert">
-                    <div class="span8">
-                        <h4>Un autre quartier</h4>
-                        <p>une autre rue</p>
-                    </div>
-                    <div class="span4 alert-icons">
-                        <button type="button" class="btn" data-toggle="button">
-                            <img src="/images/gmail-icon.png">
-                        </button>
-                        <button type="button" class="btn" data-toggle="button">
-                            <img src="/images/twitter-icon.png">
-                        </button>
-                    </div>
-                </div>
-                <div class="span12 alert">
-                    <div class="span8">
-                        <h4>Encore un autre</h4>
-                        <p>encore une autre</p>
-                    </div>
-                    <div class="span4 alert-icons">
-                        <button type="button" class="btn" data-toggle="button">
-                            <img src="/images/gmail-icon.png">
-                        </button>
-                        <button type="button" class="btn" data-toggle="button">
-                            <img src="/images/twitter-icon.png">
-                        </button>
-                    </div>
-                </div>
-                <hr>
-
-                <div class="footer">
+            <hr>
+            <div class="footer">
                     <p>© M1 ATAL 2013</p>
-                </div>
-
             </div>
         </div> <!-- /container-narrow -->
 
-        <!-- Le javascript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-        <script type="text/javascript" src="js/bootstrap-typeahead.js"></script>
-        <script type="text/javascript" src="js/bootstrap-tooltip.js"></script>
-        <script type="text/javascript" src="js/bootstrap-popover.js"></script>
-        <script type="text/javascript" src="js/underscore.js"></script>
-        <script type="text/javascript" src="js/oauth.js"></script>
-        <script type="text/javascript" src="js/addressquery.js"></script>
-        <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=load"></script>  
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="js/bootstrap-typeahead.js"></script>
+    <script type="text/javascript" src="js/bootstrap-tooltip.js"></script>
+    <script type="text/javascript" src="js/bootstrap-popover.js"></script>
+    <script type="text/javascript" src="js/bootstrap-collapse.js"></script>
+    <script type="text/javascript" src="js/underscore.js"></script>
+    <script type="text/javascript" src="js/piubella.js"></script>
+    <script type="text/javascript" src="js/oauth.js"></script>
+    <script type="text/javascript" src="js/addressquery.js"></script>
+    <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=load"></script>  
+    <script type="text/javascript">
+    var pb = null;
+
+    function onConnect() {
+        $('.piubella-notconnected').hide();
+        $('.piubella-connected').show();
+
+        pb = new PiuBella();
+        pb.loadNotifications('#accordion2');
+    }
+
+    function onDisconnect() {
+        $('.piubella-notconnected').show();
+        $('.piubella-connected').hide();
+        pb = null;
+    }
+    </script> 
 
     </body>
 </html>

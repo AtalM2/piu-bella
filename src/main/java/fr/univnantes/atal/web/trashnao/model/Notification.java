@@ -30,6 +30,10 @@ public class Notification {
         onYellowDay = new ArrayList<>();
     }
 
+    public Notification(Address address) {
+        this.address = address;
+    }
+
     public Address getAddress() {
         return address;
     }

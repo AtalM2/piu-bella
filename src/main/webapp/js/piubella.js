@@ -4,11 +4,17 @@ var PiuBella = function(conf) {
 /**
  */
 PiuBella.prototype.loadNotifications = function(selector) {
-    $.getJSON("/notification",function(data){
-        $(selector).html(
+    $.ajax('/notification', {
+        type: 'GET',
+        data: {
+            access_token: gapi.auth.getToken().access_token
+        },
+        success: function(data){
+            $(selector).html(
             $("#notifications-options").render(data.data)
-            );
-    })
+        );
+        }
+    });
 };
 
 /**
@@ -17,8 +23,8 @@ PiuBella.prototype.addNotification = function(street, yellow, blue) {
     $.ajax('/notification', {
         type: 'POST',
         data: {
-            data: JSON.stringify({
-                access_token: gapi.auth.getToken(),
+            access_token: gapi.auth.getToken().access_token,
+            json: JSON.stringify({
                 street: street,
                 yellow: yellow,
                 blue: blue
@@ -37,7 +43,7 @@ PiuBella.prototype.deleteNotification = function(id) {
         method: 'delete',
         data: JSON.stringify({
             method: 'delete',
-            access_token: gapi.auth.getToken()
+            access_token: gapi.auth.getToken().access_token
         }),
         success: function() { /* notif supprimée */ }
     });

@@ -44,8 +44,8 @@ public class TokenVerifier {
                         user = pm.getObjectById(User.class, userId);
                     } catch (JDOObjectNotFoundException ex) {
                         user = new User(userId, email);
-                    } finally {
                         pm.makePersistent(user);
+                    } finally {
                         pm.close();
                     }
                     return user;

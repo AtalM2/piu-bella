@@ -24,6 +24,10 @@
         <servlet-name>TestNotifs</servlet-name>
         <servlet-class>fr.univnantes.atal.web.trashnao.servlets.TestNotifs</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShrinkJson</servlet-name>
+        <servlet-class>fr.univnantes.atal.web.trashnao.servlets.ShrinkJson</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Fetch</servlet-name>
         <url-pattern>/admin/fetch</url-pattern>
@@ -64,6 +68,10 @@
             <role-name>admin</role-name>
         </auth-constraint>
     </security-constraint>
+    <servlet-mapping>
+        <servlet-name>ShrinkJson</servlet-name>
+        <url-pattern>/ShrinkJson</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>

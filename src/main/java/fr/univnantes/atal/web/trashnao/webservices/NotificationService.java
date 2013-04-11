@@ -25,11 +25,11 @@ public class NotificationService extends AuthWebService {
     @Override
     public void init() {
         allowed_methods =
-            new ArrayList(Arrays.asList(false, false, false, false));
+                new ArrayList(Arrays.asList(false, false, false, false));
         authenticated_methods =
-            new ArrayList(Arrays.asList(true, true, false, false));
+                new ArrayList(Arrays.asList(true, true, false, false));
     }
-    
+
     @Override
     protected void auth_get(
             HttpServletRequest request,
@@ -37,9 +37,31 @@ public class NotificationService extends AuthWebService {
             User user)
             throws ServletException, IOException {
         Map<String, Object> data = new HashMap<>();
-        Set<Notification> notifications = user.getNotifications();
+        List<Map<String, Object>> notificationsData = new ArrayList<>();
+
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            User userManaged = (User) pm.getObjectById(
+                    User.class,
+                    user.getGoogleId());
+            List<Notification> notifications = userManaged.getNotifications();
+            for (Notification notification : notifications) {
+                Map<String, Object> notificationData = new HashMap<>();
+                notificationData.put("street",
+                        notification.getAddress().getStreet());
+                notificationData.put("blue",
+                        notification.getNotificationsOnBlueDay());
+                notificationData.put("yellow",
+                        notification.getNotificationsOnYellowDay());
+                notificationData.put("id",
+                        notification.getKey());
+                notificationsData.add(notificationData);
+            }
+        } finally {
+            pm.close();
+        }
         data.put("status", "success");
-        data.put("data", notifications);
+        data.put("data", notificationsData);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -54,16 +76,24 @@ public class NotificationService extends AuthWebService {
             HttpServletResponse response,
             User user)
             throws ServletException, IOException {
-        String json = request.getParameter("data");
+        String json = request.getParameter("json");
+
+
+
+
         if (json != null) {
             Map<String, Object> data = mapper.readValue(json, Map.class);
             List<String> yellowRaw, blueRaw;
             Address address = null;
             Set<NotificationTransport> yellow = new HashSet<>(),
                     blue = new HashSet<>();
-            if (data != null) {
+            if (data
+                    != null) {
                 PersistenceManager pm = PMF.get().getPersistenceManager();
                 try {
+                    User userManaged = pm.getObjectById(User.class,
+                            user.getGoogleId());
+
                     if (data.containsKey("street")) {
                         String street = (String) data.get("street");
                         Query q = pm.newQuery(Address.class);
@@ -85,7 +115,7 @@ public class NotificationService extends AuthWebService {
                                 "The street field must be present and set "
                                 + "to a valid street contained in the NOD "
                                 + "dataset.",
-                                HttpServletResponse.SC_BAD_REQUEST);
+                                422);
                         return;
 
                     }
@@ -99,7 +129,7 @@ public class NotificationService extends AuthWebService {
                                         response,
                                         "The yellow field isn't correct. Should be "
                                         + "of the form [\"XMPP\", \"EMAIL\"].",
-                                        HttpServletResponse.SC_BAD_REQUEST);
+                                        422);
                                 return;
                             }
                         }
@@ -113,21 +143,41 @@ public class NotificationService extends AuthWebService {
                                             response,
                                             "The blue field isn't correct. Should be "
                                             + "of the form [\"XMPP\", \"EMAIL\"].",
-                                            HttpServletResponse.SC_BAD_REQUEST);
+                                            422);
                                     return;
                                 }
                             }
                         }
                     }
-                    Notification notification = new Notification(address);
-                    for (NotificationTransport transport : yellow) {
-                        notification.addNotificationOnYellowDay(transport);
+                    try (PrintWriter out = response.getWriter()) {
+                        List<Notification> notifications = userManaged.getNotifications();
+                        out.println(notifications);
+                        out.println(address.getStreet());
+                        Notification notification = null;
+                        for (Notification notif : notifications) {
+                            if (notif.getAddress().equals(address)) {
+                                notification = notif;
+                            }
+                        }
+                        if (notification == null) {
+                            notification = new Notification(address);
+                            for (NotificationTransport transport : yellow) {
+                                notification.addNotificationOnYellowDay(transport);
+                            }
+                            for (NotificationTransport transport : blue) {
+                                notification.addNotificationOnBlueDay(transport);
+                            }
+                            userManaged.addNotification(notification);
+                        } else {
+                            notification.removeAllNotifications();
+                            for (NotificationTransport transport : yellow) {
+                                notification.addNotificationOnYellowDay(transport);
+                            }
+                            for (NotificationTransport transport : blue) {
+                                notification.addNotificationOnBlueDay(transport);
+                            }
+                        }
                     }
-                    for (NotificationTransport transport : blue) {
-                        notification.addNotificationOnBlueDay(transport);
-                    }
-                    user.addNotification(notification);
-                    pm.makePersistent(user);
 
                 } finally {
                     pm.close();

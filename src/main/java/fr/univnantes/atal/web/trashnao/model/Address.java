@@ -2,6 +2,7 @@ package fr.univnantes.atal.web.trashnao.model;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Objects;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -68,4 +69,27 @@ public class Address {
     public void setStreet(String street) {
         this.street = street;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.street);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Address other = (Address) obj;
+        if (!Objects.equals(this.street, other.street)) {
+            return false;
+        }
+        return true;
+    }
+
 }

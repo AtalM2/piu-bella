@@ -1,11 +1,11 @@
 package fr.univnantes.atal.web.trashnao.model;
 
+import com.google.appengine.api.datastore.Key;
 import com.google.appengine.datanucleus.annotations.Unowned;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -13,11 +13,10 @@ import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
 public class Notification {
-
+    
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    @Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
-    private String key;
+    private Key key;
     @Persistent
     @Unowned
     private Address address;
@@ -75,6 +74,19 @@ public class Notification {
         onYellowDay.remove(transport);
     }
     
+    public void removeAllNotificationsOnBlueDay() {
+        onBlueDay.clear();
+    }
+
+    public void removeAllNotificationsOnYellowDay() {
+        onYellowDay.clear();
+    }
+    
+    public void removeAllNotifications() {
+        removeAllNotificationsOnBlueDay();
+        removeAllNotificationsOnYellowDay();
+    }
+    
     public Collection<NotificationTransport> getNotificationsOnBlueDay() {
         return Collections.unmodifiableCollection(onBlueDay);
     }
@@ -83,7 +95,7 @@ public class Notification {
         return Collections.unmodifiableCollection(onYellowDay);
     }
 
-    public String getKey() {
+    public Key getKey() {
         return key;
     }
 }

@@ -24,7 +24,6 @@
         <servlet-name>TestNotifs</servlet-name>
         <servlet-class>fr.univnantes.atal.web.trashnao.servlets.TestNotifs</servlet-class>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>Fetch</servlet-name>
         <url-pattern>/admin/fetch</url-pattern>
@@ -49,7 +48,6 @@
         <servlet-name>TestNotifs</servlet-name>
         <url-pattern>/TestNotifs</url-pattern>
     </servlet-mapping>
-    
     <security-constraint>
         <web-resource-collection>
             <url-pattern>/admin/*</url-pattern>
@@ -66,7 +64,6 @@
             <role-name>admin</role-name>
         </auth-constraint>
     </security-constraint>
-    
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>

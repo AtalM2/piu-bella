@@ -18,10 +18,15 @@ import org.codehaus.jackson.map.ObjectMapper;
 public abstract class AuthWebService extends HttpServlet {
 
     protected ObjectMapper mapper = new ObjectMapper();
-    protected List<Boolean> allowed_methods =
-            new ArrayList(Arrays.asList(false, false, false, false));
-    protected List<Boolean> authenticated_methods =
-            new ArrayList(Arrays.asList(false, false, false, false));
+    protected List<Boolean> allowed_methods, authenticated_methods;
+
+    @Override
+    public void init() {
+        allowed_methods =
+                new ArrayList(Arrays.asList(false, false, false, false));
+        authenticated_methods =
+                new ArrayList(Arrays.asList(false, false, false, false));
+    }
 
     /**
      * Handles the HTTP
@@ -35,7 +40,7 @@ public abstract class AuthWebService extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (allowed_methods.get(0)) {
+        if (allowed_methods.get(0) || authenticated_methods.get(0)) {
             if (authenticated_methods.get(0)) {
                 User user = TokenVerifier.getUser(request);
                 if (user != null) {
@@ -93,7 +98,7 @@ public abstract class AuthWebService extends HttpServlet {
                     return;
             }
         }
-        if (allowed_methods.get(1)) {
+        if (allowed_methods.get(1) || authenticated_methods.get(1)) {
             if (authenticated_methods.get(1)) {
                 User user = TokenVerifier.getUser(request);
                 if (user != null) {
@@ -140,7 +145,7 @@ public abstract class AuthWebService extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (allowed_methods.get(2)) {
+        if (allowed_methods.get(2) || authenticated_methods.get(2)) {
             if (authenticated_methods.get(2)) {
                 User user = TokenVerifier.getUser(request);
                 if (user != null) {
@@ -187,7 +192,7 @@ public abstract class AuthWebService extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (allowed_methods.get(3)) {
+        if (allowed_methods.get(3) || authenticated_methods.get(3)) {
             if (authenticated_methods.get(3)) {
                 User user = TokenVerifier.getUser(request);
                 if (user != null) {

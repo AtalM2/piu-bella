@@ -7,6 +7,8 @@ import fr.univnantes.atal.web.trashnao.model.User;
 import fr.univnantes.atal.web.trashnao.persistence.PMF;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +22,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class NotificationService extends AuthWebService {
 
+    @Override
+    public void init() {
+        allowed_methods =
+            new ArrayList(Arrays.asList(false, false, false, false));
+        authenticated_methods =
+            new ArrayList(Arrays.asList(true, true, false, false));
+    }
+    
     @Override
     protected void auth_get(
             HttpServletRequest request,

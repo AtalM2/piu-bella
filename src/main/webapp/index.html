@@ -35,7 +35,7 @@
             <div class="masthead">
                 <ul class="nav nav-pills pull-right">
                     <li class="active"><a href="/">Accueil</a></li>
-                    <li><a href="#" data-bb="alert" class="bb-trigger">À Propos</a></li>
+                    <li><a href="#" class="about" id="apropos" >À Propos</a></li>
 
                 </ul>
                 <span id="email">email</span>
@@ -69,9 +69,13 @@
 
             <div class="row-fluid marketing piubella-connected">
 
+                <button type="button" class="btn btn-primary" id="notif-creation"
+                        data-loading-text="Création...">Créer une alerte</button>
+
 
                 <h2>Mes Alertes</h2>
                 <div class="accordion" id="accordion2">
+
 
                 </div>
             </div>
@@ -91,6 +95,7 @@
         <script type="text/javascript" src="js/bootstrap-tooltip.js"></script>
         <script type="text/javascript" src="js/bootstrap-popover.js"></script>
         <script type="text/javascript" src="js/bootstrap-collapse.js"></script>
+        <script type="text/javascript" src="js/bootstrap-modal.js"></script>
         <script type="text/javascript" src="js/bootbox.js"></script>
         <script type="text/javascript" src="js/underscore.js"></script>
         <script type="text/javascript" src="js/piubella.js"></script>
@@ -116,7 +121,15 @@
             }
         </script>
         <script type="text/javascript">
-            bootbox.alert("Più-Bella blablablablablbal");
+            $("#apropos").click(function (e) {
+                e.preventDefault();
+                bootbox.alert("Più Bella est un projet réalisé par des étudiants M1 ATAL - Université de Nantes.\n\nLes données proviennent de Nantes Open Data et sont mis à jour régulièrement.");
+            });
+        </script>
+        <script type="text/javascript">
+            $("#notif-creation").click(function ()) {
+
+            }
         </script>
         <script type="text/x-jsrender" id="notifications-options">
             <div class="accordion-group">

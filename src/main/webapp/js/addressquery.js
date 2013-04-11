@@ -2,6 +2,10 @@
     var url = "/fetchjson";
     var dict = null;
     var addressList = [];
+
+    var street = "";
+    var yellow = "";
+    var blue = "";
     
     $(window).load(function() {
         $('#loading-indicator').show();
@@ -13,10 +17,10 @@
                 if(!dict){
                     dict = {};
                     addressList = $.map(data.data,function(item) {
-                        if(!dict[item.LIBELLE]){
+                        //if(!dict[item.LIBELLE]){
                             dict[item.LIBELLE]=item;
                             return item.LIBELLE;
-                        }
+                        //}
                     });
                 }
                 $('#addressquery').typeahead({
@@ -25,17 +29,17 @@
                     updater:function (item) {
                         $('#address-query-wrapper').popover('destroy');
 
-                        var street = dict[item].LIBELLE;
-                        var yellow = dict[item].JAUNE_JOUR_COLLECTE;
-                        var blue = dict[item].BLEU_JOUR_COLLECTE;
+                        street = dict[item].LIBELLE;
+                        yellow = dict[item].JAUNE_JOUR_COLLECTE;
+                        blue = dict[item].BLEU_JOUR_COLLECTE;
 
                         var popoverContent =
                         '<div class="yellow">Sacs jaunes : ' + yellow
                         + '</div>'
                         + '<div class="blue">Sacs bleus : '+ blue + '</div>'
                         + '<div align=right>'
-                        + '<img src="/img/ajax-loader.gif" id="loading-indicator-notif" style="display: none;">'
-                        + '<button type="button" class="btn btn-primary" '
+                        //+ '<img src="/img/ajax-loader.gif" id="loading-indicator-notif" style="display: none;">'
+                        + '<button type="button" class="btn btn-primary" id="notif-creation" '
                         + 'data-loading-text="Création...">Créer une alerte</button>';
 
                         $('#address-query-wrapper').popover({
@@ -55,4 +59,7 @@
             cache: true
         });
     });
+    //$("#notif-creation").click( function () {
+    //    PiuBella.prototype.addNotification(street,yellow,blue);
+    //});
 })();

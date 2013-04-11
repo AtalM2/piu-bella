@@ -56,9 +56,7 @@ public class TestBlobOut extends HttpServlet {
 
             BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
             FileService fileService = FileServiceFactory.getFileService();
-            AppEngineFile file = new AppEngineFile(jsonInfo.getPath().getValue());
-            FileWriteChannel wc = fileService.openWriteChannel(file, true);
-            wc.close();
+            AppEngineFile file = new AppEngineFile(jsonInfo.getPath());
             BlobKey bk = fileService.getBlobKey(file);
             blobstoreService.serve(bk, response);
 

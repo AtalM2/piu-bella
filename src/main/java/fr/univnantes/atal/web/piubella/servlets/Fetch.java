@@ -189,13 +189,12 @@ public class Fetch extends HttpServlet {
             }
 
             writeChannel.closeFinally();
-            if (jsonInfo.getPath() != null) {
+            if (jsonInfo.getBlobKey() != null) {
                 BlobstoreService blobstoreService =
                         BlobstoreServiceFactory.getBlobstoreService();
-                AppEngineFile oldFile = new AppEngineFile(jsonInfo.getPath());
-                blobstoreService.delete(fileService.getBlobKey(oldFile));
+                blobstoreService.delete(jsonInfo.getBlobKey());
             }
-            jsonInfo.setPath(file.getFullPath());
+            jsonInfo.setBlobKey(fileService.getBlobKey(file));
         } finally {
             q.closeAll();
         }

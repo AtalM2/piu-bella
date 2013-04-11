@@ -1,20 +1,22 @@
 package fr.univnantes.atal.web.piubella.servlets;
 
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
+import fr.univnantes.atal.web.piubella.model.JSONInfo;
+import fr.univnantes.atal.web.piubella.persistence.PMF;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
+import java.util.List;
+import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.PrintWriter;
 
 public class FetchJson extends HttpServlet {
 
-    //PersistenceManager pm = PMF.get().getPersistenceManager();
     /**
-     * Handles the HTTP
+     * Processes requests for the HTTP
      * <code>GET</code> method.
      *
      * @param request servlet request
@@ -25,18 +27,25 @@ public class FetchJson extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        URL url = new URL("http://data.nantes.fr/api/publication/"
-                + "JOURS_COLLECTE_DECHETS_VDN/JOURS_COLLECTE_DECHETS_VDN_STBL/"
-                + "content/?format=json");
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(
-                     url.openStream(), "UTF-8"))) {
-            String inputLine;
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            PrintWriter pw = response.getWriter();
-            while ((inputLine = in.readLine()) != null) {
-                pw.println(inputLine);
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        Query q = pm.newQuery(JSONInfo.class);
+        try {
+            JSONInfo jsonInfo;
+            List<JSONInfo> results =
+                    (List<JSONInfo>) q.execute();
+            if (results.isEmpty()) {
+                response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                return;
+            } else {
+                jsonInfo = results.get(0);
             }
+
+            BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+            response.setCharacterEncoding("UTF-8");
+            blobstoreService.serve(jsonInfo.getBlobKey(), response);
+
+        } finally {
+            pm.close();
         }
     }
 }

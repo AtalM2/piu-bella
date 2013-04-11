@@ -2,7 +2,6 @@
     var url = "/fetchjson";
     var dict = null;
     var addressList = [];
-    
     $(window).load(function() {
         $('#loading-indicator').show();
         $.ajax(url,{
@@ -13,22 +12,47 @@
                 if(!dict){
                     dict = {};
                     addressList = $.map(data.data,function(item) {
-                        dict[item.LIBELLE]=item;
-                        return item.LIBELLE;//+ '<span>' + item.QUARTIER + '</span>';
+                        dict[item[0]]=item;
+                        return item[0];//+ '<span>' + item.QUARTIER + '</span>';
                     });
                 }
                 $('#addressquery').typeahead({
                     source: addressList,
 
                     updater:function (item) {
-                        $('#address-query-wrapper').popover('destroy');
+                        var intToDay = function (index) {
+                            switch (index) {
+                                case '0':
+                                    return 'Lundi';
+                                case '1':
+                                    return 'Mardi';
+                                case '2':
+                                    return 'Mercredi';
+                                case '3':
+                                    return 'Mercredi des semaines paires';
+                                case '4':
+                                    return 'Mercredi des semaines impaires';
+                                case '5':
+                                    return 'Jeudi';
+                                case '6':
+                                    return 'Vendredi';
+                                case '7':
+                                    return 'Samedi';
+                                case '8':
+                                    return 'Dimanche';
+                            }
+                        };
 
-                        var yellow = dict[item].JAUNE_JOUR_COLLECTE;
-                        var blue = dict[item].BLEU_JOUR_COLLECTE;
+                        $('#address-query-wrapper').popover('destroy');
+                        var itemdic = dict[item]
+                        var yellow = (itemdic.length > 2) ? itemdic[2] : null;
+                        var blue = itemdic[1];
 
                         var popoverContent =
-                        '<div class="yellow">Sacs jaunes : ' + yellow
-                        + '</div>'
+                        (yellow !== null
+                            ? ('<div class="yellow">Sacs jaunes : ' + yellow
+                                + '</div>')
+                            : '')
                         + '<div class="blue">Sacs bleus : '+ blue + '</div>'
                         + '<div align=right>'
                         + '<button type="button" class="btn btn-primary" '

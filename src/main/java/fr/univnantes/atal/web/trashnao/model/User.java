@@ -1,8 +1,8 @@
 package fr.univnantes.atal.web.trashnao.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -17,16 +17,16 @@ public class User {
     @Persistent
     private String email;
     @Persistent(mappedBy="user")
-    private Set<Notification> notifications;
+    private List<Notification> notifications;
 
     public User() {
-        notifications = new HashSet<>();
+        notifications = new ArrayList<>();
     }
     
     public User(String googleId, String email) {
         this.googleId = googleId;
         this.email = email;
-        notifications = new HashSet<>(); 
+        notifications = new ArrayList<>(); 
    }
 
     public String getEmail() {
@@ -56,7 +56,7 @@ public class User {
         }
     }
     
-    public Set<Notification> getNotifications() {
-        return Collections.unmodifiableSet(notifications);
+    public List<Notification> getNotifications() {
+        return Collections.unmodifiableList(notifications);
     }
 }

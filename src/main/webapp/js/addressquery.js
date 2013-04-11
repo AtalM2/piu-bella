@@ -13,8 +13,10 @@
                 if(!dict){
                     dict = {};
                     addressList = $.map(data.data,function(item) {
-                        dict[item.LIBELLE]=item;
-                        return item.LIBELLE;//+ '<span>' + item.QUARTIER + '</span>';
+                        if(!dict[item.LIBELLE]){
+                            dict[item.LIBELLE]=item;
+                            return item.LIBELLE;
+                        }
                     });
                 }
                 $('#addressquery').typeahead({
@@ -31,6 +33,7 @@
                         + '</div>'
                         + '<div class="blue">Sacs bleus : '+ blue + '</div>'
                         + '<div align=right>'
+                        + '<img src="/img/ajax-loader.gif" id="loading-indicator-notif" style="display: none;">'
                         + '<button type="button" class="btn btn-primary" '
                         + 'data-loading-text="Création...">Créer une alerte</button>';
 

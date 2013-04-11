@@ -20,27 +20,32 @@
                     source: addressList,
 
                     updater:function (item) {
-                        var intToDay = function (index) {
-                            switch (index) {
-                                case '0':
-                                    return 'Lundi';
-                                case '1':
-                                    return 'Mardi';
-                                case '2':
-                                    return 'Mercredi';
-                                case '3':
-                                    return 'Mercredi des semaines paires';
-                                case '4':
-                                    return 'Mercredi des semaines impaires';
-                                case '5':
-                                    return 'Jeudi';
-                                case '6':
-                                    return 'Vendredi';
-                                case '7':
-                                    return 'Samedi';
-                                case '8':
-                                    return 'Dimanche';
-                            }
+                        function intToDay(index) {
+                            var days = _.map(index, function(day) {
+                                switch (index) {
+                                    case 0:
+                                        return 'Lundi';
+                                    case 1:
+                                        return 'Mardi';
+                                    case 2:
+                                        return 'Mercredi';
+                                    case 3:
+                                        return 'Mercredi des semaines paires';
+                                    case 4:
+                                        return 'Mercredi des semaines impaires';
+                                    case 5:
+                                        return 'Jeudi';
+                                    case 6:
+                                        return 'Vendredi';
+                                    case 7:
+                                        return 'Samedi';
+                                    case 8:
+                                        return 'Dimanche';
+                                    default:
+                                        return 'lulz';
+                                }
+                            });
+                            return days;
                         };
 
                         $('#address-query-wrapper').popover('destroy');
@@ -50,7 +55,7 @@
 
                         var popoverContent =
                         (yellow !== null
-                            ? ('<div class="yellow">Sacs jaunes : ' + yellow
+                            ? ('<div class="yellow">Sacs jaunes : ' + intToDay(yellow)
                                 + '</div>')
                             : '')
                         + '<div class="blue">Sacs bleus : '+ blue + '</div>'

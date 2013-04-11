@@ -5,7 +5,7 @@
   <packaging>war</packaging>
   <version>0.1</version>
 
-  <groupId>fr.univnantes.atal.web.trashnao</groupId>
+  <groupId>fr.univnantes.atal.web.piubella</groupId>
   <artifactId>trashnao</artifactId>
 
   <properties>

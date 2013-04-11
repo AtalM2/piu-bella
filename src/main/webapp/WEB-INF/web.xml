@@ -2,31 +2,39 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <servlet>
         <servlet-name>Fetch</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.trashnao.servlets.Fetch</servlet-class>
+        <servlet-class>fr.univnantes.atal.web.piubella.servlets.Fetch</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FetchJson</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.trashnao.servlets.FetchJson</servlet-class>
+        <servlet-class>fr.univnantes.atal.web.piubella.servlets.FetchJson</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>User</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.trashnao.webservices.UserService</servlet-class>
+        <servlet-class>fr.univnantes.atal.web.piubella.webservices.UserService</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Notification</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.trashnao.webservices.NotificationService</servlet-class>
+        <servlet-class>fr.univnantes.atal.web.piubella.webservices.NotificationService</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateChecker</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.trashnao.servlets.UpdateChecker</servlet-class>
+        <servlet-class>fr.univnantes.atal.web.piubella.servlets.UpdateChecker</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>TestNotifs</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.trashnao.servlets.TestNotifs</servlet-class>
+        <servlet-class>fr.univnantes.atal.web.piubella.servlets.TestNotifs</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ShrinkJson</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.trashnao.servlets.ShrinkJson</servlet-class>
+        <servlet-name>TestBlobOut</servlet-name>
+        <servlet-class>fr.univnantes.atal.web.piubella.servlets.TestBlobOut</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TestBlobIn</servlet-name>
+        <servlet-class>fr.univnantes.atal.web.piubella.servlets.TestBlobIn</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RescueJSONInfo</servlet-name>
+        <servlet-class>fr.univnantes.atal.web.piubella.servlets.RescueJSONInfo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Fetch</servlet-name>
@@ -69,8 +77,16 @@
         </auth-constraint>
     </security-constraint>
     <servlet-mapping>
-        <servlet-name>ShrinkJson</servlet-name>
-        <url-pattern>/ShrinkJson</url-pattern>
+        <servlet-name>TestBlobOut</servlet-name>
+        <url-pattern>/TestBlobOut</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestBlobIn</servlet-name>
+        <url-pattern>/TestBlobIn</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RescueJSONInfo</servlet-name>
+        <url-pattern>/RescueJSONInfo</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

@@ -1,8 +1,8 @@
-package fr.univnantes.atal.web.trashnao.servlets;
+package fr.univnantes.atal.web.piubella.servlets;
 
-import fr.univnantes.atal.web.trashnao.app.Constants;
-import fr.univnantes.atal.web.trashnao.model.DatasetInfo;
-import fr.univnantes.atal.web.trashnao.persistence.PMF;
+import fr.univnantes.atal.web.piubella.app.Constants;
+import fr.univnantes.atal.web.piubella.model.DatasetInfo;
+import fr.univnantes.atal.web.piubella.persistence.PMF;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;

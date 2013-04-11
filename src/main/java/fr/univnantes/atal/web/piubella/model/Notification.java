@@ -1,4 +1,4 @@
-package fr.univnantes.atal.web.trashnao.model;
+package fr.univnantes.atal.web.piubella.model;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.datanucleus.annotations.Unowned;

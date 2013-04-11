@@ -1,4 +1,4 @@
-package fr.univnantes.atal.web.trashnao.webservices;
+package fr.univnantes.atal.web.piubella.webservices;
 
 import java.io.IOException;
 import java.io.PrintWriter;

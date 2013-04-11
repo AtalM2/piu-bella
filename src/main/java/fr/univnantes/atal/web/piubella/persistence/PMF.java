@@ -1,4 +1,4 @@
-package fr.univnantes.atal.web.trashnao.persistence;
+package fr.univnantes.atal.web.piubella.persistence;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;

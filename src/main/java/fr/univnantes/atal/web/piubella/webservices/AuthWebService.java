@@ -1,7 +1,7 @@
-package fr.univnantes.atal.web.trashnao.webservices;
+package fr.univnantes.atal.web.piubella.webservices;
 
-import fr.univnantes.atal.web.trashnao.model.User;
-import fr.univnantes.atal.web.trashnao.security.TokenVerifier;
+import fr.univnantes.atal.web.piubella.model.User;
+import fr.univnantes.atal.web.piubella.security.TokenVerifier;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;

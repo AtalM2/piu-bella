@@ -1,4 +1,4 @@
-package fr.univnantes.atal.web.trashnao.model;
+package fr.univnantes.atal.web.piubella.model;
 
 public enum CollectDay {
     MONDAY,

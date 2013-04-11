@@ -1,10 +1,10 @@
-package fr.univnantes.atal.web.trashnao.webservices;
+package fr.univnantes.atal.web.piubella.webservices;
 
-import fr.univnantes.atal.web.trashnao.model.Address;
-import fr.univnantes.atal.web.trashnao.model.Notification;
-import fr.univnantes.atal.web.trashnao.model.NotificationTransport;
-import fr.univnantes.atal.web.trashnao.model.User;
-import fr.univnantes.atal.web.trashnao.persistence.PMF;
+import fr.univnantes.atal.web.piubella.model.Address;
+import fr.univnantes.atal.web.piubella.model.Notification;
+import fr.univnantes.atal.web.piubella.model.NotificationTransport;
+import fr.univnantes.atal.web.piubella.model.User;
+import fr.univnantes.atal.web.piubella.persistence.PMF;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;

@@ -1,8 +1,8 @@
-package fr.univnantes.atal.web.trashnao.security;
+package fr.univnantes.atal.web.piubella.security;
 
-import fr.univnantes.atal.web.trashnao.app.Constants;
-import fr.univnantes.atal.web.trashnao.model.User;
-import fr.univnantes.atal.web.trashnao.persistence.PMF;
+import fr.univnantes.atal.web.piubella.app.Constants;
+import fr.univnantes.atal.web.piubella.model.User;
+import fr.univnantes.atal.web.piubella.persistence.PMF;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Map;

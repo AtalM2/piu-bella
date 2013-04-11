@@ -56,7 +56,7 @@ public class RescueJSONInfo extends HttpServlet {
             } else {
                 jsonInfo = results.get(0);
             }
-            jsonInfo.setPath(new Text("/blobstore/writable:AD8BvuntOLUCY-DrlIqYuxg5_RmJWVyMPn01cqKYMgKIT8IZMf2niasYBhzTNWUTYw35c8NjpSHtS-AW6qdo5DdX84G3tvS9aaoXhNN-MPJkgBAGCcnrbWOhjOcEz38Y3LVNRIMS9R_MDmAToZkUYfNr5QauN9ireghRyHfUwLbT6SQb9QRzTGLIEgETorT35iSQGtYIHZemTpnCvWeKEUA0jf0RNhkH2dKkIM6bc5oTn_bxSlTqrzyY08iAtSxgMAaGVcf_d9ZXTsM7Dqmru83SiGD-wN6p3HJh5qTBTjOmzObek-j72uH330jKiHTVpg2b44Uc_TWtJ4lu4CCigWTPXAxRzBapeVqI20QS8xnEmOmh9YBB2lD9k6l1T4E97Ufxa0qsfvcLLAbK1Ad1BYJOe374WIW2Dsk3h6zZKQu6ozEyGRdpPM6WZUkrIEBy2MvXfBtFpyV_h8k_3LnAcChFxiyVZLVIe0GVlbXWjl2E_IlJctMKQilUAMFnCJcqVsV6S_IbvGEzq1fjKiGDX6Ph1P84IYG5Mhh3UUi2R8h9wvtzys1BnSXeGsB4TpyYD8aqhGghihHTV1OZMXeTuXAyXoTWlWRTtwSr6PSaHGxAoY8ZbIop_aVqvDN97lXYCSkxqp4J1sWe29gDj-igmgPJCyi3lqVXPxuJ-EVZ10NKbVDfZrErODjQX-uS3Uqiitj6PwwiDVSp5jBg_Q-Q_D-JZyKXFfXu-6d6-64PkSQrPTqKbSqh8ltDopSsU4K7b28T2M_LmX3HhsZEX1g1mvWfmaOEsz_zIxau4d1uPZrxO7sQHCaaYde68RZMonqSowFJTebSIXrLvjYnjrXdCl_PuTrHR2t09ajqu55k7xLKAu64ycCE-i4"));
+            jsonInfo.setPath("");
         } finally {
             pm.close();
         }

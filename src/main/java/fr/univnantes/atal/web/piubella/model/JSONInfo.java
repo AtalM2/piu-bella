@@ -1,7 +1,6 @@
 package fr.univnantes.atal.web.piubella.model;
 
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.Text;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -14,13 +13,13 @@ public class JSONInfo {
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
     @Persistent
-    private Text path = null;
+    private String path = null;
 
-    public Text getPath() {
+    public String getPath() {
         return path;
     }
     
-    public void setPath(Text path) {
+    public void setPath(String path) {
         this.path = path; 
    }
 }

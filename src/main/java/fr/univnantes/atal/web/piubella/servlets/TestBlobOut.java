@@ -1,20 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.univnantes.atal.web.piubella.servlets;
 
-import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
-import com.google.appengine.api.files.AppEngineFile;
-import com.google.appengine.api.files.FileService;
-import com.google.appengine.api.files.FileServiceFactory;
-import com.google.appengine.api.files.FileWriteChannel;
 import fr.univnantes.atal.web.piubella.model.JSONInfo;
 import fr.univnantes.atal.web.piubella.persistence.PMF;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -23,10 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author mog
- */
 public class TestBlobOut extends HttpServlet {
 
     /**
@@ -55,10 +41,8 @@ public class TestBlobOut extends HttpServlet {
             }
 
             BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-            FileService fileService = FileServiceFactory.getFileService();
-            AppEngineFile file = new AppEngineFile(jsonInfo.getPath());
-            BlobKey bk = fileService.getBlobKey(file);
-            blobstoreService.serve(bk, response);
+            response.setCharacterEncoding("UTF-8");
+            blobstoreService.serve(jsonInfo.getBlobKey(), response);
 
         } finally {
             pm.close();

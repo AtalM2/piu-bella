@@ -55,19 +55,19 @@ public class RescueJSONInfo extends HttpServlet {
                 pm.makePersistent(jsonInfo);
             } else {
                 jsonInfo = results.get(0);
+                BlobInfoFactory bif = new BlobInfoFactory();
+                Iterator<BlobInfo> it = bif.queryBlobInfos();
+                try (PrintWriter out = response.getWriter()) {
+                    if (!it.hasNext()) {
+                        out.println("itérateur vide");
+                    }
+                    while (it.hasNext()) {
+                        jsonInfo.setBlobKey(it.next().getBlobKey());
+                    }
+                }
             }
-            jsonInfo.setPath("");
         } finally {
             pm.close();
-        }
-        BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-        BlobInfoFactory bif = new BlobInfoFactory();
-        Iterator<BlobInfo> it = bif.queryBlobInfos();
-        while (it.hasNext()) {
-            BlobInfo bi = it.next();
-            try (PrintWriter out = response.getWriter()) {
-                out.println(bi.getBlobKey());
-            }
         }
     }
 

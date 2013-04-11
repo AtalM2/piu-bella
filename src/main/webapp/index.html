@@ -35,7 +35,7 @@
             <div class="masthead">
                 <ul class="nav nav-pills pull-right">
                     <li class="active"><a href="/">Accueil</a></li>
-                    <li><a href="javascript: bootbox.alert('Più-Bella est un projet réalisé par les M1 ATAL - Université de Nantes.')">À Propos</a></li>
+                    <li><a href="#" data-bb="alert" class="bb-trigger">À Propos</a></li>
 
                 </ul>
                 <span id="email">email</span>
@@ -115,14 +115,17 @@
                 pb = null;
             }
         </script>
+        <script type="text/javascript">
+            bootbox.alert("Più-Bella blablablablablbal");
+        </script>
         <script type="text/x-jsrender" id="notifications-options">
             <div class="accordion-group">
                 <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#{{>keyIntRandom}}">
-                        {{>address.street}}
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#{{>id}}">
+                        {{>street}}
                     </a>
                 </div>
-                <div id="{{>keyIntRandom}}" class="accordion-body in collapse">
+                <div id="{{>id}}" class="accordion-body in collapse">
                     <div class="accordion-inner">
                         <div class="accordion-section-jaune span6">
                             Mardi et Vendredi

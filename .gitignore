@@ -3,7 +3,7 @@ hotspot.log
 *.ipr
 *.iws
 target/
-classes/
+!META_INF
 /var
 pom.xml.versionsBackup
 test-output/

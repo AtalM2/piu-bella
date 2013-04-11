@@ -25,6 +25,7 @@
                     updater:function (item) {
                         $('#address-query-wrapper').popover('destroy');
 
+                        var street = dict[item].LIBELLE;
                         var yellow = dict[item].JAUNE_JOUR_COLLECTE;
                         var blue = dict[item].BLEU_JOUR_COLLECTE;
 

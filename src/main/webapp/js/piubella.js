@@ -20,7 +20,6 @@ PiuBella.prototype.loadNotifications = function(selector) {
 /**
  */
 PiuBella.prototype.addNotification = function(street, yellow, blue) {
-    console.log("addNotification : " + street + " , " + yellow + " , " + blue);
     $.ajax('/notification', {
         type: 'POST',
         data: {

@@ -3,9 +3,9 @@
     var dict = null;
     var addressList = [];
 
-    var street = "";
-    var yellow = "";
-    var blue = "";
+    var street = "myStreet";
+    var yellow = "myYellow";
+    var blue = "myBlue";
     
     $(window).load(function() {
         $('#loading-indicator').show();
@@ -59,7 +59,7 @@
             cache: true
         });
     });
-    //$("#notif-creation").click( function () {
-    //    PiuBella.prototype.addNotification(street,yellow,blue);
-    //});
+    $("#notif-creation").click( function () {
+        PiuBella.prototype.addNotification(street,yellow,blue);
+    });
 })();

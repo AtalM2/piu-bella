@@ -54,7 +54,7 @@ public class NotificationService extends AuthWebService {
                 notificationData.put("yellow",
                         notification.getNotificationsOnYellowDay());
                 notificationData.put("id",
-                        notification.getKey());
+                        notification.getKey().toString());
                 notificationsData.add(notificationData);
             }
         } finally {

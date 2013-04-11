@@ -1,4 +1,4 @@
-package fr.univnantes.atal.web.trashnao.servlets;
+package fr.univnantes.atal.web.piubella.servlets;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

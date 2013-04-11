@@ -1,4 +1,4 @@
-package fr.univnantes.atal.web.trashnao.app;
+package fr.univnantes.atal.web.piubella.app;
 
 import java.util.Arrays;
 import java.util.List;

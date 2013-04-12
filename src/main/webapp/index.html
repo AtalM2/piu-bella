@@ -150,12 +150,12 @@
         <script type="text/x-jsrender" id="notifications-options">
             <div class="accordion-group">
                 <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#{{>street}}">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#notif{{>id}}">
                     {{>street}}
                         <button type="button" class="btn btn-remove" id="remove-{{>street}}"><i class="icon-remove"></i></button>
                     </a>
                 </div>
-                <div id="{{>street}}" class="accordion-body in collapse">
+                <div id="notif{{>id}}" class="accordion-body in collapse">
                     <div class="accordion-inner">
                         <div class="accordion-section-jaune">
                             <img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 30px"/>
@@ -173,7 +173,6 @@
                         </div>
                     </div>
                 </div>
-            </div>    
         </script>
 
     </body>

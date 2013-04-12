@@ -47,16 +47,17 @@ padding: 0px;
 .popover-title{
   font-size: 20px;
   text-align: center;
+  background: #e5e5e5;
 }
 
 .popover-content div{
-  padding: 9px 14px;
+  padding: 5px 14px;
 }
 
 .yellow-blue{
   float: bottom;
   text-align : justify;
-  padding: 0px 10px;
+  padding: 0px 0px;
   border-bottom: 1px solid #e5e5e5;
 }
 

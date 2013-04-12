@@ -11,12 +11,20 @@ Interesting problems we solved
  possible readers regarding the difficult parts of implementing a
  solution on GAE.
 
-* Datastore and Maven
-
- The Datanucleus maven documentation is non existant. We've ran into a
- number of problems to get the versions right. Finally, we got the whole
- JDO stack to work and were able to implement a correct model through
- classical entity management.
+* Maven, Datanucleus, Maven App Engine plugin, etc...
+ 
+ The App Engine team started to support Java 7 around the same time we
+ started the project. We thought it was a great opportunity to use the
+ modern version of Java.
+ 
+ Though, the support was non functionnal as we mentionned it on this
+ {{{https://code.google.com/p/appengine-maven-plugin/issues/detail?id=13}bug report}}.
+ It eventually got fixed and now the project is running on Java 7.
+ 
+ Then, the Datanucleus maven documentation was non existant. We've run
+ into a number of problems to get the versions right. Finally, we got
+ the whole JDO 3 stack to work on java 7 and were able to implement a
+ correct model through classical entity management.
 
 * Dataset filtering (Jackson streaming API, blobstore, enums)
 
@@ -63,4 +71,14 @@ Interesting problems we solved
  we use the js OAuth library as well as the OAuth endpoint to check
  things correctly on the server.
  
+* Bootstrap
  
+ Since our idea was to implement our front end using only our
+ webservices, we had to use a good JS library to handle all the AJAX and
+ the fancy forms.
+ 
+ We picked Bootstrap because it's used a lot and of extremely good
+ quality overall. The problem was: the three of us were not used to
+ javascript development. It was somewhat of a challenge to learn this
+ asynchronous way of thought so that we could produce a functionnal
+ website.

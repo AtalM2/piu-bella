@@ -97,8 +97,8 @@
     $('body').on('click', '.popover button', function () {
         console.log("click : ");
         console.log( street.replace("\'", "\\\'") + ", " + yellowAdd + ", " + blueAdd);
-            notifData.add();
-            PiuBella.prototype.putNotifications(data);
+            //notifData[notif]
+            //PiuBella.prototype.putNotifications(data);
 
             $('#address-query-wrapper').popover('destroy');
         });

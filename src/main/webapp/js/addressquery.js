@@ -70,7 +70,6 @@
                             : '')
                         + '<div class="blue">Sacs bleus : '+ blue + '</div>'
                         + '<div align=right>'
-                        //+ '<img src="/img/ajax-loader.gif" id="loading-indicator-notif" style="display: none;">'
                         + '<button type="button" class="btn btn-primary" id="notif-creation" '
                         + 'data-loading-text="Création...">Créer une alerte</button>';
 
@@ -98,7 +97,9 @@
     $('body').on('click', '.popover button', function () {
         console.log("click : ");
         console.log( street.replace("\'", "\\\'") + ", " + yellowAdd + ", " + blueAdd);
-            PiuBella.prototype.addNotification(street.replace("\'", "\\\'"), yellowAdd, blueAdd);
+            notifData.add();
+            PiuBella.prototype.putNotifications(data);
+
             $('#address-query-wrapper').popover('destroy');
         });
 })();

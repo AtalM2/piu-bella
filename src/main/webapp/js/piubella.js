@@ -10,6 +10,7 @@ PiuBella.prototype.loadNotifications = function(selector) {
             access_token: gapi.auth.getToken().access_token
         },
         success: function(data){
+            notifData = data;
             $(selector).html(
             $("#notifications-options").render(data.data)
         );

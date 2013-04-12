@@ -19,32 +19,17 @@ PiuBella.prototype.loadNotifications = function(selector) {
 
 /**
  */
-PiuBella.prototype.addNotification = function(street, yellow, blue) {
+PiuBella.prototype.putNotifications = function(data) {
+    console.log("putNotification : ", data);
     $.ajax('/notification', {
         type: 'POST',
         data: {
+            method: 'put',
             access_token: gapi.auth.getToken().access_token,
-            json: JSON.stringify({
-                street: street,
-                yellow: yellow,
-                blue: blue
-            })
+            json: JSON.stringify(data)
         },
         success: function(data) {
             console.log(data);
         }
-    });
-};
-
-/**
- */
-PiuBella.prototype.deleteNotification = function(id) {
-    $.ajax('/notifications', {
-        method: 'delete',
-        data: JSON.stringify({
-            method: 'delete',
-            access_token: gapi.auth.getToken().access_token
-        }),
-        success: function() { /* notif supprimée */ }
     });
 };

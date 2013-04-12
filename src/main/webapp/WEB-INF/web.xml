@@ -21,20 +21,8 @@
         <servlet-class>fr.univnantes.atal.web.piubella.servlets.UpdateChecker</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>TestNotifs</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.piubella.servlets.TestNotifs</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>TestBlobOut</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.piubella.servlets.TestBlobOut</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>TestBlobIn</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.piubella.servlets.TestBlobIn</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RescueJSONInfo</servlet-name>
-        <servlet-class>fr.univnantes.atal.web.piubella.servlets.RescueJSONInfo</servlet-class>
+        <servlet-name>Notifier</servlet-name>
+        <servlet-class>fr.univnantes.atal.web.piubella.servlets.Notifier</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Fetch</servlet-name>
@@ -57,8 +45,8 @@
         <url-pattern>/notification</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>TestNotifs</servlet-name>
-        <url-pattern>/TestNotifs</url-pattern>
+        <servlet-name>Notifier</servlet-name>
+        <url-pattern>/cron/notifier</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <web-resource-collection>
@@ -76,18 +64,6 @@
             <role-name>admin</role-name>
         </auth-constraint>
     </security-constraint>
-    <servlet-mapping>
-        <servlet-name>TestBlobOut</servlet-name>
-        <url-pattern>/TestBlobOut</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>TestBlobIn</servlet-name>
-        <url-pattern>/TestBlobIn</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RescueJSONInfo</servlet-name>
-        <url-pattern>/RescueJSONInfo</url-pattern>
-    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>

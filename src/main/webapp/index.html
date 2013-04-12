@@ -35,7 +35,8 @@
             <div class="masthead">
                 <ul class="nav nav-pills pull-right">
                     <li class="active"><a href="/">Accueil</a></li>
-                    <li><a href="#">À propos</a></li>
+                    <li><a href="#" class="about" id="apropos" >À Propos</a></li>
+
                 </ul>
                 <span id="email">email</span>
                 <h3 class="muted">Projet Più Bella</h3>
@@ -57,7 +58,7 @@
                     <a href="https://trashnao.appspot.com/fetch">Fetch</a>
                     <br /> -->
                     <div class="address-query-container">
-                        <input placeholder="Votre rue ou quartier..." type="text" data-provide="typeahead" id="addressquery">
+                        <input placeholder="Votre rue..." type="text" data-provide="typeahead" id="addressquery">
                         <img src="/img/ajax-loader.gif" id="loading-indicator" style="display:none" />
                     </div>
                 </div>
@@ -68,9 +69,9 @@
 
             <div class="row-fluid marketing piubella-connected">
 
-
                 <h2>Mes Alertes</h2>
                 <div class="accordion" id="accordion2">
+
 					<div class="accordion-group">
                 <div class="accordion-heading">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" ">
@@ -98,8 +99,7 @@
                     </div>
                 </div>
             </div>
-                </div>
-            </div>
+
 
             <hr>
             <div class="footer">
@@ -116,6 +116,8 @@
         <script type="text/javascript" src="js/bootstrap-tooltip.js"></script>
         <script type="text/javascript" src="js/bootstrap-popover.js"></script>
         <script type="text/javascript" src="js/bootstrap-collapse.js"></script>
+        <script type="text/javascript" src="js/bootstrap-modal.js"></script>
+        <script type="text/javascript" src="js/bootbox.js"></script>
         <script type="text/javascript" src="js/underscore.js"></script>
         <script type="text/javascript" src="js/piubella.js"></script>
         <script type="text/javascript" src="js/oauth.js"></script>
@@ -130,14 +132,42 @@
 
                 pb = new PiuBella();
                 pb.loadNotifications('#accordion2');
-                pb.addNotification('Rue Paul Ramadier', ['XMPP', 'EMAIL'], ['XMPP']);
+                pb.putNotifications([
+                    {
+                        'street': 'Rue Paul Ramadier',
+                        'blue': ['XMPP', 'EMAIL'],
+                        'yellow': ['XMPP']
+                    },
+                    {
+                        'street': 'Rue Jules Bréchoir',
+                        'blue': ['XMPP', 'EMAIL'],
+                        'yellow': ['XMPP', 'EMAIL']
+                    },
+                    {
+                        'street': 'Avenue Saint Goazec',
+                        'blue': ['XMPP'],
+                        'yellow': ['XMPP']
+                    }
+                ]);
             }
+        
 
             function onDisconnect() {
                 $('.piubella-notconnected').show();
                 $('.piubella-connected').hide();
                 pb = null;
             }
+        </script>
+        <script type="text/javascript">
+            $("#apropos").click(function (e) {
+                e.preventDefault();
+                bootbox.alert("Più Bella est un projet réalisé par des étudiants M1 ATAL - Université de Nantes.\n\nLes données proviennent de Nantes Open Data et sont mis à jour régulièrement.");
+            });
+        </script>
+        <script type="text/javascript">
+            /*$('body').on('click', '.popover button', function () {
+            PiuBella.prototype.addNotification(street,yellow,blue);
+        });*/
         </script>
         <script type="text/x-jsrender" id="notifications-options">
             <div class="accordion-group">

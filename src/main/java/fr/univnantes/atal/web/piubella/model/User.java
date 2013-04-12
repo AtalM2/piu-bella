@@ -2,7 +2,9 @@ package fr.univnantes.atal.web.piubella.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -17,16 +19,16 @@ public class User {
     @Persistent
     private String email;
     @Persistent(mappedBy="user")
-    private List<Notification> notifications;
+    private Set<Notification> notifications;
 
     public User() {
-        notifications = new ArrayList<>();
+        notifications = new HashSet<>();
     }
     
     public User(String googleId, String email) {
         this.googleId = googleId;
         this.email = email;
-        notifications = new ArrayList<>(); 
+        notifications = new HashSet<>(); 
    }
 
     public String getEmail() {
@@ -42,21 +44,7 @@ public class User {
         notifications.add(notification);
     }
     
-    public Boolean removeNotification(String key) {
-        Notification toRemove = null;
-        for (Notification notification : notifications) {
-            if (notification.getKey().equals(key)) {
-                toRemove = notification;
-            }
-        }
-        if (toRemove != null) {
-            return notifications.remove(toRemove);
-        } else {
-            return false;
-        }
-    }
-    
-    public List<Notification> getNotifications() {
-        return Collections.unmodifiableList(notifications);
+    public Set<Notification> getNotifications() {
+        return Collections.unmodifiableSet(notifications);
     }
 }

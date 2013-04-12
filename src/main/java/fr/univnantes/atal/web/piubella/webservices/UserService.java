@@ -5,6 +5,8 @@ import fr.univnantes.atal.web.piubella.persistence.PMF;
 import fr.univnantes.atal.web.piubella.security.TokenVerifier;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import javax.jdo.PersistenceManager;
@@ -12,7 +14,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UserService extends WebService {
+public class UserService extends AuthWebService {
+
+    @Override
+    public void init() {
+        allowed_methods =
+                new ArrayList(Arrays.asList(true, false, false, true));
+        authenticated_methods =
+                new ArrayList(Arrays.asList(false, false, false, false));
+    }
 
     @Override
     protected void get(

@@ -4,8 +4,6 @@
     var addressList = [];
 
     var street = "myStreet";
-    var yellow = "myYellow";
-    var blue = "myBlue";
     
     $(window).load(function() {
         $('#loading-indicator').show();
@@ -67,9 +65,9 @@
                         street = itemdic[0];
                         console.log("itemdic : " + itemdic);
                         console.log("street : " + street);
-                        yellow = (itemdic.length > 2) ? itemdic[2] : null;
+                        var yellow = (itemdic.length > 2) ? itemdic[2] : null;
                         console.log("yellow : " + yellow);                        
-                        blue = itemdic[1];
+                        var blue = itemdic[1];
                         console.log("blue : " + blue);
 
                         yellow = intToDay(yellow);
@@ -105,9 +103,11 @@
             cache: true
         });
     });
+    var yellowAdd = ["XMPP", "EMAIL"];
+    var blueAdd = ["XMPP", "EMAIL"];
     $('body').on('click', '.popover button', function () {
         console.log("click : ");
-        console.log( street + ", " + yellow + ", " + blue);
-            PiuBella.prototype.addNotification(street, yellow, blue);
+        console.log( street + ", " + yellowAdd + ", " + blueAdd);
+            PiuBella.prototype.addNotification(street, yellowAdd, blueAdd);
         });
 })();

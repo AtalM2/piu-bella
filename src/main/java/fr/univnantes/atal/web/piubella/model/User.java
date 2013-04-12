@@ -72,6 +72,10 @@ public class User {
         return googleId;
     }
     
+    public void removeNotifications() {
+        notifications.clear();
+    }
+    
     /**
      * Adder for the notifications.
      * 

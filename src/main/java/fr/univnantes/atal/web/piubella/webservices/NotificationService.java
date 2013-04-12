@@ -89,118 +89,89 @@ public class NotificationService extends AuthWebService {
 
 
         if (json != null) {
-            Map<String, List<Map<String, Object>>> array = mapper.readValue(json, Map.class);
-            if (array.containsKey("data")) {
-                List<Map<String, Object>> dataTemp = array.get("data");
-                if (dataTemp != null) {
-                    for (Map<String, Object> data : dataTemp) {
+            List<Map<String, Object>> array = mapper.readValue(json, List.class);
+            if (array != null) {
+                PersistenceManager pm = PMF.get().getPersistenceManager();
+                try {
+                    User userManaged = pm.getObjectById(User.class,
+                            user.getGoogleId());
+                    userManaged.removeNotifications();
+                    for (Map<String, Object> data : array) {
                         List<String> yellowRaw, blueRaw;
                         Address address = null;
                         Set<NotificationTransport> yellow = new HashSet<>(),
                                 blue = new HashSet<>();
                         if (data
                                 != null) {
-                            PersistenceManager pm = PMF.get().getPersistenceManager();
-                            try {
-                                if (data.containsKey("street")) {
-                                    String street = (String) data.get("street");
-                                    Query q = pm.newQuery(Address.class);
-                                    q.setFilter("street == '" + street + "'");
+                            if (data.containsKey("street")) {
+                                String street = (String) data.get("street");
+                                street = street.replaceAll("'","\'");
+                                Query q = pm.newQuery(Address.class);
+                                q.setFilter("street == \"" + street + "\"");
+                                try {
+                                    List<Address> results =
+                                            (List<Address>) q.execute();
+                                    if (!results.isEmpty()) {
+                                        address = results.get(0);
+                                    }
+                                } finally {
+                                    q.closeAll();
+                                }
+                            }
+                            if (address == null) {
+                                error(request,
+                                        response,
+                                        "The street field must be present and set "
+                                        + "to a valid street contained in the NOD "
+                                        + "dataset.",
+                                        422);
+                                return;
+
+                            }
+                            if (data.containsKey("yellow")) {
+                                yellowRaw = (List<String>) data.get("yellow");
+                                for (String transport : yellowRaw) {
                                     try {
-                                        List<Address> results =
-                                                (List<Address>) q.execute();
-                                        if (!results.isEmpty()) {
-                                            address = results.get(0);
-                                        } else {
-                                        }
-                                    } finally {
-                                        q.closeAll();
+                                        yellow.add(NotificationTransport.valueOf(transport));
+                                    } catch (IllegalArgumentException e) {
+                                        error(request,
+                                                response,
+                                                "The yellow field isn't correct. Should be "
+                                                + "of the form [\"XMPP\", \"EMAIL\"].",
+                                                422);
+                                        return;
                                     }
                                 }
-                                if (address == null) {
-                                    error(request,
-                                            response,
-                                            "The street field must be present and set "
-                                            + "to a valid street contained in the NOD "
-                                            + "dataset.",
-                                            422);
-                                    return;
-
-                                }
-                                if (data.containsKey("yellow")) {
-                                    yellowRaw = (List<String>) data.get("yellow");
-                                    for (String transport : yellowRaw) {
+                                if (data.containsKey("blue")) {
+                                    blueRaw = (List<String>) data.get("blue");
+                                    for (String transport : blueRaw) {
                                         try {
-                                            yellow.add(NotificationTransport.valueOf(transport));
+                                            blue.add(NotificationTransport.valueOf(transport));
                                         } catch (IllegalArgumentException e) {
                                             error(request,
                                                     response,
-                                                    "The yellow field isn't correct. Should be "
+                                                    "The blue field isn't correct. Should be "
                                                     + "of the form [\"XMPP\", \"EMAIL\"].",
                                                     422);
                                             return;
                                         }
                                     }
-                                    if (data.containsKey("blue")) {
-                                        blueRaw = (List<String>) data.get("blue");
-                                        for (String transport : blueRaw) {
-                                            try {
-                                                blue.add(NotificationTransport.valueOf(transport));
-                                            } catch (IllegalArgumentException e) {
-                                                error(request,
-                                                        response,
-                                                        "The blue field isn't correct. Should be "
-                                                        + "of the form [\"XMPP\", \"EMAIL\"].",
-                                                        422);
-                                                return;
-                                            }
-                                        }
-                                    }
                                 }
-                                try (PrintWriter out = response.getWriter()) {
-                                    User userManaged = pm.getObjectById(User.class,
-                                            user.getGoogleId());
-
-                                    Set<Notification> notifications = userManaged.getNotifications();
-                                    Notification notification = null;
-                                    for (Notification notif : notifications) {
-                                        out.println(notif.getAddress().getStreet());
-                                        if (notif.getAddress().equals(address)) {
-                                            notification = notif;
-                                        }
-                                    }
-                                    if (notification == null) {
-                                        out.println("null");
-                                        notification = new Notification();
-                                        notification.setAddress(address);
-                                        for (NotificationTransport transport : yellow) {
-                                            notification.addNotificationOnYellowDay(transport);
-                                        }
-                                        for (NotificationTransport transport : blue) {
-                                            notification.addNotificationOnBlueDay(transport);
-                                        }
-                                        userManaged.addNotification(notification);
-                                    } else {
-                                        notification.removeAllNotifications();
-                                        for (NotificationTransport transport : yellow) {
-                                            notification.addNotificationOnYellowDay(transport);
-                                        }
-                                        for (NotificationTransport transport : blue) {
-                                            notification.addNotificationOnBlueDay(transport);
-                                        }
-                                    }
-                                    out.println(userManaged.getNotifications());
-                                    out.println(address.getStreet());
-                                }
-
-                            } finally {
-                                pm.close();
                             }
+                            Notification notification = new Notification();
+                            notification.setAddress(address);
+                            for (NotificationTransport transport : yellow) {
+                                notification.addNotificationOnYellowDay(transport);
+                            }
+                            for (NotificationTransport transport : blue) {
+                                notification.addNotificationOnBlueDay(transport);
+                            }
+                            userManaged.addNotification(notification);
                         }
                     }
+                } finally {
+                    pm.close();
                 }
-
-
             }
         }
     }

@@ -15,11 +15,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 
+/**
+ * Base class to produce a webservice.
+ * 
+ * Provides helpers to handle authentication.
+ */
 public abstract class AuthWebService extends HttpServlet {
 
+    /**
+     * Jackson mapper.
+     */
     protected ObjectMapper mapper = new ObjectMapper();
-    protected List<Boolean> allowed_methods, authenticated_methods;
+    /**
+     * List of allowed methods for the webservice.
+     */
+    protected List<Boolean> allowed_methods,
+            /**
+             * List of allowed authenticated methods for the webservice.
+             */
+            authenticated_methods;
 
+    /**
+     * Init method to set the allowed methods.
+     */
     @Override
     public void init() {
         allowed_methods =
@@ -62,6 +80,15 @@ public abstract class AuthWebService extends HttpServlet {
         }
     }
 
+    /**
+     * Get method when authentication is required.
+     *
+     * @param request
+     * @param response
+     * @param user
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void auth_get(
             HttpServletRequest request,
             HttpServletResponse response,
@@ -69,6 +96,14 @@ public abstract class AuthWebService extends HttpServlet {
             throws ServletException, IOException {
     }
 
+    /**
+     * Get method when authentication is not required.
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void get(
             HttpServletRequest request,
             HttpServletResponse response)
@@ -120,6 +155,15 @@ public abstract class AuthWebService extends HttpServlet {
         }
     }
 
+    /**
+     * Post method when authentication is required.
+     *
+     * @param request
+     * @param response
+     * @param user
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void auth_post(
             HttpServletRequest request,
             HttpServletResponse response,
@@ -127,6 +171,14 @@ public abstract class AuthWebService extends HttpServlet {
             throws ServletException, IOException {
     }
 
+    /**
+     * Post method when authentication is not required.
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void post(
             HttpServletRequest request,
             HttpServletResponse response)
@@ -167,6 +219,15 @@ public abstract class AuthWebService extends HttpServlet {
         }
     }
 
+    /**
+     * Put method when authentication is required.
+     *
+     * @param request
+     * @param response
+     * @param user
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void auth_put(
             HttpServletRequest request,
             HttpServletResponse response,
@@ -174,6 +235,14 @@ public abstract class AuthWebService extends HttpServlet {
             throws ServletException, IOException {
     }
 
+    /**
+     * Put method when authentication is not required.
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void put(
             HttpServletRequest request,
             HttpServletResponse response)
@@ -214,6 +283,15 @@ public abstract class AuthWebService extends HttpServlet {
         }
     }
 
+    /**
+     * Delete method when authentication is required.
+     *
+     * @param request
+     * @param response
+     * @param user
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void auth_delete(
             HttpServletRequest request,
             HttpServletResponse response,
@@ -221,12 +299,30 @@ public abstract class AuthWebService extends HttpServlet {
             throws ServletException, IOException {
     }
 
+    /**
+     * Delete method when authentication is not required.
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void delete(
             HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
     }
 
+    /**
+     * Helper method to produce an error.
+     *
+     * @param request
+     * @param response
+     * @param error
+     * @param status
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void error(
             HttpServletRequest request,
             HttpServletResponse response,

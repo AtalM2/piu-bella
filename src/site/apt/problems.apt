@@ -6,4 +6,61 @@
 
 Interesting problems we solved
  
- TODO
+ This page intends to gather the main issues we solved during this
+ project. Both to serve as a basis for evaluation and to offer hints to
+ possible readers regarding the difficult parts of implementing a
+ solution on GAE.
+
+* Datastore and Maven
+
+ The Datanucleus maven documentation is non existant. We've ran into a
+ number of problems to get the versions right. Finally, we got the whole
+ JDO stack to work and were able to implement a correct model through
+ classical entity management.
+
+* Dataset filtering (Jackson streaming API, blobstore, enums)
+
+ In order to have a working typeahead (the fancy input text displayed in
+ our main page), we had to find a way to send the dataset to the client
+ without slowing down the loading of the page too significantly.
+ 
+ To do that, a simple way to proceed is to filter the whole dataset by
+ only keeping the interesting fields. From a 400 Ko json file, that
+ brought us to a 150 Ko json file.
+ 
+ Already this was quite tricky since loading the whole file into a data
+ structure so that Jackson can write it in JSON produced an out of
+ memory error. The solution we found was to use the streaming API of
+ Jackson. Just as a SAX parser for XML, it allows for constant memory
+ and linear time translation into JSON. And even without the out of
+ memory error, GAE doesn't allow for arbitrary file writing, so we had
+ to use the blobstore.
+ 
+ But this wasn't enough. To go further, we turned enums such as the list
+ of days used to collect trash into list of ints. This way, the
+ resulting fight weighs only 90 Ko. Just a bit over a png logo. We
+ thought that was ok!
+
+* Checking for updates
+
+ The NOD dataset doesn't include relevant metadata to check if some
+ updates were made recently. Moreover, even its "right way" of getting
+ the information is quite complicated as shown in the
+ {{{http://data.nantes.fr/forum/?tx_mmforum_pi1[action]=list_post&tx_mmforum_pi1[tid]=157}thread}} we made on the NOD forum.
+ 
+ That lead us to propose a {{{https://gist.github.com/Mogzor/5282686}script}}
+ so that the task would be easier for future programmers.
+ 
+ Once we got our hands on a JSON metadata file containing the update
+ date we needed, the task was made easy. The result is the
+ <<<UpdateChecker>>> servlet.
+
+* OAuth
+ 
+ In order to propose web services, we needed a way to authenticate users
+ that was not relying on the Users API by Google (this only works for a
+ basic browser usage). The solution was indeed OAuth2. To make it work,
+ we use the js OAuth library as well as the OAuth endpoint to check
+ things correctly on the server.
+ 
+ 

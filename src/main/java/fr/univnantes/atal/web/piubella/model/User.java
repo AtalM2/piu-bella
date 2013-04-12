@@ -57,7 +57,7 @@ public class User {
     /**
      * Getter for the email.
      * 
-     * @return
+     * @return the email of the user.
      */
     public String getEmail() {
         return email;
@@ -66,7 +66,7 @@ public class User {
     /**
      * Getter for the Id.
      * 
-     * @return
+     * @return the id of the user.
      */
     public String getGoogleId() {
         return googleId;
@@ -89,7 +89,7 @@ public class User {
     /**
      * Getter for the notifications.
      * 
-     * @return
+     * @return the notifications of the user.
      */
     public Set<Notification> getNotifications() {
         return Collections.unmodifiableSet(notifications);

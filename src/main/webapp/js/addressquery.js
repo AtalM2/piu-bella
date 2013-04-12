@@ -97,7 +97,7 @@
     $('body').on('click', '.popover button', function () {
         console.log("click : ");
         console.log( street.replace("\'", "\\\'") + ", " + yellowAdd + ", " + blueAdd);
-        /*if(notifData.indexOf({
+        if(notifData.indexOf({
                         'street': street,
                         'blue': blueAdd,
                         'yellow': yellowAdd
@@ -112,6 +112,6 @@
             PiuBella.prototype.putNotifications(notifData);
 
             $('#address-query-wrapper').popover('destroy');
-        //}
+        }
         });
 })();

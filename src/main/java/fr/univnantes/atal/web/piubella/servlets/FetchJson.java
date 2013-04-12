@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Servlet that serves a filtered version of the dataset.
+ */
 public class FetchJson extends HttpServlet {
 
     /**

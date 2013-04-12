@@ -12,10 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
+/**
+ * Security helper.
+ * 
+ * Checks if the request contains a field access_token that is set to a correct
+ * OAuth token for this application.
+ */
 public class TokenVerifier {
 
     static private ObjectMapper mapper = new ObjectMapper();
 
+    /**
+     * Main method to authenticate a request.
+     * 
+     * @param request
+     * @return a User if the token was correct. null otherwise.
+     */
     static public User getUser(HttpServletRequest request) {
         String accessToken = request.getParameter("access_token");
         if (accessToken == null) {

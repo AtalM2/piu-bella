@@ -14,6 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Webservice to CD users.
+ */
 public class UserService extends AuthWebService {
 
     @Override

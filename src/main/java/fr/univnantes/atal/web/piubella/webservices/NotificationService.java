@@ -96,6 +96,9 @@ public class NotificationService extends AuthWebService {
 
                     if (data.containsKey("street")) {
                         String street = (String) data.get("street");
+
+                        System.out.println("street in notif.java : "+street);
+
                         Query q = pm.newQuery(Address.class);
                         q.setFilter("street == '" + street + "'");
                         try {

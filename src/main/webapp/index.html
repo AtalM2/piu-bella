@@ -73,6 +73,13 @@
                 <div class="accordion" id="accordion2">
 
 
+
+
+
+
+
+
+
                 </div>
             </div>
 
@@ -91,6 +98,8 @@
         <script type="text/javascript" src="js/bootstrap-tooltip.js"></script>
         <script type="text/javascript" src="js/bootstrap-popover.js"></script>
         <script type="text/javascript" src="js/bootstrap-collapse.js"></script>
+        <script type="text/javascript" src="js/bootstrap-dropdown.js"></script>
+        <script type="text/javascript" src="js/bootstrap-transition.js"></script>
         <script type="text/javascript" src="js/bootstrap-modal.js"></script>
         <script type="text/javascript" src="js/bootbox.js"></script>
         <script type="text/javascript" src="js/underscore.js"></script>
@@ -117,36 +126,54 @@
                 pb = null;
             }
         </script>
+
+        <!-- A Propos -->
         <script type="text/javascript">
             $("#apropos").click(function (e) {
                 e.preventDefault();
                 bootbox.alert("Più Bella est un projet réalisé par des étudiants M1 ATAL - Université de Nantes.\n\nLes données proviennent de Nantes Open Data et sont mis à jour régulièrement.");
             });
         </script>
-        <script type="text/javascript">
-        /*$('body').on('click', '.popover button', function () {
-            PiuBella.prototype.addNotification(street,yellow,blue);
-        });*/
+        
+        <!-- Delete Notification Button -->
+        <script>
+        $(".btn-remove").click( function () {
+            PiuBella.prototype.deleteNotification((this.id).replace("remove-",""));
+        });
         </script>
+        
         <script type="text/x-jsrender" id="notifications-options">
+            
+                <div class="accordion-group">
+                  <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                      Collapsible Group Item #1
+                    </a>
+                  </div>
+                  <div id="collapseOne" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high
+                    </div>
+                  </div>
+                </div>
+
             <div class="accordion-group">
                 <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#{{>street}}">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#{{>streetId}}">
                         {{>street}}
+                        <button type="button" class="btn btn-remove" id="remove-{{>street}}"><i class="icon-remove"></i></button>
                     </a>
                 </div>
-                <div id="{{>street}}" class="accordion-body in collapse">
+                <div id="{{>streetId}}" class="accordion-body collapse in">
                     <div class="accordion-inner">
                         <div class="accordion-section-jaune span6">
-                            Mardi et Vendredi
-                            <div class="btn-group btn-group-vertical">
+                            <div class="btn-group btn-group-horizontal">
                                 <button type="button" class="btn alert-btn" data-toggle="button"><i class="icon-envelope"></i> Gmail</button>
                                 <button type="button" class="btn alert-btn" data-toggle="button"><i class="icon-envelope"></i> Xmpp</button>
                             </div>
                         </div>
                         <div class="accordion-section-bleu span6">
-                            Jeudi et Samedi
-                            <div class="btn-group btn-group-vertical">
+                            <div class="btn-group btn-group-horizontal">
                                 <button type="button" class="btn alert-btn" data-toggle="button"><i class="icon-envelope"></i> Gmail</button>
                                 <button type="button" class="btn alert-btn" data-toggle="button"><i class="icon-envelope"></i> Xmpp</button>
                             </div>

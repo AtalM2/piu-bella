@@ -127,3 +127,10 @@ padding: 0px;
   text-align: right;
   margin-left: 20px;
 }
+
+.btn-remove {
+  vertical-align:top;
+  float: right;
+  margin-left: -80px;
+  margin-top: -5px;
+}

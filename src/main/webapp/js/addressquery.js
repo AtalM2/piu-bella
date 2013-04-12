@@ -3,7 +3,7 @@
     var dict = null;
     var addressList = [];
 
-    var street = "myStreet";
+    var street = null;
     
     $(window).load(function() {
         $('#loading-indicator').show();
@@ -15,8 +15,6 @@
                 if(!dict){
                     dict = {};
                     addressList = $.map(data.data,function(item) {
-
-                        
 
                         dict[item[0]]=item;
                         return item[0];
@@ -55,20 +53,12 @@
                             return days;
                         };
 
-                        //street = dict[item].LIBELLE;
-                        //yellow = dict[item].JAUNE_JOUR_COLLECTE;
-                        //blue = dict[item].BLEU_JOUR_COLLECTE;
-
                         $('#address-query-wrapper').popover('destroy');
                         var itemdic = dict[item]
 
                         street = itemdic[0];
-                        console.log("itemdic : " + itemdic);
-                        console.log("street : " + street);
                         var yellow = (itemdic.length > 2) ? itemdic[2] : null;
-                        console.log("yellow : " + yellow);                        
                         var blue = itemdic[1];
-                        console.log("blue : " + blue);
 
                         yellow = intToDay(yellow);
                         blue = intToDay(blue);
@@ -107,7 +97,8 @@
     var blueAdd = ["XMPP", "EMAIL"];
     $('body').on('click', '.popover button', function () {
         console.log("click : ");
-        console.log( street + ", " + yellowAdd + ", " + blueAdd);
-            PiuBella.prototype.addNotification(street, yellowAdd, blueAdd);
+        console.log( street.replace("\'", "\\\'") + ", " + yellowAdd + ", " + blueAdd);
+            PiuBella.prototype.addNotification(street.replace("\'", "\\\'"), yellowAdd, blueAdd);
+            $('#address-query-wrapper').popover('destroy');
         });
 })();

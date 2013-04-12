@@ -33,6 +33,7 @@ PiuBella.prototype.addNotification = function(street, yellow, blue) {
         },
         success: function(data) {
             console.log(data);
+            PiuBella.prototype.loadNotifications('#accordion2');
         }
     });
 };

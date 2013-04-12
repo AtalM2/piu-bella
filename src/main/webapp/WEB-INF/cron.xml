@@ -6,4 +6,10 @@
         <schedule>every day 04:00</schedule>
         <timezone>Europe/Paris</timezone>
     </cron>
+    <cron>
+        <url>/cron/notifier</url>
+        <description>Sends email and XMPP notifications</description>
+        <schedule>every 2 minutes</schedule>
+        <timezone>Europe/Paris</timezone>
+    </cron>
 </cronentries>

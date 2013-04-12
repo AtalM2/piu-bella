@@ -159,9 +159,10 @@ public class Fetch extends HttpServlet {
                                 yellowDays.add(CollectDay.SUNDAY);
                             }
                             Address address = new Address();
-                            address.setStreet(street + (obsStreet.isEmpty()
+                            street = street + (obsStreet.isEmpty()
                                     ? ""
-                                    : " " + obsStreet));
+                                    : " " + obsStreet);
+                            address.setStreet(street);
                             address.setBlueDays(blueDays);
                             address.setYellowDays(yellowDays);
                             addresses.add(address);

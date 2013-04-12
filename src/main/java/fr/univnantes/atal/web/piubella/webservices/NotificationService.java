@@ -164,13 +164,11 @@ public class NotificationService extends AuthWebService {
                                     Set<Notification> notifications = userManaged.getNotifications();
                                     Notification notification = null;
                                     for (Notification notif : notifications) {
-                                        out.println(notif.getAddress().getStreet());
                                         if (notif.getAddress().equals(address)) {
                                             notification = notif;
                                         }
                                     }
                                     if (notification == null) {
-                                        out.println("null");
                                         notification = new Notification();
                                         notification.setAddress(address);
                                         for (NotificationTransport transport : yellow) {
@@ -189,8 +187,6 @@ public class NotificationService extends AuthWebService {
                                             notification.addNotificationOnBlueDay(transport);
                                         }
                                     }
-                                    out.println(userManaged.getNotifications());
-                                    out.println(address.getStreet());
                                 }
 
                             } finally {

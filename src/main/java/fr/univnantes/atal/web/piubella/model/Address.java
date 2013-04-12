@@ -1,75 +1,111 @@
 package fr.univnantes.atal.web.piubella.model;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+/**
+ * Model class for addresses.
+ * 
+ * Contains mainly the street and the days where the trash is collected on that
+ * street.
+ */
 @PersistenceCapable
 public class Address {
-
-    @Persistent
-    private Boolean singleCollect;
     
+    /**
+     * Set of collect days for the blue trash.
+     */
     @Persistent
-    private Collection<CollectDay> blueDays;
+    private Set<CollectDay> blueDays;
     
+    /**
+     * Set of collect days for the yellow trash.
+     */
     @Persistent
-    private Collection<CollectDay> yellowDays;
+    private Set<CollectDay> yellowDays;
     
+    /**
+     * Street of the address.
+     * 
+     * Id in the datastore.
+     */
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private String street;
 
+    /**
+     * Constructor.
+     */
     public Address() {
-
+        yellowDays = new HashSet<>();
+        blueDays = new HashSet<>();
     }
 
-    public Address(String street){
-        this.street = street;
+    /**
+     * Getter for the collect days of blue trash.
+     * 
+     * @return a set of CollectDay s.
+     */
+    public Set<CollectDay> getBlueDays() {
+        return Collections.unmodifiableSet(blueDays);
     }
 
-    public Address(String street, Collection<CollectDay> blueDays, Collection<CollectDay> yellowDays){
-        this.street = street;
-        this.blueDays = blueDays;
-        this.yellowDays = yellowDays;     
-    }
-
-    public Boolean getSingleCollect() {
-        return singleCollect;
-    }
-
-    public void setSingleCollect(Boolean singleCollect) {
-        this.singleCollect = singleCollect;
-    }
-
-    public Collection<CollectDay> getBlueDays() {
-        return Collections.unmodifiableCollection(blueDays);
-    }
-
-    public void setBlueDays(Collection<CollectDay> blueDays) {
+    /**
+     * Setter fot the collect days of blue trash.
+     * 
+     * @param blueDays
+     */
+    public void setBlueDays(Set<CollectDay> blueDays) {
         this.blueDays = blueDays;
     }
 
-    public Collection<CollectDay> getYellowDays() {
-        return Collections.unmodifiableCollection(yellowDays);
+    /**
+     * Getter for the collect days of yellow trash.
+     * 
+     * @return a set of CollectDay s.
+     */
+    public Set<CollectDay> getYellowDays() {
+        return Collections.unmodifiableSet(yellowDays);
     }
 
-    public void setYellowDays(Collection<CollectDay> yellowDays) {
+    /**
+     * Setter for the collect days of yellow trash.
+     * 
+     * @param yellowDays
+     */
+    public void setYellowDays(Set<CollectDay> yellowDays) {
         this.yellowDays = yellowDays;
     }
 
+    /**
+     * Getter for the street.
+     * 
+     * @return the street of the address.
+     */
     public String getStreet() {
         return street;
     }
 
+    /**
+     * Setter for the street.
+     * 
+     * @param street
+     */
     public void setStreet(String street) {
         this.street = street;
     }
 
+    /**
+     * Override to consider only the street.
+     * 
+     * @return a hash code for use in hash data structures.
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -77,6 +113,12 @@ public class Address {
         return hash;
     }
 
+    /**
+     * Override to consider only the street.
+     * 
+     * @param obj the object to compare this one to.
+     * @return true if both objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

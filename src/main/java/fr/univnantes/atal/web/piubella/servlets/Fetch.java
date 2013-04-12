@@ -7,6 +7,7 @@ import com.google.appengine.api.files.AppEngineFile;
 import com.google.appengine.api.files.FileService;
 import com.google.appengine.api.files.FileServiceFactory;
 import com.google.appengine.api.files.FileWriteChannel;
+import fr.univnantes.atal.web.piubella.app.Constants;
 import fr.univnantes.atal.web.piubella.model.Address;
 import fr.univnantes.atal.web.piubella.model.CollectDay;
 import fr.univnantes.atal.web.piubella.model.JSONInfo;
@@ -19,7 +20,9 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.servlet.ServletException;
@@ -29,6 +32,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerator;
 
+/**
+ * Servlet fetching data on NOD.
+ * 
+ * This servlet has two roles. The first one is to store the current NOD dataset
+ * in the datastore. The second one is to create a blob in the blobstore
+ * containing a filtered dataset for use by the client in a typeahead for
+ * example.
+ */
 public class Fetch extends HttpServlet {
 
     /**
@@ -60,14 +71,9 @@ public class Fetch extends HttpServlet {
             }
             file = fileService.createNewBlobFile("text/plain");
 
-            // Create a new Blob file with mime-type "text/plain"
-
-            // Open a channel to write to it
             boolean lock = true;
             FileWriteChannel writeChannel = fileService.openWriteChannel(file, lock);
 
-            // Different standard Java ways of writing to the channel
-            // are possible. Here we use a PrintWriter:
             JsonFactory f = new JsonFactory();
             try (OutputStream os = Channels.newOutputStream(writeChannel);
                     JsonGenerator g = f.createJsonGenerator(os)) {
@@ -79,9 +85,7 @@ public class Fetch extends HttpServlet {
                 }
                 q = pm.newQuery(Address.class);
                 q.deletePersistentAll();
-                URL url = new URL("http://data.nantes.fr/api/publication/"
-                        + "JOURS_COLLECTE_DECHETS_VDN/JOURS_COLLECTE_DECHETS_VDN_STBL/"
-                        + "content/?format=csv");
+                URL url = new URL(Constants.NOD_DATASET_CSV_URL);
                 CSVReader reader = new CSVReader(new InputStreamReader(url.openStream(), "UTF-8"));
                 String[] nextLine;
                 Collection<Address> addresses = new ArrayList<>();
@@ -98,8 +102,8 @@ public class Fetch extends HttpServlet {
                             String street = nextLine[1],
                                     obsStreet = nextLine[9],
                                     yellow = nextLine[11];
-                            Collection<CollectDay> blueDays = new ArrayList<>(),
-                                    yellowDays = new ArrayList<>();
+                            Set<CollectDay> blueDays = new HashSet<>(),
+                                    yellowDays = new HashSet<>();
                             Boolean singleCollect = false;
                             if (yellow.isEmpty()) {
                                 singleCollect = true;
@@ -155,7 +159,6 @@ public class Fetch extends HttpServlet {
                                 yellowDays.add(CollectDay.SUNDAY);
                             }
                             Address address = new Address();
-                            address.setSingleCollect(singleCollect);
                             address.setStreet(street + (obsStreet.isEmpty()
                                     ? ""
                                     : " " + obsStreet));

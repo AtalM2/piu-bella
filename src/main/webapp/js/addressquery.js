@@ -18,13 +18,10 @@
                     dict = {};
                     addressList = $.map(data.data,function(item) {
 
-                        //if(!dict[item.LIBELLE]){
-                        //    dict[item.LIBELLE]=item;
-                        //    return item.LIBELLE;
-                        //}
+                        
 
                         dict[item[0]]=item;
-                        return item[0];//+ '<span>' + item.QUARTIER + '</span>';
+                        return item[0];
 
                     });
                 }
@@ -34,7 +31,7 @@
                     updater:function (item) {
                         function intToDay(index) {
                             var days = _.map(index, function(day) {
-                                switch (index) {
+                                switch (day) { //was index
                                     case 0:
                                         return 'Lundi';
                                     case 1:
@@ -66,12 +63,21 @@
 
                         $('#address-query-wrapper').popover('destroy');
                         var itemdic = dict[item]
-                        var yellow = (itemdic.length > 2) ? itemdic[2] : null;
-                        var blue = itemdic[1];
+
+                        street = itemdic[0];
+                        console.log("itemdic : " + itemdic);
+                        console.log("street : " + street);
+                        yellow = (itemdic.length > 2) ? itemdic[2] : null;
+                        console.log("yellow : " + yellow);                        
+                        blue = itemdic[1];
+                        console.log("blue : " + blue);
+
+                        yellow = intToDay(yellow);
+                        blue = intToDay(blue);
 
                         var popoverContent =
                         (yellow !== null
-                            ? ('<div class="yellow">Sacs jaunes : ' + intToDay(yellow)
+                            ? ('<div class="yellow">Sacs jaunes : ' + yellow
                                 + '</div>')
                             : '')
                         + '<div class="blue">Sacs bleus : '+ blue + '</div>'
@@ -79,6 +85,8 @@
                         //+ '<img src="/img/ajax-loader.gif" id="loading-indicator-notif" style="display: none;">'
                         + '<button type="button" class="btn btn-primary" id="notif-creation" '
                         + 'data-loading-text="Création...">Créer une alerte</button>';
+
+                        
 
                         $('#address-query-wrapper').popover({
                             title: "Jours de collecte",
@@ -97,7 +105,9 @@
             cache: true
         });
     });
-    $("#notif-creation").click( function () {
-        PiuBella.prototype.addNotification(street,yellow,blue);
-    });
+    $('body').on('click', '.popover button', function () {
+        console.log("click : ");
+        console.log( street + ", " + yellow + ", " + blue);
+            PiuBella.prototype.addNotification(street, yellow, blue);
+        });
 })();

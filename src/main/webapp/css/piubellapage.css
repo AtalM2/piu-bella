@@ -1,12 +1,16 @@
 body {
   padding-top: 20px;
   padding-bottom: 40px;
+  background: #F0F0F0;
 }
 
 /* Custom container */
 .container-narrow {
   margin: 0 auto;
   max-width: 700px;
+  background: #FFFFFF;
+  padding: 25px 20px;
+  border: 1px solid #DADADA;
 }
 .container-narrow > hr {
   margin: 30px 0;
@@ -107,11 +111,18 @@ padding: 0px;
 }
 
 .accordion-section-bleu{
-  background-color: #B3B9FF;
+  background-color: #fafafa;
+  float: top;
+  text-align : justify;
+  padding: 0px 50px;
 }
 
 .accordion-section-jaune{
-  background-color: #FFFF71;
+  background-color: #fafafa;
+  float: bottom;
+  text-align : justify;
+  padding: 0px 50px;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .accordion-inner{
@@ -123,7 +134,7 @@ padding: 0px;
   margin: 20px;
 }
 
-.btn-group-vertical {
-  text-align: right;
-  margin-left: 20px;
+.btn-group {
+  float: right;
+  margin-left: 50px;
 }

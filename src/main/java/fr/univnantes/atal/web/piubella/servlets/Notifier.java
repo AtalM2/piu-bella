@@ -193,6 +193,7 @@ public class Notifier extends HttpServlet {
 
         XMPPService xmpp = XMPPServiceFactory.getXMPPService();
         if (xmpp.getPresence(jid).isValid()) {
+            xmpp.sendInvitation(jid);
             SendResponse status = xmpp.sendMessage(msg);
             if (status.getStatusMap().get(jid) != SendResponse.Status.SUCCESS) {
                 Logger.getLogger(Notification.class.getName()).log(Level.SEVERE, "{0} not sent", email);

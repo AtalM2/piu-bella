@@ -97,13 +97,21 @@
     $('body').on('click', '.popover button', function () {
         console.log("click : ");
         console.log( street.replace("\'", "\\\'") + ", " + yellowAdd + ", " + blueAdd);
+        /*if(notifData.indexOf({
+                        'street': street,
+                        'blue': blueAdd,
+                        'yellow': yellowAdd
+                    })!= -1){*/
+            console.log("notifData avant add" +notifData);
             notifData[notifData.length] = {
-                        'street': street.replace("\'", "\\\'"),
+                        'street': street,
                         'blue': blueAdd,
                         'yellow': yellowAdd
                     };
+            console.log("notifData apres add" +notifData);
             PiuBella.prototype.putNotifications(notifData);
 
             $('#address-query-wrapper').popover('destroy');
+        //}
         });
 })();

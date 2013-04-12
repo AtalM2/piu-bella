@@ -72,9 +72,34 @@
                 <h2>Mes Alertes</h2>
                 <div class="accordion" id="accordion2">
 
-
+					<div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" ">
+                        Quai de la Fosse
+                    </a>
+                </div>
+                <div id="{{>street}}" class="accordion-body in collapse">
+                    <div class="accordion-inner">
+                        <div class="accordion-section-jaune">
+                        	<img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 30px"/>
+                            Mardi et Vendredi
+                            <div class="btn-group" data-toggle="buttons-checkbox">
+                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
+                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
+                            </div>
+                        </div>
+                        <div class="accordion-section-bleu">
+                        	<img src="/img/poubelle-bleue.png" id="poubelle-bleue" style="margin-right: 30px";/>
+                            Jeudi et Samedi
+                            <div class="btn-group" data-toggle="buttons-checkbox">
+                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
+                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
 
             <hr>
             <div class="footer">

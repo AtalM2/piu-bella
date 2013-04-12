@@ -91,15 +91,18 @@ public class NotificationService extends AuthWebService {
         if (json != null) {
             List<Map<String, Object>> array = mapper.readValue(json, List.class);
             if (array != null) {
-                for (Map<String, Object> data : array) {
-                    List<String> yellowRaw, blueRaw;
-                    Address address = null;
-                    Set<NotificationTransport> yellow = new HashSet<>(),
-                            blue = new HashSet<>();
-                    if (data
-                            != null) {
-                        PersistenceManager pm = PMF.get().getPersistenceManager();
-                        try {
+                PersistenceManager pm = PMF.get().getPersistenceManager();
+                try {
+                    User userManaged = pm.getObjectById(User.class,
+                            user.getGoogleId());
+                    userManaged.removeNotifications();
+                    for (Map<String, Object> data : array) {
+                        List<String> yellowRaw, blueRaw;
+                        Address address = null;
+                        Set<NotificationTransport> yellow = new HashSet<>(),
+                                blue = new HashSet<>();
+                        if (data
+                                != null) {
                             if (data.containsKey("street")) {
                                 String street = (String) data.get("street");
                                 Query q = pm.newQuery(Address.class);
@@ -109,7 +112,6 @@ public class NotificationService extends AuthWebService {
                                             (List<Address>) q.execute();
                                     if (!results.isEmpty()) {
                                         address = results.get(0);
-                                    } else {
                                     }
                                 } finally {
                                     q.closeAll();
@@ -155,42 +157,19 @@ public class NotificationService extends AuthWebService {
                                     }
                                 }
                             }
-                            try (PrintWriter out = response.getWriter()) {
-                                User userManaged = pm.getObjectById(User.class,
-                                        user.getGoogleId());
-
-                                Set<Notification> notifications = userManaged.getNotifications();
-                                Notification notification = null;
-                                for (Notification notif : notifications) {
-                                    if (notif.getAddress().equals(address)) {
-                                        notification = notif;
-                                    }
-                                }
-                                if (notification == null) {
-                                    notification = new Notification();
-                                    notification.setAddress(address);
-                                    for (NotificationTransport transport : yellow) {
-                                        notification.addNotificationOnYellowDay(transport);
-                                    }
-                                    for (NotificationTransport transport : blue) {
-                                        notification.addNotificationOnBlueDay(transport);
-                                    }
-                                    userManaged.addNotification(notification);
-                                } else {
-                                    notification.removeAllNotifications();
-                                    for (NotificationTransport transport : yellow) {
-                                        notification.addNotificationOnYellowDay(transport);
-                                    }
-                                    for (NotificationTransport transport : blue) {
-                                        notification.addNotificationOnBlueDay(transport);
-                                    }
-                                }
+                            Notification notification = new Notification();
+                            notification.setAddress(address);
+                            for (NotificationTransport transport : yellow) {
+                                notification.addNotificationOnYellowDay(transport);
                             }
-
-                        } finally {
-                            pm.close();
+                            for (NotificationTransport transport : blue) {
+                                notification.addNotificationOnBlueDay(transport);
+                            }
+                            userManaged.addNotification(notification);
                         }
                     }
+                } finally {
+                    pm.close();
                 }
             }
         }

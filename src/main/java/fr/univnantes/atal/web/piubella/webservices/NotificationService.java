@@ -45,6 +45,7 @@ public class NotificationService extends AuthWebService {
                     User.class,
                     user.getGoogleId());
             Set<Notification> notifications = userManaged.getNotifications();
+            int i = 0;
             for (Notification notification : notifications) {
                 Map<String, Object> notificationData = new HashMap<>();
                 notificationData.put("street",
@@ -53,9 +54,9 @@ public class NotificationService extends AuthWebService {
                         notification.getNotificationsOnBlueDay());
                 notificationData.put("yellow",
                         notification.getNotificationsOnYellowDay());
-                notificationData.put("id",
-                        notification.getKey().toString());
+                notificationData.put("id", i);
                 notificationsData.add(notificationData);
+                i++;
             }
         } finally {
             pm.close();

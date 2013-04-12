@@ -92,13 +92,17 @@
             cache: true
         });
     });
-    var yellowAdd = ["XMPP", "EMAIL"];
-    var blueAdd = ["XMPP", "EMAIL"];
+    var yellowAdd = ["EMAIL"];
+    var blueAdd = ["EMAIL"];
     $('body').on('click', '.popover button', function () {
         console.log("click : ");
         console.log( street.replace("\'", "\\\'") + ", " + yellowAdd + ", " + blueAdd);
-            //notifData[notif]
-            //PiuBella.prototype.putNotifications(data);
+            notifData[notifData.length] = {
+                        'street': street.replace("\'", "\\\'"),
+                        'blue': blueAdd,
+                        'yellow': yellowAdd
+                    };
+            PiuBella.prototype.putNotifications(notifData);
 
             $('#address-query-wrapper').popover('destroy');
         });

@@ -143,7 +143,14 @@
         <!-- Delete Notification Button -->
         <script>
         $(".btn-remove").click( function () {
-            PiuBella.prototype.deleteNotification((this.id).replace("remove-",""));
+            var idToRemove = (this.id).replace("remove","");
+            for (var i = 0 ; i < notifData.length ; i++) {
+                if(notifData[i]["id"]==idToRemove){
+                    notifData.pop(i);
+                    break;
+                }
+            };
+            PiuBella.prototype.putNotifications(notifData);
         });
         </script>
         
@@ -152,7 +159,7 @@
                 <div class="accordion-heading">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#notif{{>id}}">
                     {{>street}}
-                        <button type="button" class="btn btn-remove" id="remove-{{>street}}"><i class="icon-remove"></i></button>
+                        <button type="button" class="btn btn-remove" id="remove{{>id}}"><i class="icon-remove"></i></button>
                     </a>
                 </div>
                 <div id="notif{{>id}}" class="accordion-body collapse">
@@ -161,15 +168,15 @@
                         <div class="accordion-section-jaune">
                             <img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 30px"/>
                             <div class="btn-group" data-toggle="buttons-checkbox">
-                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
-                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
+                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="yellow-gmail" style="height:20px" /> Gmail</button>
+                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="yellow-xmpp" style="height:20px" /> Xmpp</button>
                             </div>
                         </div>
                         <div class="accordion-section-bleu">
                             <img src="/img/poubelle-bleue.png" id="poubelle-bleue" style="margin-right: 30px" />
                             <div class="btn-group" data-toggle="buttons-checkbox">
-                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
-                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
+                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="blue-gmail" style="height:20px" /> Gmail</button>
+                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="blue-xmpp" style="height:20px" /> Xmpp</button>
                             </div>
                         </div>
                     </div>

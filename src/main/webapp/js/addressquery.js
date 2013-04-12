@@ -96,25 +96,25 @@
     var blueAdd = ["EMAIL"];
     $('body').on('click', '.popover button', function () {
         console.log("click : ");
-        console.log( street + ", " + yellowAdd + ", " + blueAdd);
-        var alreadyNotified = 0;
-
-        //for (var i = 0; i < notifData.length ; i++) {
-        //    if(notifData[i])
-        //};
-
-        if(alreadyNotified){
-            console.log("notifData avant add" + notifData);
+        var alreadyNotified = false;
+        for (var i = 0; i < notifData.length ; i++) {
+            console.log("notifData[i][street] : " + notifData[i][street]);
+            console.log("street : " + street);
+            if(notifData[i]["street"]==street){
+                alreadyNotified = true;
+                break;
+            }
+        };
+        if(!alreadyNotified){
             notifData[notifData.length] = {
                         'street': street,
                         'blue': blueAdd,
                         'yellow': yellowAdd
                     };
-            console.log("notifData apres add" + notifData);
             PiuBella.prototype.putNotifications(notifData);
-
-            $('#address-query-wrapper').popover('destroy');
         }
         else bootbox.alert("Vous avez déjà listé cette alerte !");
+        $('#address-query-wrapper').popover('destroy');
+        
         });
 })();

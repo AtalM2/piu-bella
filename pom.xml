@@ -6,7 +6,15 @@
   <version>0.1</version>
 
   <groupId>fr.univnantes.atal.web.piubella</groupId>
-  <artifactId>trashnao</artifactId>
+  <artifactId>piubella</artifactId>
+  <name>Più Bella</name>
+  <url>https://github.com/Mogzor/piu-bella</url>
+
+  <scm>
+    <connection>scm:https://github.com/Mogzor/piu-bella.git</connection>
+    <developerConnection>scm:https://github.com/Mogzor/piu-bella.git</developerConnection>
+    <url>https://github.com/Mogzor/piu-bella</url>
+  </scm>
 
   <properties>
     <appengine.app.version>1</appengine.app.version>
@@ -146,5 +154,80 @@
       </plugin>
     </plugins>
   </build>
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.6</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+	      <report>dependencies</report>
+              <report>project-team</report>
+              <report>license</report>
+              <report>scm</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9</version>
+      </plugin>
+    </plugins>
+  </reporting>
 
+  <developers>
+    <developer>
+      <name>Agathe Mollé</name>
+      <email>agathe.molle@etu.univ-nantes.fr</email>
+      <organization>ATAL</organization>
+      <organizationUrl>https://github.com/organizations/AtalM1</organizationUrl>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+	<role>documentation maintainer</role>
+      </roles>
+      <timezone>Europe/Paris</timezone>
+    </developer>
+    <developer>
+      <name>Joseph Lark</name>
+      <email>joseph.lark@etu.univ-nantes.fr</email>
+      <organization>ATAL</organization>
+      <organizationUrl>https://github.com/organizations/AtalM1</organizationUrl>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+	<role>documentation maintainer</role>
+      </roles>
+      <timezone>Europe/Paris</timezone>
+    </developer>
+    <developer>
+      <name>Hugo Mougard</name>
+      <email>hugo.mougard@etu.univ-nantes.fr</email>
+      <organization>ATAL</organization>
+      <organizationUrl>https://github.com/organizations/AtalM1</organizationUrl>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+	<role>documentation maintainer</role>
+      </roles>
+      <timezone>Europe/Paris</timezone>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>GNU General Public License</name>
+      <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
+      <distribution>manual</distribution>
+      <comments>The GNU General Public License is a free, copyleft license for software and other kinds of works.</comments>
+    </license>
+  </licenses>
+  
+  <organization>
+    <name>ATAL</name>
+    <url>https://github.com/organizations/AtalM1</url>
+  </organization>
 </project>

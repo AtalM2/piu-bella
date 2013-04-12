@@ -1,0 +1,118 @@
+ -----
+ Più Bella API Getting Started Guide
+ -----
+ Joseph Lark, Agathe Mollé and Hugo Mougard
+ -----
+
+Getting Started
+
+ Più Bella exposes mainly two APIs. Both APIs require a valid OAuth
+ token. If none is provided, a 403 will be returned.
+
+ The first one of those two APIs handles users, the second one
+ notifications.
+ 
+User API
+ 
+ The <<<GET>>> method allows to retrieve the info stocked about a
+ particular user.
+ 
+ The only parameter is the <<<access_token>>>.
+ 
+ Example request:
+ 
++--+
+curl 'https://piu-bella.appspot.com/user' \
+	-d access_token=ya29.AHES6ZSCCZrxY8qQ_UTxg0H_0Br5P-tyr44JLGzXRRZI5YFG
++--+
+ 
+ The <<<DELETE>>> method allows to delete the user that is the owned of
+ the access_token given.
+ 
+ Here using normal style:
+ 
++--+
+curl -X DELETE -G 'https://piu-bella.appspot.com/user' \
+	-d 'access_token=ya29.AHES6ZQe4v8DjgpSJT-L7M7VPWu7IB03QiteHfN8V3nSajhz'
++--+
+ 
+ Here using limited browser style:
+ 
++--+
+curl -X POST 'https://piu-bella.appspot.com/user' \
+	-d 'method=delete' \
+	-d 'access_token=ya29.AHES6ZSCCZrxY8qQ_UTxg0H_0Br5P-tyr44JLGzXRRZI5YFG'
++--+
+
+Notifications
+
+ The <<<GET>>> method allows to retrieve the notifications of a
+ particular user.
+ 
++--+
+curl -X GET -G 'https://piu-bella.appspot.com/notification' \
+	-d 'access_token=ya29.AHES6ZTanW_s_BIrpAb3UKkvB0KONnBmcOu_QrJQIu7aPrMD'
++--+
+
+ Here the answer coud be, for example:
+
++--+
+{
+	"status":"success",
+	"data": [
+			{
+				"id":0,
+				"blue": ["XMPP"],
+				"street": "Avenue Saint Goazec",
+				"yellow": ["XMPP"]
+			},
+			{
+				"id": 1,
+				"blue": ["EMAIL", "XMPP"],
+				"street": "Rue Jules Bréchoir",
+				"yellow": ["EMAIL", "XMPP"]
+			},
+			{
+				"id": 2,
+				"blue": ["EMAIL", "XMPP"],
+				"street": "Rue Paul Ramadier",
+				"yellow": ["XMPP"]
+			}
+		]
+}
++--+
+
+ The answer always contains a status field, set at <<<success>>> or
+ <<<error>>>. It then contains a <<<data>>> field or an <<<error>>>
+ field depending the result. The <<<error>>> field contains a string
+ describing the error.
+ 
+ The <<<data>>> field contains a list of objects with the following
+ fields: one is an identifier, another one is the street of the
+ notification, the last two are a list of channels to reach the user on
+ blue and yellow collect days.
+
+ The <<<PUT>>> method allows to edit the user's notifications. Required
+ arguments are the <<<access_token>>> and a <<<field>>> containing an
+ array of objects of the form of the one returned by the <<<GET>>>
+ method, minus the <<<ids>>>. We will present an exemple with an empty
+ json field, which erases all notifications, because anything else would
+ quickly become unreadable:
+
+ First, in normal style:
+ 
++--+
+curl -X PUT -G 'https://piu-bella.appspot.com/notification' \
+	-d 'access_token=ya29.AHES6ZTanW_s_BIrpAb3UKkvB0KONnBmcOu_QrJQIu7aPrMD' \
+	-d 'method=put' \
+	-d 'json=[]'
++--+
+
+ Now, in browser style:
+ 
++--+
+curl -X POST 'https://piu-bella.appspot.com/notification' \
+	-d 'access_token=ya29.AHES6ZTanW_s_BIrpAb3UKkvB0KONnBmcOu_QrJQIu7aPrMD' \
+	-d 'method=put' \
+	-d 'json=[]'
++--+

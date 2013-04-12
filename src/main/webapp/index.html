@@ -52,11 +52,6 @@
 
             <div class="row-fluid marketing piubella-connected">
                 <div class="span6" id="address-query-wrapper">
-                    <!-- <h1>Memberz app</h1>
-                    <a href="https://trashnao.appspot.com/">Welcome</a>
-                    <br/>
-                    <a href="https://trashnao.appspot.com/fetch">Fetch</a>
-                    <br /> -->
                     <div class="address-query-container">
                         <input placeholder="Votre rue..." type="text" data-provide="typeahead" id="addressquery">
                         <img src="/img/ajax-loader.gif" id="loading-indicator" style="display:none" />
@@ -72,32 +67,7 @@
                 <h2>Mes Alertes</h2>
                 <div class="accordion" id="accordion2">
 
-					<div class="accordion-group">
-                <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" ">
-                        Quai de la Fosse
-                    </a>
-                </div>
-                <div id="{{>street}}" class="accordion-body in collapse">
-                    <div class="accordion-inner">
-                        <div class="accordion-section-jaune">
-                        	<img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 30px"/>
-                            Mardi et Vendredi
-                            <div class="btn-group" data-toggle="buttons-checkbox">
-                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
-                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
-                            </div>
-                        </div>
-                        <div class="accordion-section-bleu">
-                        	<img src="/img/poubelle-bleue.png" id="poubelle-bleue" style="margin-right: 30px";/>
-                            Jeudi et Samedi
-                            <div class="btn-group" data-toggle="buttons-checkbox">
-                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
-                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+					
             </div>
 
 
@@ -116,6 +86,8 @@
         <script type="text/javascript" src="js/bootstrap-tooltip.js"></script>
         <script type="text/javascript" src="js/bootstrap-popover.js"></script>
         <script type="text/javascript" src="js/bootstrap-collapse.js"></script>
+        <script type="text/javascript" src="js/bootstrap-dropdown.js"></script>
+        <script type="text/javascript" src="js/bootstrap-transition.js"></script>
         <script type="text/javascript" src="js/bootstrap-modal.js"></script>
         <script type="text/javascript" src="js/bootbox.js"></script>
         <script type="text/javascript" src="js/underscore.js"></script>
@@ -132,6 +104,7 @@
 
                 pb = new PiuBella();
                 pb.loadNotifications('#accordion2');
+                
                 pb.putNotifications([
                     {
                         'street': 'Rue Paul Ramadier',
@@ -158,43 +131,49 @@
                 pb = null;
             }
         </script>
+
+        <!-- A Propos -->
         <script type="text/javascript">
             $("#apropos").click(function (e) {
                 e.preventDefault();
                 bootbox.alert("Più Bella est un projet réalisé par des étudiants M1 ATAL - Université de Nantes.\n\nLes données proviennent de Nantes Open Data et sont mis à jour régulièrement.");
             });
         </script>
-        <script type="text/javascript">
-            /*$('body').on('click', '.popover button', function () {
-            PiuBella.prototype.addNotification(street,yellow,blue);
-        });*/
+        
+        <!-- Delete Notification Button -->
+        <script>
+        $(".btn-remove").click( function () {
+            PiuBella.prototype.deleteNotification((this.id).replace("remove-",""));
+        });
         </script>
+        
         <script type="text/x-jsrender" id="notifications-options">
             <div class="accordion-group">
                 <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#{{>street}}">
-                        {{>street}}
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#notif{{>id}}">
+                    {{>street}}
+                        <button type="button" class="btn btn-remove" id="remove-{{>street}}"><i class="icon-remove"></i></button>
                     </a>
                 </div>
-                <div id="{{>street}}" class="accordion-body in collapse">
+                <div id="notif{{>id}}" class="accordion-body in collapse">
                     <div class="accordion-inner">
-                        <div class="accordion-section-jaune span6">
-                            Mardi et Vendredi
-                            <div class="btn-group btn-group-vertical">
-                                <button type="button" class="btn alert-btn" data-toggle="button"><i class="icon-envelope"></i> Gmail</button>
-                                <button type="button" class="btn alert-btn" data-toggle="button"><i class="icon-envelope"></i> Xmpp</button>
+                        <div class="accordion-section-jaune">
+                            <img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 30px"/>
+                            <div class="btn-group" data-toggle="buttons-checkbox">
+                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
+                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
                             </div>
                         </div>
-                        <div class="accordion-section-bleu span6">
-                            Jeudi et Samedi
-                            <div class="btn-group btn-group-vertical">
-                                <button type="button" class="btn alert-btn" data-toggle="button"><i class="icon-envelope"></i> Gmail</button>
-                                <button type="button" class="btn alert-btn" data-toggle="button"><i class="icon-envelope"></i> Xmpp</button>
+                        <div class="accordion-section-bleu">
+                            <img src="/img/poubelle-bleue.png" id="poubelle-bleue" style="margin-right: 30px" />
+                            <div class="btn-group" data-toggle="buttons-checkbox">
+                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
+                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>    
         </script>
 
     </body>

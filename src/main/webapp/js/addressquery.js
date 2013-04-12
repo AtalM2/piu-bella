@@ -3,7 +3,7 @@
     var dict = null;
     var addressList = [];
 
-    var street = "myStreet";
+    var street = null;
     
     $(window).load(function() {
         $('#loading-indicator').show();
@@ -15,8 +15,6 @@
                 if(!dict){
                     dict = {};
                     addressList = $.map(data.data,function(item) {
-
-                        
 
                         dict[item[0]]=item;
                         return item[0];
@@ -55,32 +53,23 @@
                             return days;
                         };
 
-                        //street = dict[item].LIBELLE;
-                        //yellow = dict[item].JAUNE_JOUR_COLLECTE;
-                        //blue = dict[item].BLEU_JOUR_COLLECTE;
-
                         $('#address-query-wrapper').popover('destroy');
                         var itemdic = dict[item]
 
                         street = itemdic[0];
-                        console.log("itemdic : " + itemdic);
-                        console.log("street : " + street);
                         var yellow = (itemdic.length > 2) ? itemdic[2] : null;
-                        console.log("yellow : " + yellow);                        
                         var blue = itemdic[1];
-                        console.log("blue : " + blue);
 
                         yellow = intToDay(yellow);
                         blue = intToDay(blue);
 
                         var popoverContent =
                         (yellow !== null
-                            ? ('<div class="yellow">Sacs jaunes : ' + yellow
+                            ? ('<div class="yellow-blue"><img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 10px; height:40px;"/>Sacs jaunes : ' + yellow
                                 + '</div>')
                             : '')
-                        + '<div class="blue">Sacs bleus : '+ blue + '</div>'
+                        + '<div class="yellow-blue"><img src="/img/poubelle-bleue.png" id="poubelle-jaune" style="margin-right: 10px; height:40px;"/>Sacs bleus : '+ blue + '</div>'
                         + '<div align=right>'
-                        //+ '<img src="/img/ajax-loader.gif" id="loading-indicator-notif" style="display: none;">'
                         + '<button type="button" class="btn btn-primary" id="notif-creation" '
                         + 'data-loading-text="Création...">Créer une alerte</button>';
 
@@ -103,11 +92,18 @@
             cache: true
         });
     });
-    var yellowAdd = ["XMPP", "EMAIL"];
-    var blueAdd = ["XMPP", "EMAIL"];
+    var yellowAdd = ["EMAIL"];
+    var blueAdd = ["EMAIL"];
     $('body').on('click', '.popover button', function () {
         console.log("click : ");
-        console.log( street + ", " + yellowAdd + ", " + blueAdd);
-            PiuBella.prototype.addNotification(street, yellowAdd, blueAdd);
+        console.log( street.replace("\'", "\\\'") + ", " + yellowAdd + ", " + blueAdd);
+            notifData[notifData.length] = {
+                        'street': street.replace("\'", "\\\'"),
+                        'blue': blueAdd,
+                        'yellow': yellowAdd
+                    };
+            PiuBella.prototype.putNotifications(notifData);
+
+            $('#address-query-wrapper').popover('destroy');
         });
 })();

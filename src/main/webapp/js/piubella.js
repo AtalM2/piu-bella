@@ -22,12 +22,13 @@ PiuBella.prototype.loadNotifications = function(selector) {
  */
 PiuBella.prototype.putNotifications = function(data) {
     console.log("putNotification : ", data);
+    console.log(JSON.stringify(data));
     $.ajax('/notification', {
         type: 'POST',
         data: {
             method: 'put',
             access_token: gapi.auth.getToken().access_token,
-            json: JSON.stringify(data)
+            json: JSON.stringify({data: data})
         },
         success: function(data) {
             console.log(data);

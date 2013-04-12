@@ -28,7 +28,7 @@ PiuBella.prototype.putNotifications = function(data) {
         data: {
             method: 'put',
             access_token: gapi.auth.getToken().access_token,
-            json: JSON.stringify({data: data})
+            json: JSON.stringify(data)
         },
         success: function(data) {
             console.log(data);

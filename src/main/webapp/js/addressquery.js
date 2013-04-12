@@ -65,10 +65,10 @@
 
                         var popoverContent =
                         (yellow !== null
-                            ? ('<div class="yellow">Sacs jaunes : ' + yellow
+                            ? ('<div class="yellow-blue"><img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 10px; height:40px;"/>Sacs jaunes : ' + yellow
                                 + '</div>')
                             : '')
-                        + '<div class="blue">Sacs bleus : '+ blue + '</div>'
+                        + '<div class="yellow-blue"><img src="/img/poubelle-bleue.png" id="poubelle-jaune" style="margin-right: 10px; height:40px;"/>Sacs bleus : '+ blue + '</div>'
                         + '<div align=right>'
                         + '<button type="button" class="btn btn-primary" id="notif-creation" '
                         + 'data-loading-text="Création...">Créer une alerte</button>';

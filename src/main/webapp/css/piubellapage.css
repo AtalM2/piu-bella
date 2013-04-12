@@ -53,13 +53,13 @@ padding: 0px;
   padding: 9px 14px;
 }
 
-.yellow{
-  background-color: #FFFF71;
+.yellow-blue{
+  float: bottom;
+  text-align : justify;
+  padding: 0px 10px;
+  border-bottom: 1px solid #e5e5e5;
 }
 
-.blue{
-  background-color: #B3B9FF;
-}
 
 /* Main marketing message and sign up button */
 .jumbotron {

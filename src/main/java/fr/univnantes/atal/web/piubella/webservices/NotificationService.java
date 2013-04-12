@@ -105,8 +105,9 @@ public class NotificationService extends AuthWebService {
                                 != null) {
                             if (data.containsKey("street")) {
                                 String street = (String) data.get("street");
+                                street = street.replaceAll("'","\'");
                                 Query q = pm.newQuery(Address.class);
-                                q.setFilter("street == '" + street + "'");
+                                q.setFilter("street == \"" + street + "\"");
                                 try {
                                     List<Address> results =
                                             (List<Address>) q.execute();

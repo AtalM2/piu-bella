@@ -56,16 +56,20 @@ public class UserService extends AuthWebService {
             HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        PersistenceManager pm = PMF.get().getPersistenceManager();
         User user = TokenVerifier.getUser(request);
         if (user != null) {
-            pm.deletePersistent(user);
+            PersistenceManager pm = PMF.get().getPersistenceManager();
+            try {
+                User userManaged = pm.getObjectById(User.class, user.getGoogleId());
+                pm.deletePersistent(userManaged);
+            } finally {
+                pm.close();
+            }
         } else {
             error(request,
                     response,
                     "Couldn't identify the user thanks to the access_token.",
                     HttpServletResponse.SC_UNAUTHORIZED);
         }
-        pm.close();
     }
 }

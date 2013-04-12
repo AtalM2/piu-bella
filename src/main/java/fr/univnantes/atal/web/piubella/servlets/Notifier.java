@@ -97,11 +97,11 @@ public class Notifier extends HttpServlet {
                             break innerLoop;
                         }
                     }
-//                    sendMail(notification,
-//                            notification.getNotificationsOnBlueDay()
-//                            .contains(NotificationTransport.EMAIL),
-//                            notification.getNotificationsOnYellowDay()
-//                            .contains(NotificationTransport.EMAIL));
+                    sendMail(notification,
+                            notification.getNotificationsOnBlueDay()
+                            .contains(NotificationTransport.EMAIL),
+                            notification.getNotificationsOnYellowDay()
+                            .contains(NotificationTransport.EMAIL));
                     sendXMPP(notification,
                             notification.getNotificationsOnBlueDay()
                             .contains(NotificationTransport.EMAIL),

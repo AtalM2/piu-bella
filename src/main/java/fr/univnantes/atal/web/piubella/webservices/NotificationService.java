@@ -44,7 +44,7 @@ public class NotificationService extends AuthWebService {
             User userManaged = (User) pm.getObjectById(
                     User.class,
                     user.getGoogleId());
-            List<Notification> notifications = userManaged.getNotifications();
+            Set<Notification> notifications = userManaged.getNotifications();
             for (Notification notification : notifications) {
                 Map<String, Object> notificationData = new HashMap<>();
                 notificationData.put("street",
@@ -150,7 +150,7 @@ public class NotificationService extends AuthWebService {
                         }
                     }
                     try (PrintWriter out = response.getWriter()) {
-                        List<Notification> notifications = userManaged.getNotifications();
+                        Set<Notification> notifications = userManaged.getNotifications();
                         out.println(notifications);
                         out.println(address.getStreet());
                         Notification notification = null;
@@ -160,7 +160,8 @@ public class NotificationService extends AuthWebService {
                             }
                         }
                         if (notification == null) {
-                            notification = new Notification(address);
+                            notification = new Notification();
+                            notification.setAddress(address);
                             for (NotificationTransport transport : yellow) {
                                 notification.addNotificationOnYellowDay(transport);
                             }

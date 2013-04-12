@@ -9,7 +9,7 @@
     <cron>
         <url>/cron/notifier</url>
         <description>Sends email and XMPP notifications</description>
-        <schedule>every 2 minutes</schedule>
+        <schedule>every day 07:00</schedule>
         <timezone>Europe/Paris</timezone>
     </cron>
 </cronentries>

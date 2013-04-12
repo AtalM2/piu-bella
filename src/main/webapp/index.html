@@ -116,9 +116,25 @@
 
                 pb = new PiuBella();
                 pb.loadNotifications('#accordion2');
-                pb.addNotification('Rue Paul Ramadier', ['XMPP', 'EMAIL'], ['XMPP']);
-                pb.addNotification('Rue Jules Bréchoir', ['XMPP'], ['EMAIL']);
+                pb.putNotifications([
+                    {
+                        'street': 'Rue Paul Ramadier',
+                        'blue': ['XMPP', 'EMAIL'],
+                        'yellow': ['XMPP']
+                    },
+                    {
+                        'street': 'Rue Jules Bréchoir',
+                        'blue': ['XMPP', 'EMAIL'],
+                        'yellow': ['XMPP', 'EMAIL']
+                    },
+                    {
+                        'street': 'Avenue Saint Goazec',
+                        'blue': ['XMPP'],
+                        'yellow': ['XMPP']
+                    }
+                ]);
             }
+        
 
             function onDisconnect() {
                 $('.piubella-notconnected').show();

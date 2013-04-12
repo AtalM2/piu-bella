@@ -18,7 +18,6 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
@@ -102,14 +101,9 @@ public class UpdateChecker extends HttpServlet {
 
         try {
             Message msg = new MimeMessage(session);
-            try {
-                msg.setFrom(new InternetAddress(
-                        Constants.MAILER_ADDRESS,
-                        "Piu-bella update notifier"));
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(UpdateChecker.class.getName())
-                        .log(Level.SEVERE, null, ex);
-            }
+            msg.setFrom(new InternetAddress(
+                    Constants.MAILER_ADDRESS,
+                    "Piu-bella update notifier"));
             for (String address : Constants.ADMIN_ADDRESSES) {
                 msg.addRecipient(Message.RecipientType.TO,
                         new InternetAddress(address));
@@ -118,10 +112,7 @@ public class UpdateChecker extends HttpServlet {
             msg.setText("Your action is (maybe) required.");
             Transport.send(msg);
 
-        } catch (AddressException e) {
-            Logger.getLogger(UpdateChecker.class.getName())
-                    .log(Level.SEVERE, null, e);
-        } catch (MessagingException e) {
+        } catch (MessagingException | UnsupportedEncodingException e) {
             Logger.getLogger(UpdateChecker.class.getName())
                     .log(Level.SEVERE, null, e);
         }

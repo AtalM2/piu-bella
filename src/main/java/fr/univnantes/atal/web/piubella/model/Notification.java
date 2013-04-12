@@ -167,6 +167,11 @@ public class Notification {
         return key;
     }
 
+    /**
+     * Override to consider the address and user only.
+     * 
+     * @return an int to use for hashing data structures.
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -175,6 +180,12 @@ public class Notification {
         return hash;
     }
 
+    /**
+     * Override to consider the address and user only.
+     * 
+     * @param obj
+     * @return boolean representing the equality between the two objects.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

@@ -26,6 +26,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 
+/**
+ * Cron to handle updates of the dataset.
+ */
 public class UpdateChecker extends HttpServlet {
 
     static private ObjectMapper mapper = new ObjectMapper();

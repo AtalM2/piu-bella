@@ -20,6 +20,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Webservice to CRUD notifications.
+ * 
+ * Workflow is GET as usual and PUT to POST/PUT/DELETE. This is easier to handle
+ * for the datastore.
+ */
 public class NotificationService extends AuthWebService {
 
     @Override

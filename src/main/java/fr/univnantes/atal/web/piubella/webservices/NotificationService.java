@@ -20,6 +20,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Webservice to CRUD notifications.
+ * 
+ * Workflow is GET as usual and PUT to POST/PUT/DELETE. This is easier to handle
+ * for the datastore.
+ */
 public class NotificationService extends AuthWebService {
 
     @Override
@@ -83,6 +89,7 @@ public class NotificationService extends AuthWebService {
 
 
         if (json != null) {
+
             List<Map<String, Object>> array = mapper.readValue(json, List.class);
             if (array != null) {
                 for (Map<String, Object> data : array) {
@@ -93,6 +100,7 @@ public class NotificationService extends AuthWebService {
                     if (data
                             != null) {
                         PersistenceManager pm = PMF.get().getPersistenceManager();
+
                         try {
                             if (data.containsKey("street")) {
                                 String street = (String) data.get("street");

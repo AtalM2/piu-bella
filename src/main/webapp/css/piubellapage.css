@@ -134,6 +134,19 @@ padding: 0px;
   margin: 20px;
 }
 
+<<<<<<< HEAD
+.btn-group-vertical {
+  text-align: right;
+  margin-left: 20px;
+}
+
+.btn-remove {
+  vertical-align:top;
+  float: right;
+  margin-left: -80px;
+  margin-top: -5px;
+}
+
 .btn-group {
   float: right;
   margin-left: 50px;

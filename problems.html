@@ -47,17 +47,20 @@
       <div id="navcolumn">
              
         
-                                <h5>PiÃ¹ Bella</h5>
+                                <h5>Più Bella</h5>
                   <ul>
                   <li class="none">
                           <a href="index.html" title="Home">Home</a>
             </li>
                   <li class="none">
-                          <a href="about.html" title="What is PiÃ¹ Bella">What is PiÃ¹ Bella</a>
+                          <a href="about.html" title="What is Più Bella">What is Più Bella</a>
             </li>
                   <li class="none">
             <strong>Interesting problems we solved</strong>
           </li>
+                  <li class="none">
+                          <a href="team-list.html" title="The Team!">The Team!</a>
+            </li>
           </ul>
                        <h5>Developer documentation</h5>
                   <ul>
@@ -86,7 +89,7 @@
     </div>
     <div id="bodyColumn">
       <div id="contentBox">
-        <div class="section"><h2>Interesting problems we solved<a name="Interesting_problems_we_solved"></a></h2><p>TODO</p></div>
+        <div class="section"><h2>Interesting problems we solved<a name="Interesting_problems_we_solved"></a></h2><p>This page intends to gather the main issues we solved during this project. Both to serve as a basis for evaluation and to offer hints to possible readers regarding the difficult parts of implementing a solution on GAE.</p><div class="section"><h3>Maven, Datanucleus, Maven App Engine plugin, etc...<a name="Maven_Datanucleus_Maven_App_Engine_plugin_etc..."></a></h3><p>The App Engine team started to support Java 7 around the same time we started the project. We thought it was a great opportunity to use the modern version of Java.</p><p>Though, the support was non functionnal as we mentionned it on this <a class="externalLink" href="https://code.google.com/p/appengine-maven-plugin/issues/detail?id=13">bug report</a>. It eventually got fixed and now the project is running on Java 7.</p><p>Then, the Datanucleus maven documentation was non existant. We've run into a number of problems to get the versions right. Finally, we got the whole JDO 3 stack to work on java 7 and were able to implement a correct model through classical entity management.</p></div><div class="section"><h3>Dataset filtering (Jackson streaming API, blobstore, enums)<a name="Dataset_filtering_Jackson_streaming_API_blobstore_enums"></a></h3><p>In order to have a working typeahead (the fancy input text displayed in our main page), we had to find a way to send the dataset to the client without slowing down the loading of the page too significantly.</p><p>To do that, a simple way to proceed is to filter the whole dataset by only keeping the interesting fields. From a 400 Ko json file, that brought us to a 150 Ko json file.</p><p>Already this was quite tricky since loading the whole file into a data structure so that Jackson can write it in JSON produced an out of memory error. The solution we found was to use the streaming API of Jackson. Just as a SAX parser for XML, it allows for constant memory and linear time translation into JSON. And even without the out of memory error, GAE doesn't allow for arbitrary file writing, so we had to use the blobstore.</p><p>But this wasn't enough. To go further, we turned enums such as the list of days used to collect trash into list of ints. This way, the resulting fight weighs only 90 Ko. Just a bit over a png logo. We thought that was ok!</p></div><div class="section"><h3>Checking for updates<a name="Checking_for_updates"></a></h3><p>The NOD dataset doesn't include relevant metadata to check if some updates were made recently. Moreover, even its &quot;right way&quot; of getting the information is quite complicated as shown in the <a class="externalLink" href="http://data.nantes.fr/forum/?tx_mmforum_pi1[action]=list_post&amp;tx_mmforum_pi1[tid]=157">thread</a> we made on the NOD forum.</p><p>That lead us to propose a <a class="externalLink" href="https://gist.github.com/Mogzor/5282686">script</a> so that the task would be easier for future programmers.</p><p>Once we got our hands on a JSON metadata file containing the update date we needed, the task was made easy. The result is the <tt>UpdateChecker</tt> servlet.</p></div><div class="section"><h3>OAuth<a name="OAuth"></a></h3><p>In order to propose web services, we needed a way to authenticate users that was not relying on the Users API by Google (this only works for a basic browser usage). The solution was indeed OAuth2. To make it work, we use the js OAuth library as well as the OAuth endpoint to check things correctly on the server.</p></div><div class="section"><h3>Bootstrap<a name="Bootstrap"></a></h3><p>Since our idea was to implement our front end using only our webservices, we had to use a good JS library to handle all the AJAX and the fancy forms.</p><p>We picked Bootstrap because it's used a lot and of extremely good quality overall. The problem was: the three of us were not used to javascript development. It was somewhat of a challenge to learn this asynchronous way of thought so that we could produce a functionnal website.</p></div></div>
       </div>
     </div>
     <div class="clear">

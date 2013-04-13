@@ -41,6 +41,10 @@ public class FetchJson extends HttpServlet {
                 return;
             } else {
                 jsonInfo = results.get(0);
+                if (jsonInfo.getBlobKey() == null) {
+                    response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                    return;
+                }
             }
 
             BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();

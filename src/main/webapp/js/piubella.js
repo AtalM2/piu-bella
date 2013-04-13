@@ -15,7 +15,9 @@ PiuBella.prototype.loadNotifications = function(selector) {
             if(notifs.length === 0){
                 $("#empty-notif-message").show();
             }
-                
+            else{
+                $("#empty-notif-message").hide();
+             }   
 
             $(selector).html(
                 $("#notifications-options").render(data.data)

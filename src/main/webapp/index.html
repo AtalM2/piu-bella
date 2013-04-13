@@ -1,5 +1,5 @@
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
@@ -20,15 +20,15 @@
           <script src="../assets/js/html5shiv.js"></script>
           <![endif]-->
 
-          <!-- Fav and touch icons -->
-          <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
-          <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
-          <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
-          <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
-          <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/assets/ico/favicon.png">
-      </head>
+        <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/assets/ico/favicon.png">
+    </head>
 
-      <body>
+    <body>
 
         <div class="container-narrow">
 
@@ -38,7 +38,7 @@
                     <li><a href="#" class="about" id="apropos" >À Propos</a></li>
 
                 </ul>
-                <span id="email">email</span>
+                <span id="email"></span>
                 <h3 class="muted">Projet Più Bella</h3>
             </div>
 
@@ -89,84 +89,61 @@
             <script type="text/javascript" src="js/addressquery.js"></script>
             <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=load"></script>  
             <script type="text/javascript">
-            var pb = null;
+                function onConnect() {
+                    $('.piubella-notconnected').hide();
+                    $('.piubella-connected').show();
 
-            function onConnect() {
-                $('.piubella-notconnected').hide();
-                $('.piubella-connected').show();
-
-                pb = new PiuBella();
-                pb.loadNotifications('#accordion2');
-                
-                pb.putNotifications([
-                {
-                    'street': 'Rue Paul Ramadier',
-                    'blue': ['XMPP', 'EMAIL'],
-                    'yellow': ['XMPP']
-                },
-                {
-                    'street': 'Rue Jules Bréchoir',
-                    'blue': ['XMPP', 'EMAIL'],
-                    'yellow': ['XMPP', 'EMAIL']
-                },
-                {
-                    'street': 'Avenue Saint Goazec',
-                    'blue': ['XMPP'],
-                    'yellow': ['XMPP']
                 }
-                ], true);
-            }
-            function onDisconnect() {
-                $('.piubella-notconnected').show();
-                $('.piubella-connected').hide();
-                pb = null;
-            }
+                function onDisconnect() {
+                    $('.piubella-notconnected').show();
+                    $('.piubella-connected').hide();
+                }
             </script>
 
             <!-- A Propos -->
             <script type="text/javascript">
-            $("#apropos").click(function (e) {
-                e.preventDefault();
-                bootbox.alert("Più Bella est un projet réalisé par des étudiants M1 ATAL - Université de Nantes.\n\nLes données proviennent de Nantes Open Data et sont mis à jour régulièrement.");
-            });
+                $("#apropos").click(function (e) {
+                    e.preventDefault();
+                    bootbox.alert("Più Bella est un projet réalisé par des étudiants M1 ATAL - Université de Nantes.\n\nLes données proviennent de Nantes Open Data et sont mis à jour régulièrement.");
+                });
             </script>
 
 
 
 
             <script type="text/x-jsrender" id="notifications-options">
-            <div class="accordion-group">
-                <div class="accordion-heading">
-                <button type="button" class="btn btn-remove" id="remove{{>id}}"><i class="icon-remove"></i></button>
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#notif{{>id}}">
-                {{>street}}
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <button type="button" class="btn btn-remove" id="remove{{>id}}"><i class="icon-remove"></i></button>
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#notif{{>id}}">
+                            {{>street}}
 
-                </a>
-                
-                </div>
+                        </a>
+
+                    </div>
                     <div id="notif{{>id}}" class="accordion-body collapse">
 
-                    <div class="accordion-inner">
-                        <div class="accordion-section-jaune">
-                            <img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 30px"/>
-                            <div class="btn-group">
-                            <button id="notif{{>id}}yg" type="button" class="btn alert-btn"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
-                            <button id="notif{{>id}}yx" type="button" class="btn alert-btn"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
+                        <div class="accordion-inner">
+                            <div class="accordion-section-jaune">
+                                <img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 30px"/>
+                                <div class="btn-group">
+                                    <button id="notif{{>id}}yg" type="button" class="btn alert-btn"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
+                                    <button id="notif{{>id}}yx" type="button" class="btn alert-btn"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="accordion-section-bleu">
-                            <img src="/img/poubelle-bleue.png" id="poubelle-bleue" style="margin-right: 30px" />
-                            <div class="btn-group">
-                            <button id="notif{{>id}}bg" type="button" class="btn alert-btn"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
-                            <button id="notif{{>id}}bx" type="button" class="btn alert-btn"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
+                            <div class="accordion-section-bleu">
+                                <img src="/img/poubelle-bleue.png" id="poubelle-bleue" style="margin-right: 30px" />
+                                <div class="btn-group">
+                                    <button id="notif{{>id}}bg" type="button" class="btn alert-btn"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
+                                    <button id="notif{{>id}}bx" type="button" class="btn alert-btn"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>    
+                </div>    
             </script>
 
 
         </div>
     </body>
-    </html>
+</html>

@@ -6,6 +6,9 @@ Goal is to have a running app by 04/12/2013.
 
 App is live at https://piu-bella.appspot.com/
 
+Doc is live at http://atalm1.github.io/piu-bella/
+
+
 Maven 3 is required and should be usable directly:
 
     mvn verify

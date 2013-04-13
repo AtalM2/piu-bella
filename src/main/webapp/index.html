@@ -67,124 +67,117 @@
                 <h2>Mes Alertes</h2>
                 <div class="accordion" id="accordion2">
 
+<<<<<<< HEAD
             </div>
+=======
 
-
-            <hr>
-            <div class="footer">
-                <p>© M1 ATAL 2013</p>
-            </div>
-        </div> <!-- /container-narrow -->
-
-        <!-- Le javascript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-        <script type="text/javascript" src="js/jsrender.js"></script>
-        <script type="text/javascript" src="js/bootstrap-typeahead.js"></script>
-        <script type="text/javascript" src="js/bootstrap-tooltip.js"></script>
-        <script type="text/javascript" src="js/bootstrap-popover.js"></script>
-        <script type="text/javascript" src="js/bootstrap-collapse.js"></script>
-        <script type="text/javascript" src="js/bootstrap-dropdown.js"></script>
-        <script type="text/javascript" src="js/bootstrap-transition.js"></script>
-        <script type="text/javascript" src="js/bootstrap-modal.js"></script>
-        <script type="text/javascript" src="js/bootbox.js"></script>
-        <script type="text/javascript" src="js/underscore.js"></script>
-        <script type="text/javascript" src="js/piubella.js"></script>
-        <script type="text/javascript" src="js/oauth.js"></script>
-        <script type="text/javascript" src="js/addressquery.js"></script>
-        <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=load"></script>  
-        <script type="text/javascript">
-            var pb = null;
-
-            function onConnect() {
-                $('.piubella-notconnected').hide();
-                $('.piubella-connected').show();
-
-                pb = new PiuBella();
-                pb.loadNotifications('#accordion2');
-                
-                pb.putNotifications([
-                    {
-                        'street': 'Rue Paul Ramadier',
-                        'blue': ['XMPP', 'EMAIL'],
-                        'yellow': ['XMPP']
-                    },
-                    {
-                        'street': 'Rue Jules Bréchoir',
-                        'blue': ['XMPP', 'EMAIL'],
-                        'yellow': ['XMPP', 'EMAIL']
-                    },
-                    {
-                        'street': 'Avenue Saint Goazec',
-                        'blue': ['XMPP'],
-                        'yellow': ['XMPP']
-                    }
-                ]);
-            }
-        
-
-            function onDisconnect() {
-                $('.piubella-notconnected').show();
-                $('.piubella-connected').hide();
-                pb = null;
-            }
-        </script>
-
-        <!-- A Propos -->
-        <script type="text/javascript">
-            $("#apropos").click(function (e) {
-                e.preventDefault();
-                bootbox.alert("Più Bella est un projet réalisé par des étudiants M1 ATAL - Université de Nantes.\n\nLes données proviennent de Nantes Open Data et sont mis à jour régulièrement.");
-            });
-        </script>
-        
-        <!-- Delete Notification Button -->
-        <script type="text/javascript">
-            $(".btn-remove").click( function () {
-                console.log("remove click");
-                var idToRemove = (this.id).replace("remove","");
-                console.log("idToRemove : " + idToRemove);
-                for (var i = 0 ; i < notifData.length ; i++) {
-                    console.log("notifData[i][id] : " + notifData[i]["id"]);
-                    if(notifData[i]["id"]==idToRemove){
-                        notifData.pop(i);
-                        break;
-                    }
-                };
-                PiuBella.prototype.putNotifications(notifData);
-            });
-        </script>
-        
-        <script type="text/x-jsrender" id="notifications-options">
-            <div class="accordion-group">
-                <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#notif{{>id}}">
-                    {{>street}}
-                        <button type="button" class="btn btn-remove" id="remove{{>id}}"><i class="icon-remove"></i></button>
-                    </a>
                 </div>
-                <div id="notif{{>id}}" class="accordion-body collapse">
+>>>>>>> 55ac65a28b8900049554cc444777cdfbd3fbdf53
 
-                    <div class="accordion-inner">
-                        <div class="accordion-section-jaune">
-                            <img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 30px"/>
-                            <div class="btn-group" data-toggle="buttons-checkbox">
-                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="yellow-gmail" style="height:20px" /> Gmail</button>
-                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="yellow-xmpp" style="height:20px" /> Xmpp</button>
+
+                <hr>
+                <div class="footer">
+                    <p>© M1 ATAL 2013</p>
+                </div>
+            </div> <!-- /container-narrow -->
+
+            <!-- Le javascript
+            ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+            <script type="text/javascript" src="js/jsrender.js"></script>
+            <script type="text/javascript" src="js/bootstrap-typeahead.js"></script>
+            <script type="text/javascript" src="js/bootstrap-tooltip.js"></script>
+            <script type="text/javascript" src="js/bootstrap-popover.js"></script>
+            <script type="text/javascript" src="js/bootstrap-collapse.js"></script>
+            <script type="text/javascript" src="js/bootstrap-dropdown.js"></script>
+            <script type="text/javascript" src="js/bootstrap-transition.js"></script>
+            <script type="text/javascript" src="js/bootstrap-modal.js"></script>
+            <script type="text/javascript" src="js/bootbox.js"></script>
+            <script type="text/javascript" src="js/underscore.js"></script>
+            <script type="text/javascript" src="js/piubella.js"></script>
+            <script type="text/javascript" src="js/oauth.js"></script>
+            <script type="text/javascript" src="js/addressquery.js"></script>
+            <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=load"></script>  
+            <script type="text/javascript">
+                var pb = null;
+
+                function onConnect() {
+                    $('.piubella-notconnected').hide();
+                    $('.piubella-connected').show();
+
+                    pb = new PiuBella();
+                    pb.loadNotifications('#accordion2');
+                
+                    pb.putNotifications([
+                        {
+                            'street': 'Rue Paul Ramadier',
+                            'blue': ['XMPP', 'EMAIL'],
+                            'yellow': ['XMPP']
+                        },
+                        {
+                            'street': 'Rue Jules Bréchoir',
+                            'blue': ['XMPP', 'EMAIL'],
+                            'yellow': ['XMPP', 'EMAIL']
+                        },
+                        {
+                            'street': 'Avenue Saint Goazec',
+                            'blue': ['XMPP'],
+                            'yellow': ['XMPP']
+                        }
+                    ]);
+                }
+                function onDisconnect() {
+                    $('.piubella-notconnected').show();
+                    $('.piubella-connected').hide();
+                    pb = null;
+                }
+            </script>
+
+            <!-- A Propos -->
+            <script type="text/javascript">
+                $("#apropos").click(function (e) {
+                    e.preventDefault();
+                    bootbox.alert("Più Bella est un projet réalisé par des étudiants M1 ATAL - Université de Nantes.\n\nLes données proviennent de Nantes Open Data et sont mis à jour régulièrement.");
+                });
+            </script>
+
+            <!-- Delete Notification Button -->
+            <script>
+                $(".btn-remove").click( function () {
+                    PiuBella.prototype.deleteNotification((this.id).replace("remove-",""));
+                });
+            </script>
+
+            <script type="text/x-jsrender" id="notifications-options">
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#notif{{>id}}">
+                            {{>street}}
+                            <button type="button" class="btn btn-remove" id="remove-{{>street}}"><i class="icon-remove"></i></button>
+                        </a>
+                    </div>
+                    <div id="notif{{>id}}" class="accordion-body collapse">
+
+                        <div class="accordion-inner">
+                            <div class="accordion-section-jaune">
+                                <img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 30px"/>
+                                <div class="btn-group" data-toggle="buttons-checkbox">
+                                    <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
+                                    <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="accordion-section-bleu">
-                            <img src="/img/poubelle-bleue.png" id="poubelle-bleue" style="margin-right: 30px" />
-                            <div class="btn-group" data-toggle="buttons-checkbox">
-                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="blue-gmail" style="height:20px" /> Gmail</button>
-                                <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="blue-xmpp" style="height:20px" /> Xmpp</button>
+                            <div class="accordion-section-bleu">
+                                <img src="/img/poubelle-bleue.png" id="poubelle-bleue" style="margin-right: 30px" />
+                                <div class="btn-group" data-toggle="buttons-checkbox">
+                                    <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
+                                    <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>    
-        </script>
-
+                </div>    
+            </script>
+        </div>
     </body>
 </html>

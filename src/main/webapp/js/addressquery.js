@@ -30,42 +30,40 @@
                             var days = _.map(index, function(day) {
                                 switch (day) { //was index
                                     case 0:
-                                        return 'Lundi';
+                                        return 'lundi';
                                     case 1:
-                                        return 'Mardi';
+                                        return 'mardi';
                                     case 2:
-                                        return 'Mercredi';
+                                        return 'mercredi';
                                     case 3:
-                                        return 'Mercredi des semaines paires';
+                                        return 'mercredi des semaines paires';
                                     case 4:
-                                        return 'Mercredi des semaines impaires';
+                                        return 'mercredi des semaines impaires';
                                     case 5:
-                                        return 'Jeudi';
+                                        return 'jeudi';
                                     case 6:
-                                        return 'Vendredi';
+                                        return 'vendredi';
                                     case 7:
-                                        return 'Samedi';
+                                        return 'samedi';
                                     case 8:
-                                        return 'Dimanche';
-                                    default:
-                                        return 'lulz';
+                                        return 'dimanche';
                                 }
                             });
-                            return days;
+                            return days.join(', ').replace(/, ([^,]+$)/, ' et $1');
                         };
 
                         $('#address-query-wrapper').popover('destroy');
                         var itemdic = dict[item]
 
                         street = itemdic[0];
-                        var yellow = (itemdic.length > 2) ? itemdic[2] : null;
+                        var yellow = (itemdic.length > 2) ? itemdic[2] : [];
                         var blue = itemdic[1];
 
                         yellow = intToDay(yellow);
                         blue = intToDay(blue);
 
                         var popoverContent =
-                        (yellow !== null
+                        (yellow !== ''
                             ? ('<div class="yellow-blue"><img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 10px; height:40px;"/>Sacs jaunes : ' + yellow
                                 + '</div>')
                             : '')

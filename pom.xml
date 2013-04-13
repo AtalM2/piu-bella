@@ -8,17 +8,17 @@
   <groupId>fr.univnantes.atal.web.piubella</groupId>
   <artifactId>piubella</artifactId>
   <name>Più Bella</name>
-  <url>https://github.com/Mogzor/piu-bella</url>
+  <url>http://atalm1.github.io/piu-bella/</url>
 
   <scm>
-    <connection>scm:https://github.com/Mogzor/piu-bella.git</connection>
-    <developerConnection>scm:https://github.com/Mogzor/piu-bella.git</developerConnection>
-    <url>https://github.com/Mogzor/piu-bella</url>
+    <connection>scm:https://github.com/AtalM1/piu-bella.git</connection>
+    <developerConnection>scm:https://github.com/AtalM1/piu-bella.git</developerConnection>
+    <url>https://github.com/AtalM1/piu-bella</url>
   </scm>
 
   <properties>
     <appengine.app.version>1</appengine.app.version>
-    <appengine.target.version>1.7.6</appengine.target.version>
+    <appengine.target.version>1.7.7</appengine.target.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 

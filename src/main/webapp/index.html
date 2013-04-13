@@ -131,53 +131,38 @@
             });
             </script>
 
-            <!-- Delete Notification Button -->
-            <script type="text/javascript">
-            $('.btn-remove').click( function () {
-                console.log("remove click");
-                var idToRemove = (this.id).replace("remove","");
-                console.log("idToRemove : " + idToRemove);
-                for (var i = 0 ; i < notifData.length ; i++) {
-                    console.log("notifData[i][id] : " + notifData[i]["id"]);
-                    if(notifData[i]["id"]==idToRemove){
-                        notifData.pop(i);
-                        break;
-                    }
-                };
-                PiuBella.prototype.putNotifications(notifData);
-            });
-            </script>
 
 
 
             <script type="text/x-jsrender" id="notifications-options">
             <div class="accordion-group">
-            <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#notif{{>id}}">
-            {{>street}}
+                <div class="accordion-heading">
+                <button type="button" class="btn btn-remove" id="remove{{>id}}"><i class="icon-remove"></i></button>
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#notif{{>id}}">
+                {{>street}}
 
-            </a>
-            <button type="button" class="btn btn-remove" id="remove-{{>street}}"><i class="icon-remove"></i></button>
-            </div>
-            <div id="notif{{>id}}" class="accordion-body collapse">
+                </a>
+                
+                </div>
+                    <div id="notif{{>id}}" class="accordion-body collapse">
 
-            <div class="accordion-inner">
-            <div class="accordion-section-jaune">
-            <img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 30px"/>
-            <div class="btn-group">
-            <button id="notif{{>id}}yg" type="button" class="btn alert-btn"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
-            <button id="notif{{>id}}yx" type="button" class="btn alert-btn"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
-            </div>
-            </div>
-            <div class="accordion-section-bleu">
-            <img src="/img/poubelle-bleue.png" id="poubelle-bleue" style="margin-right: 30px" />
-            <div class="btn-group">
-            <button id="notif{{>id}}bg" type="button" class="btn alert-btn"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
-            <button id="notif{{>id}}bx" type="button" class="btn alert-btn"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
-            </div>
-            </div>
-            </div>
-            </div>
+                    <div class="accordion-inner">
+                        <div class="accordion-section-jaune">
+                            <img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 30px"/>
+                            <div class="btn-group">
+                            <button id="notif{{>id}}yg" type="button" class="btn alert-btn"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
+                            <button id="notif{{>id}}yx" type="button" class="btn alert-btn"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
+                            </div>
+                        </div>
+                        <div class="accordion-section-bleu">
+                            <img src="/img/poubelle-bleue.png" id="poubelle-bleue" style="margin-right: 30px" />
+                            <div class="btn-group">
+                            <button id="notif{{>id}}bg" type="button" class="btn alert-btn"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
+                            <button id="notif{{>id}}bx" type="button" class="btn alert-btn"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>    
             </script>
 

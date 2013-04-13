@@ -51,6 +51,19 @@ PiuBella.prototype.loadNotifications = function(selector) {
                 PiuBella.prototype.putNotifications(notifData, false);
                 
             });
+            $('.btn-remove').click( function () {
+                console.log("remove click");
+                var idToRemove = (this.id).replace("remove","");
+                console.log("idToRemove : " + idToRemove);
+                for (var i = 0 ; i < notifData.length ; i++) {
+                    console.log("notifData[i][id] : " + notifData[i]["id"]);
+                    if(notifData[i]["id"]==idToRemove){
+                        notifData.pop(i);
+                        break;
+                    }
+                };
+                PiuBella.prototype.putNotifications(notifData,true);
+            });
         }
     });
 };

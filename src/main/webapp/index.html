@@ -3,15 +3,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
-        <title>Tr@sh Nao</title>
+        <title>Più Bella</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
 
         <!-- Le styles -->
-        <link href="/css/bootstrap.css" rel="stylesheet">
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-        <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
 
         <link href="/css/piubellapage.css" rel="stylesheet">
 
@@ -80,15 +80,9 @@
             <!-- Le javascript
             ================================================== -->
             <!-- Placed at the end of the document so the pages load faster -->
-            <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+            <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
             <script type="text/javascript" src="js/jsrender.js"></script>
-            <script type="text/javascript" src="js/bootstrap-typeahead.js"></script>
-            <script type="text/javascript" src="js/bootstrap-tooltip.js"></script>
-            <script type="text/javascript" src="js/bootstrap-popover.js"></script>
-            <script type="text/javascript" src="js/bootstrap-collapse.js"></script>
-            <script type="text/javascript" src="js/bootstrap-dropdown.js"></script>
-            <script type="text/javascript" src="js/bootstrap-transition.js"></script>
-            <script type="text/javascript" src="js/bootstrap-modal.js"></script>
+            <script type="text/javascript" src="js/bootstrap.min.js"></script>
             <script type="text/javascript" src="js/bootbox.js"></script>
             <script type="text/javascript" src="js/underscore.js"></script>
             <script type="text/javascript" src="js/piubella.js"></script>
@@ -121,7 +115,7 @@
                             'blue': ['XMPP'],
                             'yellow': ['XMPP']
                         }
-                    ]);
+                    ], true);
                 }
         
 
@@ -160,16 +154,16 @@
                         <div class="accordion-inner">
                             <div class="accordion-section-jaune">
                                 <img src="/img/poubelle-jaune.png" id="poubelle-jaune" style="margin-right: 30px"/>
-                                <div class="btn-group" data-toggle="buttons-checkbox">
-                                    <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
-                                    <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
+                                <div class="btn-group">
+                                    <button id="notif{{>id}}yg" type="button" class="btn alert-btn"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
+                                    <button id="notif{{>id}}yx" type="button" class="btn alert-btn"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
                                 </div>
                             </div>
                             <div class="accordion-section-bleu">
                                 <img src="/img/poubelle-bleue.png" id="poubelle-bleue" style="margin-right: 30px" />
-                                <div class="btn-group" data-toggle="buttons-checkbox">
-                                    <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
-                                    <button type="button" class="btn alert-btn" data-toggle="button"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
+                                <div class="btn-group">
+                                    <button id="notif{{>id}}bg" type="button" class="btn alert-btn"><img src="/img/gmail-icon.png" id="gmail" style="height:20px" /> Gmail</button>
+                                    <button id="notif{{>id}}bx" type="button" class="btn alert-btn"><img src="/img/xmpp-icon.png" id="gmail" style="height:20px" /> Xmpp</button>
                                 </div>
                             </div>
                         </div>

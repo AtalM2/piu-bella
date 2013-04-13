@@ -49,7 +49,7 @@
                                 }
                             });
                             return days.join(', ').replace(/, ([^,]+$)/, ' et $1');
-                        };
+                        }
 
                         $('#address-query-wrapper').popover('destroy');
                         var itemdic = dict[item]
@@ -109,7 +109,7 @@
                         'yellow': yellowAdd
                     };
             console.log("notifData apres add" + notifData);
-            PiuBella.prototype.putNotifications(notifData);
+            PiuBella.prototype.putNotifications(notifData, true);
 
             $('#address-query-wrapper').popover('destroy');
         }

@@ -17,8 +17,12 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jdo.PersistenceManager;
@@ -82,35 +86,67 @@ public class Notifier extends HttpServlet {
             }
             out.println(toTest);
             PersistenceManager pm = PMF.get().getPersistenceManager();
-            Query q = pm.newQuery(Notification.class);
+            Query q = pm.newQuery(User.class);
             try {
-                List<Notification> results =
-                        (List<Notification>) q.execute();
-                for (Notification notification : results) {
-                    boolean blue = false, yellow = false;
-                    Address address = notification.getAddress();
-                    innerLoop:
-                    for (CollectDay cd : toTest) {
-                        if (address.getBlueDays().contains(cd)) {
-                            blue = true;
+                List<User> results =
+                        (List<User>) q.execute();
+                for (User user : results) {
+                    Map<String, String> email = new HashMap<>(),
+                            xmpp = new HashMap<>();
+                    Set<Notification> notifications = user.getNotifications();
+                    for (Notification notification : notifications) {
+                        boolean blueEmail = false,
+                                blueXmpp = false,
+                                yellowEmail = false,
+                                yellowXmpp = false;
+                        Address address = notification.getAddress();
+                        String street = address.getStreet();
+                        innerLoop:
+                        for (CollectDay cd : toTest) {
+                            boolean found = false;
+                            if (address.getBlueDays().contains(cd)) {
+                                if (notification.getNotificationsOnBlueDay()
+                                        .contains(NotificationTransport.EMAIL)) {
+                                    blueEmail = true;
+                                }
+                                if (notification.getNotificationsOnBlueDay()
+                                        .contains(NotificationTransport.XMPP)) {
+                                    blueXmpp = true;
+                                }
+                                found = true;
+                            }
+                            if (address.getYellowDays().contains(cd)) {
+                                if (notification.getNotificationsOnYellowDay()
+                                        .contains(NotificationTransport.EMAIL)) {
+                                    yellowEmail = true;
+                                }
+                                if (notification.getNotificationsOnYellowDay()
+                                        .contains(NotificationTransport.XMPP)) {
+                                    yellowXmpp = true;
+                                }
+                                found = true;
+                            }
                             break innerLoop;
                         }
-                        if (address.getYellowDays().contains(cd)) {
-                            yellow = true;
-                            break innerLoop;
+                        if (blueEmail && yellowEmail) {
+                            email.put(street, "bleues et jaunes");
+                        } else if (blueEmail) {
+                            email.put(street, "bleues");
+                        } else if (yellowEmail) {
+                            email.put(street, "jaunes");
+                        }
+                        if (blueXmpp && yellowXmpp) {
+                            xmpp.put(street, "bleues et jaunes");
+                        } else if (blueXmpp) {
+                            xmpp.put(street, "bleues");
+                        } else if (yellowXmpp) {
+                            xmpp.put(street, "jaunes");
                         }
                     }
-                    sendMail(notification,
-                            notification.getNotificationsOnBlueDay()
-                            .contains(NotificationTransport.EMAIL),
-                            notification.getNotificationsOnYellowDay()
-                            .contains(NotificationTransport.EMAIL));
-                    sendXMPP(notification,
-                            notification.getNotificationsOnBlueDay()
-                            .contains(NotificationTransport.EMAIL),
-                            notification.getNotificationsOnYellowDay()
-                            .contains(NotificationTransport.EMAIL));
-                    out.println(notification.getUser().getEmail());
+                    out.println(email);
+                    out.println(xmpp);
+                    sendMail(user, email);
+                    sendXMPP(user, xmpp);
                 }
             } finally {
                 pm.close();
@@ -118,39 +154,43 @@ public class Notifier extends HttpServlet {
         }
     }
 
-    private void sendMail(
-            Notification notification,
-            boolean blue,
-            boolean yellow) {
-        String type;
-        if (blue && yellow) {
-            type = "bleues et jaunes";
-        } else if (blue) {
-            type = "bleues";
-        } else if (yellow) {
-            type = "jaunes";
-        } else {
+    private void sendMail(User user, Map<String, String> toSend) {
+        if (toSend.isEmpty()) {
             return;
         }
         Session session = Session.getDefaultInstance(new Properties(), null);
-        User recipient = notification.getUser();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Bonjour\n\nDemain, c'est le jour de collecte des poubelles ")
+                .append("pour ");
+        if (toSend.size() > 1) {
+            sb.append("vos adresses :\n\n");
+        }
+        else {
+            sb.append("votre adresse :\n\n");
+        }
+        for (String address : toSend.keySet()) {
+            sb.append("- ")
+                    .append(address)
+                    .append(" (poubelles ")
+                    .append(toSend.get(address))
+                    .append(")\n");
+        }
+        sb.append("\nN'oubliez pas des les sortir :)\n\n")
+                .append("La team de Piu Bella");
+        String from = Constants.MAILER_ADDRESS,
+                recipient = user.getEmail(),
+                subject = "Sortez vos poubelles !",
+                message = sb.toString();
         try {
             Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress(
-                    Constants.MAILER_ADDRESS,
-                    "Piu-bella update notifier"));
+            msg.setFrom(new InternetAddress(from, "Piu-bella update notifier"));
             msg.addRecipient(Message.RecipientType.TO,
-                    new InternetAddress(recipient.getEmail()));
-            msg.setSubject("Sortez vos poubelles !");
-            msg.setText("Bonjour\n\n"
-                    + "Demain, c'est le jour de collecte des poubelles "
-                    + type
-                    + " pour votre adresse "
-                    + notification.getAddress().getStreet()
-                    + ". N'oubliez pas de les sortir :)"
-                    + "\n\n"
-                    + "La team de Piu Bella");
+                    new InternetAddress(recipient));
+            msg.setSubject(subject);
+            msg.setText(message);
             Transport.send(msg);
+
+
 
 
 
@@ -162,30 +202,31 @@ public class Notifier extends HttpServlet {
 
     }
 
-    private void sendXMPP(
-            Notification notification,
-            boolean blue,
-            boolean yellow) {
-        String type;
-        if (blue && yellow) {
-            type = "bleues et jaunes";
-        } else if (blue) {
-            type = "bleues";
-        } else if (yellow) {
-            type = "jaunes";
-        } else {
+    private void sendXMPP(User user, Map<String, String> toSend) {
+        if (toSend.isEmpty()) {
             return;
         }
-        String email = notification.getUser().getEmail();
+        String email = user.getEmail();
         JID jid = new JID(email);
-        String msgBody = "Bonjour\n\n"
-                + "Demain, c'est le jour de collecte des poubelles "
-                + type
-                + " pour votre adresse "
-                + notification.getAddress().getStreet()
-                + ". N'oubliez pas de les sortir :)"
-                + "\n\n"
-                + "La team de Piu Bella";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Bonjour\n\nDemain, c'est le jour de collecte des poubelles ")
+                .append("pour ");
+        if (toSend.size() > 1) {
+            sb.append("vos adresses :\n\n");
+        }
+        else {
+            sb.append("votre adresse :\n\n");
+        }
+        for (String address : toSend.keySet()) {
+            sb.append("- ")
+                    .append(address)
+                    .append(" (poubelles ")
+                    .append(toSend.get(address))
+                    .append(")\n");
+        }
+        sb.append("\nN'oubliez pas des les sortir :)\n\n")
+                .append("La team de Piu Bella");
+        String msgBody = sb.toString();
         com.google.appengine.api.xmpp.Message msg = new MessageBuilder()
                 .withRecipientJids(jid)
                 .withBody(msgBody)
@@ -195,8 +236,11 @@ public class Notifier extends HttpServlet {
         if (xmpp.getPresence(jid).isValid()) {
             xmpp.sendInvitation(jid);
             SendResponse status = xmpp.sendMessage(msg);
+
+
             if (status.getStatusMap().get(jid) != SendResponse.Status.SUCCESS) {
-                Logger.getLogger(Notification.class.getName()).log(Level.SEVERE, "{0} not sent", email);
+                Logger.getLogger(Notification.class
+                        .getName()).log(Level.SEVERE, "{0} not sent", email);
             }
         }
     }

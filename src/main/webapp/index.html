@@ -67,7 +67,6 @@
                 <h2>Mes Alertes</h2>
                 <div class="accordion" id="accordion2">
 
-
             </div>
 
 
@@ -141,8 +140,7 @@
         </script>
         
         <!-- Delete Notification Button -->
-        <script>
-        $(document).ready(function (){
+        <script type="text/javascript">
             $(".btn-remove").click( function () {
                 console.log("remove click");
                 var idToRemove = (this.id).replace("remove","");
@@ -156,7 +154,6 @@
                 };
                 PiuBella.prototype.putNotifications(notifData);
             });
-        });
         </script>
         
         <script type="text/x-jsrender" id="notifications-options">

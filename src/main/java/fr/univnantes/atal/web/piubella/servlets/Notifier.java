@@ -55,102 +55,97 @@ public class Notifier extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try (PrintWriter out = response.getWriter()) {
-            final Calendar c = Calendar.getInstance();
-            List<CollectDay> toTest = new ArrayList<>();
-            int day = c.get(Calendar.DAY_OF_WEEK);
-            switch (day) {
-                case Calendar.MONDAY:
-                    toTest.add(CollectDay.TUESDAY);
-                    break;
-                case Calendar.TUESDAY:
-                    toTest.add(CollectDay.WEDNESDAY);
-                    toTest.add(CollectDay.WEDNESDAY_EVEN);
-                    toTest.add(CollectDay.WEDNESDAY_ODD);
-                    break;
-                case Calendar.WEDNESDAY:
-                    toTest.add(CollectDay.THURSDAY);
-                    break;
-                case Calendar.THURSDAY:
-                    toTest.add(CollectDay.FRIDAY);
-                    break;
-                case Calendar.FRIDAY:
-                    toTest.add(CollectDay.SATURDAY);
-                    break;
-                case Calendar.SATURDAY:
-                    toTest.add(CollectDay.SUNDAY);
-                    break;
-                case Calendar.SUNDAY:
-                    toTest.add(CollectDay.MONDAY);
-                    break;
-            }
-            out.println(toTest);
-            PersistenceManager pm = PMF.get().getPersistenceManager();
-            Query q = pm.newQuery(User.class);
-            try {
-                List<User> results =
-                        (List<User>) q.execute();
-                for (User user : results) {
-                    Map<String, String> email = new HashMap<>(),
-                            xmpp = new HashMap<>();
-                    Set<Notification> notifications = user.getNotifications();
-                    for (Notification notification : notifications) {
-                        boolean blueEmail = false,
-                                blueXmpp = false,
-                                yellowEmail = false,
-                                yellowXmpp = false;
-                        Address address = notification.getAddress();
-                        String street = address.getStreet();
-                        innerLoop:
-                        for (CollectDay cd : toTest) {
-                            boolean found = false;
-                            if (address.getBlueDays().contains(cd)) {
-                                if (notification.getNotificationsOnBlueDay()
-                                        .contains(NotificationTransport.EMAIL)) {
-                                    blueEmail = true;
-                                }
-                                if (notification.getNotificationsOnBlueDay()
-                                        .contains(NotificationTransport.XMPP)) {
-                                    blueXmpp = true;
-                                }
-                                found = true;
+        final Calendar c = Calendar.getInstance();
+        List<CollectDay> toTest = new ArrayList<>();
+        int day = c.get(Calendar.DAY_OF_WEEK);
+        switch (day) {
+            case Calendar.MONDAY:
+                toTest.add(CollectDay.TUESDAY);
+                break;
+            case Calendar.TUESDAY:
+                toTest.add(CollectDay.WEDNESDAY);
+                toTest.add(CollectDay.WEDNESDAY_EVEN);
+                toTest.add(CollectDay.WEDNESDAY_ODD);
+                break;
+            case Calendar.WEDNESDAY:
+                toTest.add(CollectDay.THURSDAY);
+                break;
+            case Calendar.THURSDAY:
+                toTest.add(CollectDay.FRIDAY);
+                break;
+            case Calendar.FRIDAY:
+                toTest.add(CollectDay.SATURDAY);
+                break;
+            case Calendar.SATURDAY:
+                toTest.add(CollectDay.SUNDAY);
+                break;
+            case Calendar.SUNDAY:
+                toTest.add(CollectDay.MONDAY);
+                break;
+        }
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        Query q = pm.newQuery(User.class);
+        try {
+            List<User> results =
+                    (List<User>) q.execute();
+            for (User user : results) {
+                Map<String, String> email = new HashMap<>(),
+                        xmpp = new HashMap<>();
+                Set<Notification> notifications = user.getNotifications();
+                for (Notification notification : notifications) {
+                    boolean blueEmail = false,
+                            blueXmpp = false,
+                            yellowEmail = false,
+                            yellowXmpp = false;
+                    Address address = notification.getAddress();
+                    String street = address.getStreet();
+                    innerLoop:
+                    for (CollectDay cd : toTest) {
+                        boolean found = false;
+                        if (address.getBlueDays().contains(cd)) {
+                            if (notification.getNotificationsOnBlueDay()
+                                    .contains(NotificationTransport.EMAIL)) {
+                                blueEmail = true;
                             }
-                            if (address.getYellowDays().contains(cd)) {
-                                if (notification.getNotificationsOnYellowDay()
-                                        .contains(NotificationTransport.EMAIL)) {
-                                    yellowEmail = true;
-                                }
-                                if (notification.getNotificationsOnYellowDay()
-                                        .contains(NotificationTransport.XMPP)) {
-                                    yellowXmpp = true;
-                                }
-                                found = true;
+                            if (notification.getNotificationsOnBlueDay()
+                                    .contains(NotificationTransport.XMPP)) {
+                                blueXmpp = true;
                             }
-                            break innerLoop;
+                            found = true;
                         }
-                        if (blueEmail && yellowEmail) {
-                            email.put(street, "bleues et jaunes");
-                        } else if (blueEmail) {
-                            email.put(street, "bleues");
-                        } else if (yellowEmail) {
-                            email.put(street, "jaunes");
+                        if (address.getYellowDays().contains(cd)) {
+                            if (notification.getNotificationsOnYellowDay()
+                                    .contains(NotificationTransport.EMAIL)) {
+                                yellowEmail = true;
+                            }
+                            if (notification.getNotificationsOnYellowDay()
+                                    .contains(NotificationTransport.XMPP)) {
+                                yellowXmpp = true;
+                            }
+                            found = true;
                         }
-                        if (blueXmpp && yellowXmpp) {
-                            xmpp.put(street, "bleues et jaunes");
-                        } else if (blueXmpp) {
-                            xmpp.put(street, "bleues");
-                        } else if (yellowXmpp) {
-                            xmpp.put(street, "jaunes");
-                        }
+                        break innerLoop;
                     }
-                    out.println(email);
-                    out.println(xmpp);
-                    sendMail(user, email);
-                    sendXMPP(user, xmpp);
+                    if (blueEmail && yellowEmail) {
+                        email.put(street, "bleues et jaunes");
+                    } else if (blueEmail) {
+                        email.put(street, "bleues");
+                    } else if (yellowEmail) {
+                        email.put(street, "jaunes");
+                    }
+                    if (blueXmpp && yellowXmpp) {
+                        xmpp.put(street, "bleues et jaunes");
+                    } else if (blueXmpp) {
+                        xmpp.put(street, "bleues");
+                    } else if (yellowXmpp) {
+                        xmpp.put(street, "jaunes");
+                    }
                 }
-            } finally {
-                pm.close();
+                sendMail(user, email);
+                sendXMPP(user, xmpp);
             }
+        } finally {
+            pm.close();
         }
     }
 
@@ -164,8 +159,7 @@ public class Notifier extends HttpServlet {
                 .append("pour ");
         if (toSend.size() > 1) {
             sb.append("vos adresses :\n\n");
-        }
-        else {
+        } else {
             sb.append("votre adresse :\n\n");
         }
         for (String address : toSend.keySet()) {
@@ -213,8 +207,7 @@ public class Notifier extends HttpServlet {
                 .append("pour ");
         if (toSend.size() > 1) {
             sb.append("vos adresses :\n\n");
-        }
-        else {
+        } else {
             sb.append("votre adresse :\n\n");
         }
         for (String address : toSend.keySet()) {

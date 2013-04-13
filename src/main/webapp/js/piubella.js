@@ -54,16 +54,20 @@ PiuBella.prototype.loadNotifications = function(selector) {
             $('.btn-remove').click( function () {
                 console.log("remove click");
                 var idToRemove = (this.id).replace("remove","");
-                bootbox.confirm("Are you sure?", function(result) {
-                    if (result) {
-                        console.log("idToRemove : " + idToRemove);
+                var indexOfNotifToRemove = null;
+                var streetToRemove = null;
+                console.log("idToRemove : " + idToRemove);
                         for (var i = 0 ; i < notifData.length ; i++) {
                             console.log("notifData[i][id] : " + notifData[i]["id"]);
                             if(notifData[i]["id"]==idToRemove){
-                                notifData.pop(i);
+                                indexOfNotifToRemove = i;
+                                streetToRemove = notifData[i]["street"];
                                 break;
                             }
                         };
+                bootbox.confirm("Vous ne disposerez plus d'alertes pour vos poubelles "+ streetToRemove +" !", function(result) {
+                    if (result) {
+                        notifData.pop(indexOfNotifToRemove);
                         PiuBella.prototype.putNotifications(notifData,true);
                     }
                 });

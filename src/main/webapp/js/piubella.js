@@ -79,8 +79,6 @@ PiuBella.prototype.loadNotifications = function(selector) {
 /**
 */
 PiuBella.prototype.putNotifications = function(data, reload) {
-    console.log("putNotification : ", data);
-    console.log(JSON.stringify(data));
     $.ajax('/notification', {
         type: 'POST',
         data: {
@@ -89,7 +87,6 @@ PiuBella.prototype.putNotifications = function(data, reload) {
             json: JSON.stringify(data)
         },
         success: function(data) {
-            console.log(data);
             if (reload) {
                 PiuBella.prototype.loadNotifications('#accordion2');
             }

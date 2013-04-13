@@ -94,11 +94,8 @@
     var yellowAdd = ["EMAIL"];
     var blueAdd = ["EMAIL"];
     $('body').on('click', '.popover button', function () {
-        console.log("click : ");
         var alreadyNotified = false;
         for (var i = 0; i < notifData.length ; i++) {
-            console.log("notifData[i][street] : " + notifData[i][street]);
-            console.log("street : " + street);
             if(notifData[i]["street"]==street){
                 alreadyNotified = true;
                 break;
@@ -110,8 +107,6 @@
                         'blue': blueAdd,
                         'yellow': yellowAdd
                     };
-
-            console.log("notifData apres add" + notifData);
             PiuBella.prototype.putNotifications(notifData, true);
 
             $('#address-query-wrapper').popover('destroy');

@@ -71,7 +71,7 @@ public class Notifier extends HttpServlet {
                     toTest.add(CollectDay.FRIDAY);
                     break;
                 case Calendar.FRIDAY:
-                    toTest.add(CollectDay.FRIDAY);
+                    toTest.add(CollectDay.SATURDAY);
                     break;
                 case Calendar.SATURDAY:
                     toTest.add(CollectDay.SUNDAY);

@@ -18,15 +18,19 @@ PiuBella.prototype.loadNotifications = function(selector) {
                 var notif = notifs[i];
                 if (notif.blue.indexOf('EMAIL') !== -1) {
                     $('#notif' + i + 'bg').addClass('active');
+                    $('#notif' + i + 'bg').addClass('btn-success');
                 }
                 if (notif.blue.indexOf('XMPP') !== -1) {
                     $('#notif' + i + 'bx').addClass('active');
+                    $('#notif' + i + 'bx').addClass('btn-success');
                 }
                 if (notif.yellow.indexOf('EMAIL') !== -1) {
                     $('#notif' + i + 'yg').addClass('active');
+                    $('#notif' + i + 'yg').addClass('btn-success');
                 }
                 if (notif.yellow.indexOf('XMPP') !== -1) {
                     $('#notif' + i + 'yx').addClass('active');
+                    $('#notif' + i + 'yx').addClass('btn-success');
                 }
             }
             $('.accordion-inner .btn-group > .btn').click(function() {
@@ -35,16 +39,32 @@ PiuBella.prototype.loadNotifications = function(selector) {
                 yellow = [],
                 id = $(this).attr('id').replace(/notif(.*)../, '$1');
                 if ($('#notif' + id + 'yg').hasClass('active')) {
-                    yellow.push('EMAIL')
+                    yellow.push('EMAIL');
+                    $('#notif' + id + 'yg').addClass('btn-success');
+                }
+                else {
+                    $('#notif' + id + 'yg').removeClass('btn-success');
                 }
                 if ($('#notif' + id + 'yx').hasClass('active')) {
-                    yellow.push('XMPP')
+                    yellow.push('XMPP');
+                    $('#notif' + id + 'yx').addClass('btn-success');
+                }
+                else {
+                    $('#notif' + id + 'yx').removeClass('btn-success');
                 }
                 if ($('#notif' + id + 'bg').hasClass('active')) {
-                    blue.push('EMAIL')
+                    blue.push('EMAIL');
+                    $('#notif' + id + 'bg').addClass('btn-success');
+                }
+                else {
+                    $('#notif' + id + 'bg').removeClass('btn-success');
                 }
                 if ($('#notif' + id + 'bx').hasClass('active')) {
-                    blue.push('XMPP')
+                    blue.push('XMPP');
+                    $('#notif' + id + 'bx').addClass('btn-success');
+                }
+                else {
+                    $('#notif' + id + 'bx').removeClass('btn-success');
                 }
                 notifData[id]['blue'] = blue;
                 notifData[id]['yellow'] = yellow;

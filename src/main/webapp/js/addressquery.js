@@ -50,7 +50,7 @@
                                 }
                             });
                             return days.join(', ').replace(/, ([^,]+$)/, ' et $1');
-                        };
+                        }
 
                         $('#address-query-wrapper').popover('destroy');
                         var itemdic = dict[item]
@@ -110,7 +110,11 @@
                         'blue': blueAdd,
                         'yellow': yellowAdd
                     };
-            PiuBella.prototype.putNotifications(notifData);
+
+            console.log("notifData apres add" + notifData);
+            PiuBella.prototype.putNotifications(notifData, true);
+
+            $('#address-query-wrapper').popover('destroy');
         }
         else bootbox.alert("Vous avez déjà listé cette alerte !");
         $('#address-query-wrapper').popover('destroy');

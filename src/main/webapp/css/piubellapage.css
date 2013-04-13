@@ -132,7 +132,8 @@ padding: 0px;
 }
 
 .alert-btn{
-  margin: 20px;
+  margin: 0px;
+  margin-top: 16px;
 }
 
 .btn-group-vertical {

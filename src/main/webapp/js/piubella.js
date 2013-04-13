@@ -11,6 +11,12 @@ PiuBella.prototype.loadNotifications = function(selector) {
         },
         success: function(data){
             var notifs = notifData = data.data;
+
+            if(notifs.length === 0){
+                $("#empty-notif-message").show();
+            }
+                
+
             $(selector).html(
                 $("#notifications-options").render(data.data)
                 );

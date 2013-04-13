@@ -108,11 +108,12 @@
                         'yellow': yellowAdd
                     };
             PiuBella.prototype.putNotifications(notifData, true);
-
-            $('#address-query-wrapper').popover('destroy');
         }
-        else bootbox.alert("Vous avez déjà listé cette alerte !");
+        else {
+            bootbox.alert("Vous avez déjà listé cette alerte !");
+        }
+
         $('#address-query-wrapper').popover('destroy');
-        
+        $('#addressquery').val("");
         });
 })();

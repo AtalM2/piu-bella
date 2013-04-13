@@ -114,14 +114,23 @@
                 });
             </script>
 
-
+            <script type="text/javascript">
+              $(document).ready(function () {
+                $("a").tooltip({
+                  'selector': '',
+                  'placement': 'top'
+                });
+              });
+            </script>
 
 
             <script type="text/x-jsrender" id="notifications-options">
                 <div class="accordion-group">
                     <div class="accordion-heading">
+                    
                         <button type="button" class="btn btn-remove" id="remove{{>id}}"><i class="icon-remove"></i></button>
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#notif{{>id}}">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#notif{{>id}}" data-toggle="tooltip" data-placement="top" title="Cliquez pour plus d'options !" data-original-title="Tooltip on top">
+                            
                             {{>street}}
 
                         </a>

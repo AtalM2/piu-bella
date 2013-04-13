@@ -152,3 +152,9 @@ padding: 0px;
   float: right;
   margin-left: 50px;
 }
+
+.notif-message {
+  font-size: 14px;
+  font-style: italic;
+  color: grey;
+}

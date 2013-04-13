@@ -12,9 +12,10 @@
                 $('#loading-indicator').hide();
             },
             success: function(data) {
+                notifData = data.data;
                 if(!dict){
                     dict = {};
-                    addressList = $.map(data.data,function(item) {
+                    addressList = $.map(notifData,function(item) {
 
                         dict[item[0]]=item;
                         return item[0];

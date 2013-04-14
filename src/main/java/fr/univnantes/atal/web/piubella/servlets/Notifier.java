@@ -64,8 +64,11 @@ public class Notifier extends HttpServlet {
                 break;
             case Calendar.TUESDAY:
                 toTest.add(CollectDay.WEDNESDAY);
-                toTest.add(CollectDay.WEDNESDAY_EVEN);
-                toTest.add(CollectDay.WEDNESDAY_ODD);
+                if (c.get(Calendar.WEEK_OF_YEAR) % 2 == 0) {
+                    toTest.add(CollectDay.WEDNESDAY_EVEN);
+                } else {
+                    toTest.add(CollectDay.WEDNESDAY_ODD);
+                }
                 break;
             case Calendar.WEDNESDAY:
                 toTest.add(CollectDay.THURSDAY);
@@ -124,7 +127,9 @@ public class Notifier extends HttpServlet {
                             }
                             found = true;
                         }
-                        break innerLoop;
+                        if (found) {
+                            break innerLoop;
+                        }
                     }
                     if (blueEmail && yellowEmail) {
                         email.put(street, "bleues et jaunes");

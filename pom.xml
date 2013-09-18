@@ -8,12 +8,12 @@
   <groupId>fr.univnantes.atal.web.piubella</groupId>
   <artifactId>piubella</artifactId>
   <name>Più Bella</name>
-  <url>http://atalm1.github.io/piu-bella/</url>
+  <url>http://atalm2.github.io/piu-bella/</url>
 
   <scm>
-    <connection>scm:https://github.com/AtalM1/piu-bella.git</connection>
-    <developerConnection>scm:https://github.com/AtalM1/piu-bella.git</developerConnection>
-    <url>https://github.com/AtalM1/piu-bella</url>
+    <connection>scm:https://github.com/AtalM2/piu-bella.git</connection>
+    <developerConnection>scm:https://github.com/AtalM2/piu-bella.git</developerConnection>
+    <url>https://github.com/AtalM2/piu-bella</url>
   </scm>
 
   <properties>
@@ -183,7 +183,7 @@
       <name>Agathe Mollé</name>
       <email>agathe.molle@etu.univ-nantes.fr</email>
       <organization>ATAL</organization>
-      <organizationUrl>https://github.com/organizations/AtalM1</organizationUrl>
+      <organizationUrl>https://github.com/organizations/AtalM2</organizationUrl>
       <roles>
         <role>architect</role>
         <role>developer</role>
@@ -195,7 +195,7 @@
       <name>Joseph Lark</name>
       <email>joseph.lark@etu.univ-nantes.fr</email>
       <organization>ATAL</organization>
-      <organizationUrl>https://github.com/organizations/AtalM1</organizationUrl>
+      <organizationUrl>https://github.com/organizations/AtalM2</organizationUrl>
       <roles>
         <role>architect</role>
         <role>developer</role>
@@ -207,7 +207,7 @@
       <name>Hugo Mougard</name>
       <email>hugo.mougard@etu.univ-nantes.fr</email>
       <organization>ATAL</organization>
-      <organizationUrl>https://github.com/organizations/AtalM1</organizationUrl>
+      <organizationUrl>https://github.com/organizations/AtalM2</organizationUrl>
       <roles>
         <role>architect</role>
         <role>developer</role>
@@ -228,6 +228,6 @@
   
   <organization>
     <name>ATAL</name>
-    <url>https://github.com/organizations/AtalM1</url>
+    <url>https://github.com/organizations/AtalM2</url>
   </organization>
 </project>
